@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Data",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Web", "ControlMantenimiento.Web\ControlMantenimiento.Web.csproj", "{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Data.MySql", "ControlMantenimiento.Data.MySql\ControlMantenimiento.Data.MySql.csproj", "{33B993F5-B243-4661-AF4D-2E57CC0F0276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Data.Oracle", "ControlMantenimiento.Data.Oracle\ControlMantenimiento.Data.Oracle.csproj", "{36D7AC5D-243E-4550-89D1-17BC398CE6D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33B993F5-B243-4661-AF4D-2E57CC0F0276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33B993F5-B243-4661-AF4D-2E57CC0F0276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33B993F5-B243-4661-AF4D-2E57CC0F0276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33B993F5-B243-4661-AF4D-2E57CC0F0276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D7AC5D-243E-4550-89D1-17BC398CE6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D7AC5D-243E-4550-89D1-17BC398CE6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D7AC5D-243E-4550-89D1-17BC398CE6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D7AC5D-243E-4550-89D1-17BC398CE6D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

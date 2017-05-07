@@ -80,8 +80,6 @@
     <Content Include="assets\Resources\icons.eot" />
     <Content Include="assets\Resources\icons.ttf" />
     <Content Include="assets\Resources\icons.woff" />
-    <Content Include="Conexion MySql\Web.config" />
-    <Content Include="Conexion Oracle\Web.config" />
     <Content Include="Forms\MasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -136,8 +134,6 @@
     <Compile Include="BLL\Funciones.cs" />
     <Compile Include="BLL\IControlador.cs" />
     <Compile Include="BLL\Mensajes.cs" />
-    <Compile Include="Conexion MySql\AccesoDatos.cs" />
-    <Compile Include="Conexion Oracle\AccesoDatos.cs" />
     <Compile Include="DAL\AccesoDatos.cs" />
     <Compile Include="Forms\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>

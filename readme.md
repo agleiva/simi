@@ -27,3 +27,4 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 9. Se eliminaron las clases duplicadas de `BO` del proyecto `ControlMantenimiento.Web`.
 
+10. Se crearon los proyectos `ControlMantenimiento.Data.MySql` y `ControlMantenimiento.Data.Oracle` y se movió el código de acceso a datos respectivo a estos.

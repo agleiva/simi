@@ -12,3 +12,7 @@ Source/ControlMantenimiento.Data/bin/
 Source/ControlMantenimiento.Web/obj/
 Source/ControlMantenimiento.Web/bin/
 Source/packages/
+Source/ControlMantenimiento.Data.MySql/obj/
+Source/ControlMantenimiento.Data.MySql/bin/
+Source/ControlMantenimiento.Data.Oracle/obj/
+Source/ControlMantenimiento.Data.Oracle/bin/
