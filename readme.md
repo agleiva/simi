@@ -42,3 +42,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
         * El proyecto `ControlMantenimiento.Business` contiene la lógica de negocio y funciones comunes, y hace uso tanto de `ControlMantenimiento.Model` como de `ControlMantenimiento.Data`.
         * El proyecto `ControlMantenimiento.Web` contiene la aplicación Web, y hace uso de la capa de negocio, el model y la capa de datos.
         * El proyecto `ControlMantenimiento-NetDesktop` contiene la aplicación desktop, y hace uso de la capa de negocio, el model y la capa de datos.
+    * A pesar de todo esto, el proyecto está en un estado no compilable, y aún sufre las violaciones de la separación en capas que se encontraron en el punto 7.
+
+13. Se cambiaron todos los métodos estáticos de la clase `AccesoDatos` por métodos de instancia, y se quitó las referencias directas a `ConfigurationManager` en favor de obtener el Connection String mediante un parámetro en el constructor de la clase. Esto quita las dependencias de la capa de datos a la configuración de la aplicación, que es una violación de SRP.
