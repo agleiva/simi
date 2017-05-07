@@ -19,9 +19,14 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return AccesoDatos.CargarListas(Tabla);
         }
 
+        public ArrayList CargarListas(string Tabla, string Condicion)
+        {
+            return AccesoDatos.CargarListas(Tabla, Condicion);
+        }
+
         public void ControlEquipos()
         {
-             AccesoDatos.ControlEquipos();
+            AccesoDatos.ControlEquipos();
         }
 
         public void ControlProgramacion(string Tabla)
@@ -43,7 +48,7 @@ namespace ControlMantenimiento_NetDesktop.BLL
         {
             return AccesoDatos.arlListMarca;
         }
-                
+
         public ArrayList ObtenerListaOperarios()
         {
             return AccesoDatos.arlListOperarios;
@@ -54,11 +59,10 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return AccesoDatos.ValidarTablaVacia(Tabla);
         }
 
-        // Obtener Registro
         public Operario ObtenerAcceso(string DatoBuscar, string Clave)
         {
             Operario operario = null;
-            operario = AccesoDatos.obtenerOperario(DatoBuscar, Clave);
+            operario = AccesoDatos.ObtenerOperario(DatoBuscar, Clave);
             return operario;
         }
 
@@ -68,22 +72,22 @@ namespace ControlMantenimiento_NetDesktop.BLL
             switch (Tabla)
             {
                 case "O":
-                    objeto = AccesoDatos.obtenerOperario(DatoBuscar, "");
-                     break;
+                    objeto = AccesoDatos.ObtenerOperario(DatoBuscar, "");
+                    break;
                 case "E":
-                     objeto = AccesoDatos.ObtenerEquipo(DatoBuscar);
-                     break;
+                    objeto = AccesoDatos.ObtenerEquipo(DatoBuscar);
+                    break;
                 case "M":
-                     objeto = AccesoDatos.ObtenerMantenimiento(DatoBuscar);
-                     break;
+                    objeto = AccesoDatos.ObtenerMantenimiento(DatoBuscar);
+                    break;
                 case "L":
-                     objeto = AccesoDatos.ObtenerListaValores(DatoBuscar);
-                     break;
+                    objeto = AccesoDatos.ObtenerListaValores(DatoBuscar);
+                    break;
             }
             return objeto;
         }
 
-         
+
         // Grabar en BD
         public int Guardar(object o, string Accion)
         {
@@ -98,7 +102,7 @@ namespace ControlMantenimiento_NetDesktop.BLL
                 Mantenimiento mantenimiento = (Mantenimiento)o;
                 status = AccesoDatos.GuardarMantenimiento(mantenimiento, Accion);
             }
-          
+
             return status;
         }
 
@@ -129,7 +133,7 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return AccesoDatos.EliminarRegistro(DatoEliminar, Tabla);
         }
 
-       
+
         #endregion
 
     }

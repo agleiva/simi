@@ -28,3 +28,10 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 9. Se eliminaron las clases duplicadas de `BO` del proyecto `ControlMantenimiento.Web`.
 
 10. Se crearon los proyectos `ControlMantenimiento.Data.MySql` y `ControlMantenimiento.Data.Oracle` y se movió el código de acceso a datos respectivo a estos.
+
+11. Se creó el proyecto `ControlMantenimiento.Business` y se movió el código de lógica de negocio (anteriormente llamado `BLL` y duplicado en los proyectos Web y Desktop).
+   * La interfaz `IControlador` que se encontraba duplicada tenía definiciones exactamente iguales, excepto por el método `CargarListas()`, el cuál ahora tiene 2 sobrecargas.
+   * La clases `Mensajes` tenía definiciones idénticas, excepto por la propiedad `Mensaje28` que se fue agregada.
+   * La clases `Funciones` tenían definiciones idénticas, excepto por los campos estáticos y el método `LimpiarForma()`, cuya implementación es específica para desktop y web. Se unificaron los métodos duplicados en la clase `ControlMantenimiento.Business.Funciones` y se mantuvieron las diferencias en los respectivos proyectos.
+   * La clases `Controlador` tenían definiciones idénticas, excepto por el método `CargarListas()` que ahora tiene 2 sobrecargas.
+   
