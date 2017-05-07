@@ -2,3 +2,6 @@ ControlMantenimiento-NetDesktop/.vs/ControlMantenimiento-NetDesktop/v15/
 ControlMantenimiento-NetDesktop/ControlMantenimiento-NetDesktop/bin/
 ControlMantenimiento-NetDesktop/ControlMantenimiento-NetDesktop/obj/
 *.suo
+Source/ControlMantenimiento-NetDesktop/ControlMantenimiento-NetDesktop/bin/
+Source/ControlMantenimiento-NetDesktop/ControlMantenimiento-NetDesktop/obj/
+Doc/Desktop/Ayuda.chw
