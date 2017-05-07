@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="BLL\Controlador.cs" />
     <Compile Include="BLL\Funciones.cs" />
-    <Compile Include="BLL\Mensajes.cs" />
     <Compile Include="Forms\frmAcceso.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -132,7 +132,6 @@
     <Compile Include="BLL\CargaCombosListas.cs" />
     <Compile Include="BLL\Controlador.cs" />
     <Compile Include="BLL\Funciones.cs" />
-    <Compile Include="BLL\Mensajes.cs" />
     <Compile Include="DAL\AccesoDatos.cs" />
     <Compile Include="Forms\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
