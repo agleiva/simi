@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Controlador.cs" />
     <Compile Include="BLL\Funciones.cs" />
     <Compile Include="Forms\frmAcceso.cs">
       <SubType>Form</SubType>
