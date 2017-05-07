@@ -1,0 +1,242 @@
+﻿
+/*=================================================================================== 
+ La norma es que no puede haber sino una sola programación por equipo
+ Un Operario no puede estar asignado en la misma fecha para varios mantenimientos
+ ==================================================================================== */
+
+using System;
+using System.Data;
+using System.Windows.Forms;
+using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento_NetDesktop.BLL;
+
+namespace ControlMantenimiento_NetDesktop
+{
+    public partial class frmMantenimiento : Form
+    {
+        public frmMantenimiento()
+        {
+            InitializeComponent();
+            this.cboEquipos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboEquipos_KeyPress);
+            this.cboOperarios.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboOperarios_KeyPress);
+            this.dtpFecha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFecha_KeyPress);
+            this.txtObservaciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtObservaciones_KeyPress);
+        }
+
+        private IControlador icontrolador = new Controlador();
+        private bool     Grabar;
+        private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
+
+        private void frmMantenimiento_Load(object sender, EventArgs e)
+        {
+            if (Funciones.Fuente == "CPROGRAMACION")
+            {
+                btnBuscar.Visible = true;
+                lbMensaje.Visible = true;
+                btnGrabar.Enabled = false;
+                icontrolador.ControlProgramacion("CONTROLPROGRAMACION");
+            }
+            else 
+            {
+                icontrolador.ControlProgramacion("CONTROLPROGRAMAREQUIPOS");               
+            }
+            cboEquipos.ValueMember = "CODIGO";
+            cboEquipos.DisplayMember = "DETALLE";
+            cboEquipos.DataSource = icontrolador.ObtenerListaEquipos();
+
+            cboOperarios.ValueMember = "CODIGO";
+            cboOperarios.DisplayMember = "DETALLE";
+            cboOperarios.DataSource = icontrolador.ObtenerListaOperarios();
+        }
+
+        private void CargarEquipos()
+        {   
+           cboEquipos.ValueMember = "CODIGO";
+           cboEquipos.DisplayMember = "DETALLE";
+           cboEquipos.DataSource = icontrolador.CargarListas(Funciones.Fuente);
+        }
+
+        private void cboEquipos_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
+            {
+                cboOperarios.Focus();
+            }
+        }
+
+        private void cboOperarios_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
+            {
+                dtpFecha.Focus();
+            }
+        }
+
+        private void dtpFecha_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
+            {
+                dtpFecha_ValueChanged(dtpFecha, e);
+            }            
+        }
+
+        private void txtObservaciones_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
+            {
+               BLL.Funciones.EliminarTabulador(txtObservaciones.Text, "");
+               btnGrabar.Focus();
+            }
+        }
+
+        private void btnGrabar_Click(object sender, EventArgs e)
+        {
+            Grabar = true;
+            dtpFecha_KeyPress(btnGrabar, Tecla);              
+            if (Grabar)
+            {
+                if (Funciones.Fuente == "CPROGRAMAREQUIPOS")
+                {
+                    Guardar("I", BLL.Mensajes.MensajeGraba);
+                }
+                else
+                {
+                    Guardar("U", BLL.Mensajes.MensajeActualiza);
+                }
+            }            
+        }
+
+        private void Guardar(string Accion, string Mensaje)
+        {
+            int Resultado;
+            Mantenimiento mantenimiento = new Mantenimiento();
+            mantenimiento.codigoequipo = Convert.ToInt32(cboEquipos.SelectedValue.ToString()); 
+            mantenimiento.documento = Convert.ToDouble(cboOperarios.SelectedValue.ToString()); 
+            mantenimiento.fecha = Convert.ToDateTime(dtpFecha.Value);
+            mantenimiento.observaciones = txtObservaciones.Text;
+            
+            Resultado = icontrolador.Guardar(mantenimiento, Accion);
+            if (Resultado == 0)
+            {
+                MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarEquipos();
+                Limpiar();
+            }
+            else if (Resultado == 1)
+            {
+                MessageBox.Show(BLL.Mensajes.Mensaje10, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboOperarios.Focus();
+                errorPro.SetError(cboOperarios, BLL.Mensajes.Mensaje10);
+            }
+            else
+            {
+                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            if (cboEquipos.Items.Count <= 0)
+            {
+                btnSalir.PerformClick();
+            }
+        }
+
+        private void Limpiar()
+        {
+            btnEliminar.Enabled = false;
+            cboEquipos.Enabled = true;
+            BLL.Funciones.LimpiarForma(panel2);
+            dtpFecha.Value = DateTime.Now.Date;
+            errorPro.Clear();
+            if (Funciones.Fuente == "CPROGRAMACION")
+            {
+                btnGrabar.Enabled = false;
+            }
+            cboEquipos.Focus();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {            
+            Limpiar();            
+        }
+                
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            LlenarCampos();        
+        }
+        
+        private void LlenarCampos()
+        {
+          Mantenimiento mantenimiento = (Mantenimiento)icontrolador.ObtenerRegistro(cboEquipos.SelectedValue.ToString(),"M");
+          if (mantenimiento != null)
+          {
+              btnEliminar.Enabled = true;
+              cboEquipos.Enabled = false;
+              cboOperarios.SelectedValue = mantenimiento.documento.ToString();
+              btnEliminar.Enabled = true;
+              dtpFecha.Value = mantenimiento.fecha;
+              txtObservaciones.Text = mantenimiento.observaciones;
+              btnGrabar.Enabled = true;
+              cboOperarios.Focus();
+          }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            icontrolador = null;
+            this.Close();
+            this.Dispose();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                
+                if (icontrolador.EliminarRegistro(cboEquipos.SelectedValue.ToString(), "MANTENIMIENTO")==0)
+                {
+                    MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                Limpiar();
+                CargarEquipos();
+                if (cboEquipos.Items.Count <= 0)
+                {
+                    btnSalir.PerformClick();
+                }
+            }
+            
+        }
+
+        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpFecha.Value < DateTime.Now.Date)
+            {
+                Grabar = false;
+                MessageBox.Show(BLL.Mensajes.Mensaje27, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dtpFecha.Focus();
+                errorPro.SetError(dtpFecha, BLL.Mensajes.Mensaje27);
+            }
+            else
+            {
+                errorPro.Clear();
+                txtObservaciones.Focus ();
+            }
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+           /* System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.EnableRaisingEvents = false;
+            proc.StartInfo.FileName = "E:/Fuentes CM/ControlMantenimiento-NetDesktop/ControlMantenimiento-NetDesktop/Ayudas/Ayuda.chm";
+            proc.Start();
+            proc.Dispose();*/
+
+            // Estas líneas son las encargadas de llamar el archivo de ayudas .chm, está en comentario para que usted le coloque la ruta
+            // donde descomprimió el archivo descargado de la web
+        }
+                      
+
+    }
+}

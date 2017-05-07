@@ -1,0 +1,847 @@
+--Si deseas realizar sugerencias o tienes algún problema con este fuente, no dudes en escribirme a: correal_95@hotmail.com 
+
+USE [controlmantenimientodb]
+GO
+/****** Objeto:  Table [dbo].[OPERARIOS]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[OPERARIOS](
+	[DOCUMENTO] [numeric](10, 0) NOT NULL,
+	[NOMBRES] [varchar](25) NOT NULL,
+	[APELLIDOS] [varchar](25) NOT NULL,
+	[TELEFONO] [numeric](10, 0) NOT NULL,
+	[CORREO] [varchar](50) NULL,
+	[CLAVE] [varchar](20) NOT NULL,
+	[PERFIL] [smallint] NOT NULL,
+	[FOTO] [varchar](50) NULL,
+	[INGRESADOPOR] [numeric](10, 0) NOT NULL,
+	[MODIFICADOPOR] [numeric](10, 0) NOT NULL,
+	[FECHAINGRESO] [smalldatetime] NOT NULL DEFAULT (getdate()),
+	[FECHAMODIFICACION] [smalldatetime] NOT NULL DEFAULT (getdate()),
+PRIMARY KEY CLUSTERED 
+(
+	[DOCUMENTO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Objeto:  Table [dbo].[RESPALDO]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RESPALDO](
+	[CODIGOEQUIPO] [int] NOT NULL,
+	[DOCUMENTO] [numeric](10, 0) NOT NULL,
+	[FECHA] [smalldatetime] NOT NULL,
+	[OBSERVACIONES] [varchar](255) NULL,
+	[INGRESADOPOR] [numeric](10, 0) NOT NULL,
+	[FECHAINGRESO] [smalldatetime] NOT NULL DEFAULT (getdate()),
+	[MODIFICADOPOR] [numeric](10, 0) NOT NULL,
+	[FECHAMODIFICACION] [smalldatetime] NOT NULL DEFAULT (getdate())
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Objeto:  Table [dbo].[LISTAVALORES]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[LISTAVALORES](
+	[CODIGO] [int] IDENTITY(1,1) NOT NULL,
+	[NOMBRE] [varchar](50) NOT NULL,
+	[DESCRIPCION] [varchar](255) NULL,
+	[TIPO] [varchar](50) NOT NULL,
+	[INGRESADOPOR] [int] NOT NULL,
+	[FECHAINGRESO] [smalldatetime] NOT NULL DEFAULT (getdate()),
+	[MODIFICADOPOR] [int] NOT NULL,
+	[FECHAMODIFICACION] [smalldatetime] NOT NULL DEFAULT (getdate()),
+PRIMARY KEY CLUSTERED 
+(
+	[CODIGO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[NOMBRE] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Objeto:  Table [dbo].[MANTENIMIENTO]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[MANTENIMIENTO](
+	[CODIGOEQUIPO] [int] NOT NULL,
+	[DOCUMENTO] [numeric](10, 0) NOT NULL,
+	[FECHA] [smalldatetime] NOT NULL,
+	[OBSERVACIONES] [varchar](255) NULL,
+	[INGRESADOPOR] [numeric](10, 0) NOT NULL,
+	[FECHAINGRESO] [smalldatetime] NOT NULL DEFAULT (getdate()),
+	[MODIFICADOPOR] [numeric](10, 0) NOT NULL,
+	[FECHAMODIFICACION] [smalldatetime] NOT NULL DEFAULT (getdate()),
+PRIMARY KEY CLUSTERED 
+(
+	[CODIGOEQUIPO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[DOCUMENTO] ASC,
+	[FECHA] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Objeto:  Table [dbo].[EQUIPOS]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[EQUIPOS](
+	[CODIGOEQUIPO] [int] IDENTITY(1,1) NOT NULL,
+	[NOMBREEQUIPO] [varchar](50) NOT NULL,
+	[CODIGOMARCA] [int] NOT NULL,
+	[SERIE] [varchar](20) NOT NULL,
+	[CODIGOLINEA] [int] NOT NULL,
+	[LUBRICACION] [bit] NOT NULL,
+	[INGRESADOPOR] [int] NOT NULL,
+	[FECHAINGRESO] [smalldatetime] NOT NULL DEFAULT (getdate()),
+	[MODIFICADOPOR] [int] NOT NULL,
+	[FECHAMODIFICACION] [smalldatetime] NOT NULL DEFAULT (getdate()),
+PRIMARY KEY CLUSTERED 
+(
+	[CODIGOEQUIPO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[SERIE] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_DRegistro]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spr_DRegistro]		
+@p_TABLA		varchar(20),
+@p_CONDICION  	NUMERIC(10, 0),
+@p_RESULTADO    INT OUT 
+
+AS
+    DECLARE @DatoExiste varchar(50)
+    SET @DatoExiste = ''
+    SET @p_RESULTADO = 0
+    
+    
+BEGIN TRY
+      IF(@p_TABLA = 'OPERARIOS')
+         BEGIN
+			 SET @DatoExiste = (SELECT TOP 1 DOCUMENTO FROM MANTENIMIENTO WHERE DOCUMENTO = @p_CONDICION)
+			 IF (@DatoExiste <> '')
+				 BEGIN 
+					  SET @p_RESULTADO = 1
+				 END
+			 ELSE
+				 BEGIN
+					  DELETE FROM OPERARIOS WHERE DOCUMENTO = @p_CONDICION
+				 END
+         END
+      ELSE IF (@p_TABLA = 'EQUIPOS')  
+               BEGIN        
+                    SET @DatoExiste = (SELECT TOP 1 DOCUMENTO FROM MANTENIMIENTO WHERE CODIGOEQUIPO = @p_CONDICION)
+					IF (@DatoExiste <> '')
+					    BEGIN 
+							  SET @p_RESULTADO = 1
+					    END
+					 ELSE
+						 BEGIN
+							  DELETE FROM EQUIPOS WHERE CODIGOEQUIPO = @p_CONDICION
+                         END  
+               END
+      ELSE IF (@p_TABLA = 'LISTAVALORES')
+               
+               BEGIN                    
+                    SET @DatoExiste = (SELECT TOP 1 CODIGOLINEA FROM EQUIPOS WHERE CODIGOLINEA = @p_CONDICION)
+                    		IF (@DatoExiste <> '')
+					    BEGIN 
+							  SET @p_RESULTADO = 1
+					    END					
+                    ELSE
+						BEGIN 
+                              SET @DatoExiste = (SELECT TOP 1 CODIGOMARCA FROM EQUIPOS WHERE CODIGOMARCA = @p_CONDICION)
+					          IF (@DatoExiste <> '')
+				                   BEGIN 
+							            SET @p_RESULTADO = 1
+					               END
+                              ELSE
+                                  BEGIN
+							           DELETE FROM LISTAVALORES WHERE CODIGO = @p_CONDICION
+                                  END
+						END
+               END
+      ELSE IF (@p_TABLA = 'MANTENIMIENTO')
+               BEGIN  
+                    INSERT INTO RESPALDO SELECT * FROM MANTENIMIENTO WHERE CODIGOEQUIPO = @p_CONDICION
+                    DELETE FROM MANTENIMIENTO WHERE CODIGOEQUIPO = @p_CONDICION
+               END
+                    
+END TRY
+
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_IUOperarios]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE 	[dbo].[spr_IUOperarios]
+@p_ACCION 			varchar(1),
+@p_DOCUMENTO		NUMERIC(10, 0),
+@p_NOMBRES			varchar(25),
+@p_APELLIDOS		varchar(25),
+@p_TELEFONO			NUMERIC(10, 0),
+@p_CORREO			varchar(50),
+@p_CLAVE			varchar(20),
+@p_PERFIL			SMALLINT,
+@p_FOTO  			varchar(100),
+@p_USUARIOCONECTADO	NUMERIC(10, 0),
+@p_RESULTADO		INT OUT
+
+AS
+  DECLARE @Operario NUMERIC(10, 0)
+  SET @Operario = 0
+  SET @p_RESULTADO = 0
+
+  BEGIN TRY
+        IF (@p_ACCION = 'I') 
+            BEGIN
+                 SET @Operario = (SELECT DOCUMENTO FROM OPERARIOS WHERE DOCUMENTO = @p_DOCUMENTO)
+            
+				IF (@Operario <> 0) 
+					SET @p_RESULTADO = 1
+				ELSE
+        			   INSERT INTO OPERARIOS(
+								   DOCUMENTO, 
+								   NOMBRES, 
+								   APELLIDOS, 
+								   TELEFONO, 
+								   CORREO, 
+								   CLAVE,
+								   PERFIL,
+								   FOTO, 
+								   INGRESADOPOR, 
+								   MODIFICADOPOR)
+					   VALUES(
+								   @p_DOCUMENTO, 
+								   @p_NOMBRES, 
+								   @p_APELLIDOS, 
+								   @p_TELEFONO, 
+								   @p_CORREO, 
+								   @p_CLAVE,
+								   @p_PERFIL,					
+								   @p_FOTO, 
+								   @p_USUARIOCONECTADO,
+								   @p_USUARIOCONECTADO)
+				END
+        ELSE
+            UPDATE OPERARIOS SET             
+            NOMBRES            = @p_NOMBRES,  
+            APELLIDOS          = @p_APELLIDOS, 
+            TELEFONO           = @p_TELEFONO, 
+            CORREO             = @p_CORREO, 
+            CLAVE              = @p_CLAVE,
+			PERFIL   		   = @p_PERFIL,
+            FOTO		       = @p_FOTO,
+            MODIFICADOPOR      = @p_USUARIOCONECTADO,
+            FECHAMODIFICACION  = GETDATE()
+            WHERE DOCUMENTO    = @p_DOCUMENTO             
+  END TRY
+  
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_UCambioClave]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE 	[dbo].[spr_UCambioClave]
+@p_DOCUMENTO		NUMERIC(10, 0),
+@p_CLAVE  			varchar(20),
+@p_RESULTADO        INT OUT  
+
+AS
+  
+  SET @p_RESULTADO = 0
+  
+  BEGIN TRY
+            UPDATE OPERARIOS SET             
+            CLAVE				= @p_CLAVE,
+            MODIFICADOPOR		= @p_DOCUMENTO,
+            FECHAMODIFICACION	= GETDATE()
+            WHERE DOCUMENTO		= @p_DOCUMENTO   
+  END TRY
+
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  View [dbo].[CProgramacion]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[CProgramacion]
+AS
+SELECT E.CODIGOEQUIPO, E.NOMBREEQUIPO, E.SERIE
+FROM MANTENIMIENTO AS M, EQUIPOS AS E
+WHERE M.CODIGOEQUIPO=E.CODIGOEQUIPO
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_IUEquipos]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE 	[dbo].[spr_IUEquipos]
+@p_CODIGOEQUIPO		INT,
+@p_NOMBREEQUIPO		varchar(50),
+@p_CODIGOMARCA		INT,
+@p_SERIE		    varchar(50),
+@p_CODIGOLINEA		INT,
+@p_LUBRICACION	    BIT,
+@p_USUARIOCONECTADO	INT,
+@p_RESULTADO        INT OUT
+
+AS
+  DECLARE @SerieNueva  varchar(50)
+  DECLARE @SerieActual varchar(50)
+
+  SET @SerieNueva  = ''
+  SET @SerieActual = ''   
+  SET @p_RESULTADO = 0
+  
+  BEGIN TRY
+           SET @SerieNueva = (SELECT SERIE FROM EQUIPOS WHERE SERIE = @p_SERIE)           
+           IF (@p_CODIGOEQUIPO = 0) 
+               IF (@SerieNueva <> '')
+		           SET @p_RESULTADO = 1
+               ELSE
+           		   INSERT INTO EQUIPOS(
+										   NOMBREEQUIPO, 
+										   CODIGOMARCA,  
+										   SERIE, 
+										   CODIGOLINEA,  
+										   LUBRICACION, 
+										   INGRESADOPOR, 
+										   MODIFICADOPOR)
+							   VALUES(
+										   @p_NOMBREEQUIPO, 
+										   @p_CODIGOMARCA, 
+										   @p_SERIE, 
+										   @p_CODIGOLINEA, 
+										   @p_LUBRICACION, 
+										   @p_USUARIOCONECTADO, 
+										   @p_USUARIOCONECTADO)
+           ELSE
+            
+                 SET @SerieActual = (SELECT SERIE FROM EQUIPOS WHERE CODIGOEQUIPO = @p_CODIGOEQUIPO)
+                 IF ((@SerieNueva <>'') AND (@SerieActual <> @p_SERIE)) 
+			          SET @p_RESULTADO = 1	  
+	             ELSE		 		    
+				
+			         UPDATE EQUIPOS SET             
+					 NOMBREEQUIPO       = @p_NOMBREEQUIPO,  
+					 CODIGOMARCA        = @p_CODIGOMARCA, 
+					 SERIE              = @p_SERIE, 
+					 CODIGOLINEA        = @p_CODIGOLINEA, 
+					 LUBRICACION		= @p_LUBRICACION,
+					 MODIFICADOPOR      = @p_USUARIOCONECTADO,
+					 FECHAMODIFICACION  = GETDATE()
+		     		 WHERE CODIGOEQUIPO = @p_CODIGOEQUIPO      
+			      
+  END TRY
+
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  View [dbo].[CLubricacion]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[CLubricacion]
+AS
+SELECT EQUIPOS.CODIGOEQUIPO, EQUIPOS.NOMBREEQUIPO, EQUIPOS.SERIE
+FROM EQUIPOS
+WHERE LUBRICACION=1
+GO
+/****** Objeto:  View [dbo].[CProgramarEquipos]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[CProgramarEquipos]
+AS
+SELECT     CODIGOEQUIPO, NOMBREEQUIPO, SERIE
+FROM         dbo.EQUIPOS
+WHERE     (NOT EXISTS
+                          (SELECT     CODIGOEQUIPO
+                            FROM          dbo.MANTENIMIENTO
+                            WHERE      (dbo.EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO))) AND (LUBRICACION = 1)
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_IUMantenimiento]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE 	[dbo].[spr_IUMantenimiento]
+@p_ACCION           varchar(1),  
+@p_CODIGOEQUIPO   	INT,
+@p_DOCUMENTO		NUMERIC(10,0),
+@p_FECHA			DATETIME,
+@p_OBSERVACIONES 	varchar(255),
+@p_USUARIOCONECTADO	NUMERIC(10,0),
+@p_RESULTADO          INT OUT
+
+AS
+  DECLARE @OperarioActual NUMERIC(10,0)
+  DECLARE @OperarioNuevo  NUMERIC(10,0)
+  DECLARE @FechaActual    varchar(10)
+  DECLARE @FechaNueva     varchar(10)
+  SET @OperarioActual = 0
+  SET @OperarioNuevo = 0
+  SET @FechaActual = ''
+  SET @FechaNueva = ''
+  set @p_RESULTADO = 0
+
+  BEGIN TRY
+        SELECT @OperarioNuevo = DOCUMENTO, @FechaNueva = FECHA FROM MANTENIMIENTO WHERE DOCUMENTO = @p_DOCUMENTO AND  convert(varchar(10), FECHA, 103) = convert(varchar(10), @p_FECHA, 103) 
+        IF (@p_ACCION = 'I') 
+            IF (@OperarioNuevo <> 0 AND @FechaNueva <> '')  
+		        set @p_RESULTADO = 1
+		     ELSE
+				   INSERT INTO MANTENIMIENTO(
+							   CODIGOEQUIPO, 
+							   DOCUMENTO, 
+							   FECHA, 
+							   OBSERVACIONES, 
+							   INGRESADOPOR, 
+							   MODIFICADOPOR)
+				   VALUES(
+							   @p_CODIGOEQUIPO, 
+							   @p_DOCUMENTO, 
+							   @p_FECHA,
+							   @p_OBSERVACIONES, 
+							   @p_USUARIOCONECTADO,
+							   @p_USUARIOCONECTADO)
+        ELSE     
+            IF (@OperarioNuevo <> 0) 
+               BEGIN   
+				   SELECT @OperarioActual = DOCUMENTO, @FechaActual = convert(varchar(10), FECHA, 103) FROM MANTENIMIENTO WHERE CODIGOEQUIPO = @p_CODIGOEQUIPO;
+				   IF (@OperarioActual <> @p_DOCUMENTO) 
+					  set @p_RESULTADO = 1
+				   ELSE IF ((@OperarioActual = @p_DOCUMENTO) AND (@FechaActual <> convert(varchar(10), @p_FECHA, 103))) 
+						   set @p_RESULTADO = 1	
+                   ELSE
+						BEGIN
+							UPDATE MANTENIMIENTO SET             
+							CODIGOEQUIPO	   = @p_CODIGOEQUIPO,  
+							DOCUMENTO          = @p_DOCUMENTO,
+							FECHA              = @p_FECHA,
+							OBSERVACIONES      = @p_OBSERVACIONES,
+							FECHAMODIFICACION  = GETDATE()
+							WHERE CODIGOEQUIPO = @p_CODIGOEQUIPO 
+						END
+ 
+               END		   
+            ELSE
+                BEGIN
+					UPDATE MANTENIMIENTO SET             
+					CODIGOEQUIPO	   = @p_CODIGOEQUIPO,  
+					DOCUMENTO          = @p_DOCUMENTO,
+					FECHA              = @p_FECHA,
+					OBSERVACIONES      = @p_OBSERVACIONES,
+					FECHAMODIFICACION  = GETDATE()
+					WHERE CODIGOEQUIPO = @p_CODIGOEQUIPO 
+                END
+                         
+  END TRY
+  
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_IUListaValores]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE 	[dbo].[spr_IUListaValores]
+@p_CODIGO			INT,
+@p_NOMBRE 			varchar(50),
+@p_DESCRIPCION		varchar(255),
+@p_TIPO			    varchar(50),
+@p_USUARIOCONECTADO	NUMERIC(10,0),
+@p_RESULTADO        INT OUT
+
+AS
+  DECLARE @NombreNuevo  varchar(50)
+  DECLARE @NombreActual varchar(50)
+  SET @NombreNuevo = ''
+  SET @NombreActual = ''
+  SET @p_RESULTADO = 0
+
+  BEGIN TRY
+            SET @NombreNuevo = (SELECT NOMBRE FROM LISTAVALORES WHERE NOMBRE = @p_NOMBRE)           
+          
+        IF (@p_CODIGO = 0) 
+            IF (@NombreNuevo <> '') 
+                SET @p_RESULTADO = 1
+            ELSE  
+				   INSERT INTO LISTAVALORES(
+							   NOMBRE, 
+							   DESCRIPCION, 
+							   TIPO, 
+							   INGRESADOPOR, 
+							   MODIFICADOPOR)
+				   VALUES(
+							   @p_NOMBRE, 
+							   @p_DESCRIPCION, 
+							   @p_TIPO, 
+							   @p_USUARIOCONECTADO, 
+							   @p_USUARIOCONECTADO)
+        ELSE
+            SET @NombreActual = (SELECT NOMBRE FROM LISTAVALORES WHERE CODIGO = @p_CODIGO)
+            IF ((@NombreNuevo <> '') AND (@NombreActual <> @p_NOMBRE)) 
+			     SET @p_RESULTADO = 1
+            ELSE
+				 UPDATE LISTAVALORES SET             
+				 NOMBRE			   = @p_NOMBRE,  
+				 DESCRIPCION        = @p_DESCRIPCION, 
+				 MODIFICADOPOR      = @p_USUARIOCONECTADO,
+				 FECHAMODIFICACION  = GETDATE()
+				 WHERE CODIGO	   = @p_CODIGO             
+  END TRY
+  
+BEGIN CATCH   
+      SET @P_RESULTADO = ERROR_NUMBER()
+      RETURN @P_RESULTADO
+END CATCH
+GO
+/****** Objeto:  View [dbo].[CLineas]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[CLineas]
+AS
+SELECT CODIGO, NOMBRE
+FROM LISTAVALORES
+WHERE TIPO='LINEAS'
+GO
+/****** Objeto:  View [dbo].[CMarcas]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[CMarcas]
+AS
+SELECT CODIGO, NOMBRE
+FROM LISTAVALORES
+WHERE TIPO='MARCAS'
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_CValidarExistenciaDatos]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spr_CValidarExistenciaDatos]
+(
+  @p_TABLA        varchar(20),
+  @p_RESULTADO    INT OUT
+)
+
+AS
+
+BEGIN
+      SET @p_RESULTADO = -1
+	  IF (@p_TABLA = 'OPERARIOS')
+          SELECT @p_RESULTADO = COUNT(*) FROM OPERARIOS 
+      ELSE IF (@p_TABLA = 'EQUIPOS')  
+               SELECT @p_RESULTADO = COUNT(*) FROM EQUIPOS
+               WHERE NOT EXISTS
+                          (SELECT     CODIGOEQUIPO
+                            FROM       MANTENIMIENTO
+                            WHERE     (EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO))
+      ELSE IF (@p_TABLA = 'CPROGRAMAREQUIPOS')                     
+	 		  BEGIN
+				   SELECT @p_RESULTADO = COUNT(*) FROM CPROGRAMAREQUIPOS 
+              	   IF (@p_RESULTADO = 0)
+				 	   SET @p_RESULTADO = -1    
+				   ELSE
+                       BEGIN
+   		  				    SELECT @p_RESULTADO = COUNT(*) FROM OPERARIOS
+						    IF (@p_RESULTADO = 0)
+					 		    SET @p_RESULTADO = -2  
+                       END
+              END       
+     ELSE IF (@p_TABLA = 'CPROGRAMACION')         
+	 	      SELECT @p_RESULTADO = COUNT(*) FROM CPROGRAMACION     
+     ELSE IF (@p_TABLA = 'RESPALDO')        
+	 	      SELECT @p_RESULTADO = COUNT(*) FROM RESPALDO 
+     ELSE IF (@p_TABLA = 'CMARCAS')        
+              BEGIN
+	 			  SELECT @p_RESULTADO = COUNT(*) FROM LISTAVALORES WHERE TIPO = 'MARCAS' 
+				  IF (@p_RESULTADO = 0)
+					  SET @p_RESULTADO = -1
+				  ELSE
+                      BEGIN  
+       					   SELECT @p_RESULTADO = COUNT(*) FROM LISTAVALORES WHERE TIPO = 'LINEAS' 
+						   IF (@p_RESULTADO = 0)
+						 	   SET @p_RESULTADO = -2
+                      END    
+              END           
+     ELSE IF (@p_TABLA = 'MARCAS')    
+              SELECT @p_RESULTADO = COUNT(*) FROM LISTAVALORES WHERE TIPO = 'MARCAS'    
+     ELSE IF (@p_TABLA = 'LINEAS')        
+              SELECT @p_RESULTADO = COUNT(*) FROM LISTAVALORES WHERE TIPO = 'LINEAS' 
+END  
+
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_CBuscarRegistro]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spr_CBuscarRegistro](		
+	@p_TABLA		varchar(20),
+    @p_DATOBUSCAR	varchar(50),    
+    @p_CONDICION	varchar(50))
+
+AS
+ DECLARE @p_DATOBUSCARN  	NUMERIC(10, 0)
+ BEGIN 
+      IF(@p_TABLA = 'OPERARIOS')
+         IF (@p_CONDICION <> '')
+             BEGIN
+                   SET @p_DATOBUSCARN = CONVERT(NUMERIC (10,0), @p_DATOBUSCAR)
+                   SELECT * FROM OPERARIOS WHERE DOCUMENTO = @p_DATOBUSCARN AND CLAVE = @p_CONDICION
+             END
+         ELSE 
+             BEGIN
+                   SET @p_DATOBUSCARN = CONVERT(NUMERIC (10,0), @p_DATOBUSCAR)
+                   SELECT * FROM OPERARIOS WHERE DOCUMENTO = @p_DATOBUSCARN
+             END         
+      ELSE IF (@p_TABLA = 'EQUIPOS')   
+               SELECT * FROM EQUIPOS WHERE CODIGOEQUIPO = @p_DATOBUSCAR                
+      ELSE IF (@p_TABLA = 'LISTAVALORES')
+               SELECT * FROM LISTAVALORES WHERE CODIGO = @p_DATOBUSCAR                 
+     ELSE IF (@p_TABLA = 'MANTENIMIENTO')
+              SELECT * FROM MANTENIMIENTO WHERE CODIGOEQUIPO = @p_DATOBUSCAR                              
+      ELSE IF (@p_TABLA = 'CProgramarEquipos')
+               SELECT * FROM  CProgramarEquipos
+      ELSE IF (@p_TABLA = 'CProgramacion')
+               SELECT * FROM  CProgramacion
+      ELSE IF (@p_TABLA = 'CLineas')
+               SELECT * FROM  CLineas
+      ELSE IF (@p_TABLA = 'CMarcas')
+               SELECT * FROM  CMarcas
+ 
+END
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_CCargarCombosListas]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spr_CCargarCombosListas](		
+	@p_TABLA			varchar(30))
+
+AS
+BEGIN 
+      IF(@p_TABLA = 'OPERARIOS')
+         SELECT DOCUMENTO, (NOMBRES + ' ' + APELLIDOS) AS NOMBRECOMPLETO FROM OPERARIOS
+      ELSE IF (@p_TABLA = 'EQUIPOS')       
+               SELECT CODIGOEQUIPO, NOMBREEQUIPO FROM EQUIPOS
+               WHERE NOT EXISTS
+                          (SELECT     CODIGOEQUIPO
+                            FROM       MANTENIMIENTO
+                            WHERE     (EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO))
+
+      ELSE IF (@p_TABLA = 'CLINEAS')
+               SELECT CODIGO,NOMBRE FROM CLINEAS
+      ELSE IF (@p_TABLA = 'CMARCAS')
+               SELECT CODIGO, NOMBRE FROM CMARCAS 
+      ELSE IF (@p_TABLA = 'CPROGRAMACION')
+               SELECT * FROM CPROGRAMACION     		   
+      ELSE IF (@p_TABLA = 'CPROGRAMAREQUIPOS')
+               SELECT * FROM CPROGRAMAREQUIPOS
+      ELSE IF (@p_TABLA = 'CONTROLEQUIPOS')
+               SELECT  CODIGO, NOMBRE, TIPO
+			   FROM LISTAVALORES
+			   UNION ALL(
+			   SELECT CODIGOEQUIPO, NOMBREEQUIPO, 'EQUIPOS' FROM EQUIPOS
+			   WHERE NOT EXISTS
+			          		   (SELECT CODIGOEQUIPO
+							    FROM   MANTENIMIENTO
+							    WHERE  (EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO)))
+			   ORDER BY TIPO
+      ELSE IF (@p_TABLA = 'CONTROLPROGRAMACION')        
+               SELECT CODIGOEQUIPO, (NOMBREEQUIPO+ ' '+ SERIE) AS EQUIPO, 'EQUIPOS' AS TIPO FROM CPROGRAMACION
+     		   UNION ALL(
+			   SELECT DOCUMENTO, (NOMBRES + ' ' + APELLIDOS) AS NOMBRECOMPLETO, 'OPERARIOS' FROM OPERARIOS)
+			   ORDER BY TIPO
+      ELSE IF (@p_TABLA = 'CONTROLPROGRAMAREQUIPOS')        
+               SELECT CODIGOEQUIPO, (NOMBREEQUIPO+ ' '+ SERIE) AS EQUIPO, 'EQUIPOS' AS TIPO FROM CPROGRAMAREQUIPOS
+     		   UNION ALL(
+			   SELECT DOCUMENTO, (NOMBRES + ' ' + APELLIDOS) AS NOMBRECOMPLETO, 'OPERARIOS' FROM OPERARIOS)
+			   ORDER BY TIPO
+END
+
+GO
+/****** Objeto:  StoredProcedure [dbo].[spr_CCargarListado]    ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spr_CCargarListado](		
+	@p_TABLA		varchar(20),    
+    @p_CONDICION	varchar(50))
+
+AS
+ DECLARE @p_DATOBUSCARN  	NUMERIC(10, 0)
+ BEGIN 
+      IF(@p_TABLA = 'OPERARIOS')
+         IF (@p_CONDICION <> '')
+             BEGIN
+                   SET @p_DATOBUSCARN = CONVERT(NUMERIC (10,0), @p_CONDICION)                 
+                   SELECT DOCUMENTO AS CODIGO, (NOMBRES + ' ' + APELLIDOS + ' - Correo: ' + CORREO) AS DESCRIPCION FROM OPERARIOS WHERE  DOCUMENTO = @p_DATOBUSCARN
+             END
+         ELSE 
+             BEGIN
+                               
+                   SELECT DOCUMENTO AS CODIGO, (NOMBRES + ' ' + APELLIDOS + ' - Correo: ' + CORREO) AS DESCRIPCION FROM OPERARIOS
+             END         
+      ELSE IF (@p_TABLA = 'MARCAS') 
+               IF (@p_CONDICION <> '')   
+                   BEGIN  
+                          SELECT CODIGO, (NOMBRE + ' ' + DESCRIPCION) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NOT NULL AND TIPO = 'MARCAS'
+                          AND CODIGO = @p_CONDICION
+                          UNION ALL(SELECT CODIGO, (NOMBRE) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NULL AND TIPO = 'MARCAS' AND CODIGO = @p_CONDICION)
+                   END
+               ELSE 
+                   BEGIN                      
+                          SELECT CODIGO, (NOMBRE + ' ' + DESCRIPCION) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NOT NULL AND TIPO = 'MARCAS'
+                          UNION ALL(SELECT CODIGO, (NOMBRE) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NULL AND TIPO = 'MARCAS')           
+                   END    
+      ELSE IF (@p_TABLA = 'LINEAS')
+               
+               IF (@p_CONDICION <> '')   
+                   BEGIN   			                        
+                          SELECT CODIGO, (NOMBRE + ' ' + DESCRIPCION) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NOT NULL AND TIPO = 'LINEAS'
+                          AND CODIGO = @p_CONDICION
+                          UNION ALL(SELECT CODIGO, (NOMBRE) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NULL AND TIPO = 'LINEAS' AND CODIGO = @p_CONDICION)
+                   END
+               ELSE 
+                   BEGIN   
+                          SELECT CODIGO, (NOMBRE + ' ' + DESCRIPCION) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NOT NULL AND TIPO = 'LINEAS'
+                          UNION ALL(SELECT CODIGO, (NOMBRE) AS DESCRIPCION FROM LISTAVALORES WHERE DESCRIPCION IS NULL AND TIPO = 'LINEAS')
+                   END           
+      ELSE IF (@p_TABLA = 'EQUIPOS')
+              IF (@p_CONDICION <> '')   
+                   BEGIN                           
+				        SELECT CODIGOEQUIPO AS CODIGO, (NOMBREEQUIPO + ' ' +  SERIE) AS DESCRIPCION FROM EQUIPOS 
+						WHERE (NOT EXISTS
+                          (SELECT     CODIGOEQUIPO
+                            FROM       MANTENIMIENTO
+                            WHERE     (EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO) AND CODIGOEQUIPO = @p_CONDICION))
+
+                   END
+               ELSE 
+                   BEGIN                           
+				        SELECT CODIGOEQUIPO AS CODIGO, (NOMBREEQUIPO + ' ' +  SERIE) AS DESCRIPCION FROM EQUIPOS 
+                        WHERE (NOT EXISTS
+                          (SELECT     CODIGOEQUIPO
+                            FROM       MANTENIMIENTO
+                            WHERE     (EQUIPOS.CODIGOEQUIPO = CODIGOEQUIPO)))
+                   END                                    
+      ELSE IF (@p_TABLA = 'MANTENIMIENTO')
+               IF (@p_CONDICION <> '')   
+                   BEGIN
+                        SELECT M.CODIGOEQUIPO AS CODIGO, ('Operario: '+ ' ' + CONVERT(varchar(10),M.DOCUMENTO)  + ' ' +  NOMBRES + ' ' + APELLIDOS + ' ' +' - Equipo: '+ ' ' + NOMBREEQUIPO+ ' ' +' - Serie: '+ ' ' + SERIE) AS DESCRIPCION 
+						FROM MANTENIMIENTO M
+						INNER JOIN EQUIPOS E ON E.CODIGOEQUIPO = M.CODIGOEQUIPO
+						INNER JOIN OPERARIOS O ON O.DOCUMENTO = M.DOCUMENTO
+						WHERE M.CODIGOEQUIPO = @p_CONDICION
+                   END
+               ELSE 
+                   BEGIN   
+                          SELECT M.CODIGOEQUIPO AS CODIGO, ('Operario: '+ ' ' + CONVERT(varchar(10),M.DOCUMENTO)  + ' ' +  NOMBRES + ' ' + APELLIDOS + ' ' +' - Equipo: '+ ' ' + NOMBREEQUIPO+ ' ' +' - Serie: '+ ' ' + SERIE) AS DESCRIPCION 
+						  FROM MANTENIMIENTO M
+						  INNER JOIN EQUIPOS E ON E.CODIGOEQUIPO = M.CODIGOEQUIPO
+						  INNER JOIN OPERARIOS O ON O.DOCUMENTO = M.DOCUMENTO
+                   END
+
+ 
+END
+
+GO
+
+/****** Objeto:  ForeignKey [FK_CODIGOLINEA]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+ALTER TABLE [dbo].[EQUIPOS]  WITH CHECK ADD  CONSTRAINT [FK_CODIGOLINEA] FOREIGN KEY([CODIGOLINEA])
+REFERENCES [dbo].[LISTAVALORES] ([CODIGO])
+GO
+ALTER TABLE [dbo].[EQUIPOS] CHECK CONSTRAINT [FK_CODIGOLINEA]
+GO
+/****** Objeto:  ForeignKey [FK_CODIGOMARCA]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+ALTER TABLE [dbo].[EQUIPOS]  WITH CHECK ADD  CONSTRAINT [FK_CODIGOMARCA] FOREIGN KEY([CODIGOMARCA])
+REFERENCES [dbo].[LISTAVALORES] ([CODIGO])
+GO
+ALTER TABLE [dbo].[EQUIPOS] CHECK CONSTRAINT [FK_CODIGOMARCA]
+GO
+/****** Objeto:  ForeignKey [FK_CODIGOEQUIPO]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+ALTER TABLE [dbo].[MANTENIMIENTO]  WITH CHECK ADD  CONSTRAINT [FK_CODIGOEQUIPO] FOREIGN KEY([CODIGOEQUIPO])
+REFERENCES [dbo].[EQUIPOS] ([CODIGOEQUIPO])
+GO
+ALTER TABLE [dbo].[MANTENIMIENTO] CHECK CONSTRAINT [FK_CODIGOEQUIPO]
+GO
+/****** Objeto:  ForeignKey [FK_DOCUMENTO]    Fecha de la secuencia de comandos: 09/24/2016 15:23:14 ******/
+ALTER TABLE [dbo].[MANTENIMIENTO]  WITH CHECK ADD  CONSTRAINT [FK_DOCUMENTO] FOREIGN KEY([DOCUMENTO])
+REFERENCES [dbo].[OPERARIOS] ([DOCUMENTO])
+GO
+ALTER TABLE [dbo].[MANTENIMIENTO] CHECK CONSTRAINT [FK_DOCUMENTO]
+GO
+
+INSERT INTO OPERARIOS(DOCUMENTO,NOMBRES,APELLIDOS,TELEFONO,CORREO,CLAVE,PERFIL,INGRESADOPOR,MODIFICADOPOR)
+VALUES(123456, 'Admin','Admin',1234567,'correo@yahoo.es','laclave',1,123456,123456);
