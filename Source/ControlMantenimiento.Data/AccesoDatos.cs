@@ -250,7 +250,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
             }
         }
 
-        public int GuardarOperario(Operario Operario, string Accion)
+        public int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
         {
             try
             {
@@ -267,7 +267,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     Cmd.Parameters.AddWithValue("p_CLAVE", Operario.clave);
                     Cmd.Parameters.AddWithValue("p_PERFIL", Operario.perfil);
                     Cmd.Parameters.AddWithValue("p_FOTO", Operario.foto);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -284,7 +284,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
 
         }
 
-        public bool GuardarCambioClave(string NuevaClave)
+        public bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
         {
             try
             {
@@ -292,7 +292,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                 {
                     Cmd = new SqlCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_CLAVE", NuevaClave);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
@@ -351,7 +351,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
             }
         }
 
-        public int GuardarListaValores(ListaValores listavalores)
+        public int GuardarListaValores(ListaValores listavalores, double usuarioConectado)
         {
             try
             {
@@ -363,7 +363,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     Cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
                     Cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
                     Cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -421,7 +421,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
             }
         }
 
-        public int GuardarEquipo(Equipo equipo)
+        public int GuardarEquipo(Equipo equipo, double usuarioConectado)
         {
             try
             {
@@ -435,7 +435,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
                     Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
                     Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -491,7 +491,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
             }
         }
 
-        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion)
+        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
         {
             try
             {
@@ -504,7 +504,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     Cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
                     Cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
                     Cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();

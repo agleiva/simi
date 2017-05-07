@@ -45,3 +45,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * A pesar de todo esto, el proyecto está en un estado no compilable, y aún sufre las violaciones de la separación en capas que se encontraron en el punto 7.
 
 13. Se cambiaron todos los métodos estáticos de la clase `AccesoDatos` por métodos de instancia, y se quitó las referencias directas a `ConfigurationManager` en favor de obtener el Connection String mediante un parámetro en el constructor de la clase. Esto quita las dependencias de la capa de datos a la configuración de la aplicación, que es una violación de SRP.
+
+13. Se quitaron todas las referencias desde `AccesoDatos` hacia la capa de arriba (`Business`), para mantener una separación de capas correcta y eliminar el problema detectado en el punto 7.
