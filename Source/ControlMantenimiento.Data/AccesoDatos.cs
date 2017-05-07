@@ -29,29 +29,29 @@ namespace ControlMantenimiento_NetDesktop.DAL
       public static ArrayList arlListMarca = new ArrayList();
       public static ArrayList arlListOperarios = new ArrayList();
 
-      public static void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
-      {
-        try
-        {
-              Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]);
-              Cmd = new SqlCommand("spr_CBuscarRegistro", Cn);
-              Cmd.CommandType = CommandType.StoredProcedure;
-              Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-              Cmd.Parameters.AddWithValue("p_DATOBUSCAR", DatoBuscar);
-              Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
-              Cn.Open();              
+       public static void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
+       {
+            try
+            {
+                Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString());                
+                Cmd = new SqlCommand("spr_CBuscarRegistro", Cn);
+                Cmd.CommandType = CommandType.StoredProcedure;
+                Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
+                Cmd.Parameters.AddWithValue("p_DATOBUSCAR", DatoBuscar);
+                Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
+                Cn.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-      }
        
       public static SqlDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
-      {
-         IniciarBusqueda(Tabla, DatoBuscar, Condicion);
-         sdr = Cmd.ExecuteReader();
-         return sdr;         
+      { 
+            IniciarBusqueda(Tabla, DatoBuscar, Condicion);
+            sdr = Cmd.ExecuteReader();
+            return sdr;
       }
            
       public static int ValidarTablaVacia(string Tabla)
@@ -106,7 +106,35 @@ namespace ControlMantenimiento_NetDesktop.DAL
 
         }
 
-      public static void ControlEquipos()
+        public static ArrayList CargarListas(string Tabla, string Condicion)
+        {
+            try
+            {
+                ArrayList arlListado = new ArrayList();
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                {
+                    Cmd = new SqlCommand("spr_CCargarListado", Cn);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
+                    Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
+                    Cn.Open();
+                    using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        while (sdr.Read())
+                        {
+                            arlListado.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(1).ToString()));
+                        }
+                    sdr.Close();
+                    LiberarRecursos();
+                }
+                return arlListado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void ControlEquipos()
       {
           try
           {
@@ -145,52 +173,52 @@ namespace ControlMantenimiento_NetDesktop.DAL
           }
       }
 
-      public static void ControlProgramacion(string Tabla)
-      {
-          try
-          {
-              arlListEquipo = new ArrayList();
-              arlListOperarios = new ArrayList();
-              using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
-              {
-                  Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
-                  Cmd.CommandType = CommandType.StoredProcedure;
-                  Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                  Cn.Open();
-                  using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))                      
-                      while (sdr.Read())
-                      {
-                          if (sdr.GetValue(2).ToString().Equals("EQUIPOS"))
-                          {
-                              arlListEquipo.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
-                          }
-                          else if (sdr.GetValue(2).ToString().Equals("OPERARIOS"))
-                          {
-                              arlListOperarios.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
-                          }                         
-                      }
-                  sdr.Close();
-                  LiberarRecursos();
-              }
-          }
-          catch (Exception ex)
-          {
-              throw ex;
-          }
-      }
+        public static void ControlProgramacion(string Tabla)
+        {
+            try
+            {
+                arlListEquipo = new ArrayList();
+                arlListOperarios = new ArrayList();
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                {
+                    Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
+                    Cn.Open();
+                    using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        while (sdr.Read())
+                        {
+                            if (sdr.GetValue(2).ToString().Equals("EQUIPOS"))
+                            {
+                                arlListEquipo.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                            }
+                            else if (sdr.GetValue(2).ToString().Equals("OPERARIOS"))
+                            {
+                                arlListOperarios.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                            }
+                        }
+                    sdr.Close();
+                    LiberarRecursos();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-       
-       /*
-		=======================================================================================================================================================
-        Inicio Operaciones sobre estructura Operarios
-        =======================================================================================================================================================
-		*/
 
-        public static Operario obtenerOperario(string DatoBuscar, string Clave)
+        /*
+         =======================================================================================================================================================
+         Inicio Operaciones sobre estructura Operarios
+         =======================================================================================================================================================
+         */
+
+        public static Operario ObtenerOperario(string DatoBuscar, string Clave)
         {
             Operario operario = new Operario();
             try
-            {                
+            {
                 sdr = (BuscarRegistro("OPERARIOS", DatoBuscar, Clave));
                 if (sdr.Read())
                 {
@@ -202,10 +230,10 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     operario.clave = sdr["CLAVE"].ToString();
                     operario.perfil = Convert.ToInt32(sdr["PERFIL"].ToString());
                     operario.foto = sdr["FOTO"].ToString();
-                    sdr.Close();  
+                    sdr.Close();
                     LiberarRecursos();
                     return operario;
-                }                
+                }
                 else
                 {
                     sdr.Close();
@@ -214,7 +242,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                 }
             }
             catch (Exception ex)
-            {                
+            {
                 throw ex;
             }
         }
@@ -223,7 +251,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
         {
             try
             {
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
                     Cmd = new SqlCommand("spr_IUOperarios", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -242,21 +270,22 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     Cmd.ExecuteNonQuery();
                     int Resultado = Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value);
                     LiberarRecursos();
-                    return Resultado;                   
+                    return Resultado;
                 }
             }
             catch (Exception e)
             {
                 throw e;
+
             }
-            
+
         }
 
         public static bool GuardarCambioClave(string NuevaClave)
         {
             try
             {
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
                     Cmd = new SqlCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -272,26 +301,25 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     }
                     LiberarRecursos();
                     return false;
-                }                
+                }
             }
             catch (Exception e)
             {
-                throw e;                                
+                throw e;
             }
-            
-        }	
-       /*
-		=======================================================================================================================================================
-        Fin Operaciones sobre estructura Operarios
-        =======================================================================================================================================================
-		*/
-		
-		/*
+        }
+        /*
+         =======================================================================================================================================================
+         Fin Operaciones sobre estructura Operarios
+         =======================================================================================================================================================
+         */
+
+        /*
 		=======================================================================================================================================================
         Inicio Operaciones sobre estructura ListaValores
         =======================================================================================================================================================
 		*/
-		public static ListaValores ObtenerListaValores(string DatoBuscar)
+        public static ListaValores ObtenerListaValores(string DatoBuscar)
         {
             ListaValores listavalores = new ListaValores();
             try
@@ -324,7 +352,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
         {
             try
             {
-                using ( Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
                     Cmd = new SqlCommand("spr_IUListaValores", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -343,26 +371,27 @@ namespace ControlMantenimiento_NetDesktop.DAL
             }
             catch (Exception e)
             {
-                throw e;               
+                throw e;
+
             }
 
         }
-		/*
+        /*
 		=======================================================================================================================================================
         Fin Operaciones sobre estructura ListaValores
         =======================================================================================================================================================
 		*/
-        	   
-	    /*
+
+        /*
 		=======================================================================================================================================================
         Inicio Operaciones sobre estructura Equipos
         =======================================================================================================================================================
 		*/
-		public static Equipo ObtenerEquipo(string DatoBuscar)
+        public static Equipo ObtenerEquipo(string DatoBuscar)
         {
-            ControlMantenimiento_NetDesktop.BO.Equipo equipo = new Equipo();
+            Equipo equipo = new Equipo();
             try
-            {                
+            {
                 sdr = (BuscarRegistro("EQUIPOS", DatoBuscar, "Codigo"));
                 if (sdr.Read())
                 {
@@ -388,59 +417,59 @@ namespace ControlMantenimiento_NetDesktop.DAL
                 throw ex;
             }
         }
-		
-		public static int GuardarEquipo(Equipo equipo)
+
+        public static int GuardarEquipo(Equipo equipo)
         {
             try
-            {   
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+            {
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
-                        Cmd = new SqlCommand("spr_IUEquipos", Cn);
-                        Cmd.CommandType = CommandType.StoredProcedure;
-                        Cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.codigoequipo);
-                        Cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.nombreequipo);
-                        Cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.codigomarca);
-                        Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
-                        Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
-                        Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
-                        Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
-                        Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
-                        Cn.Open();
-                        Cmd.ExecuteNonQuery();
-                        int Resultado = Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value);
-                        LiberarRecursos();
-                        return Resultado;
-                    }                
-                
+                    Cmd = new SqlCommand("spr_IUEquipos", Cn);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+                    Cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.codigoequipo);
+                    Cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.nombreequipo);
+                    Cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.codigomarca);
+                    Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
+                    Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
+                    Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    Cn.Open();
+                    Cmd.ExecuteNonQuery();
+                    int Resultado = Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value);
+                    LiberarRecursos();
+                    return Resultado;
+                }
             }
             catch (Exception e)
             {
-                throw e;                
+                throw e;
+
             }
-         }
+        }
 
-		 /*
-		=======================================================================================================================================================
-        Fin Operaciones sobre estructura Equipos
-        =======================================================================================================================================================
-		*/
+        /*
+       =======================================================================================================================================================
+       Fin Operaciones sobre estructura Equipos
+       =======================================================================================================================================================
+       */
 
-		 /*
-		=======================================================================================================================================================
-        Inicio Operaciones sobre estructura Mantenimiento
-        =======================================================================================================================================================
-		*/
-		public static Mantenimiento ObtenerMantenimiento(string DatoBuscar)
+        /*
+       =======================================================================================================================================================
+       Inicio Operaciones sobre estructura Mantenimiento
+       =======================================================================================================================================================
+       */
+        public static Mantenimiento ObtenerMantenimiento(string DatoBuscar)
         {
             Mantenimiento mantenimiento = new Mantenimiento();
             try
-            {                
+            {
                 sdr = (BuscarRegistro("MANTENIMIENTO", DatoBuscar, ""));
                 if (sdr.Read())
                 {
                     mantenimiento.codigoequipo = Convert.ToInt32(sdr["CODIGOEQUIPO"].ToString());
                     mantenimiento.documento = Convert.ToDouble(sdr["DOCUMENTO"].ToString());
-                    mantenimiento.fecha = Convert.ToDateTime(sdr["FECHA"].ToString());            
+                    mantenimiento.fecha = Convert.ToDateTime(sdr["FECHA"].ToString());
                     mantenimiento.observaciones = sdr["OBSERVACIONES"].ToString();
                     sdr.Close();
                     LiberarRecursos();
@@ -463,7 +492,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
         {
             try
             {
-                using ( Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
                     Cmd = new SqlCommand("spr_IUMantenimiento", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -480,26 +509,26 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     LiberarRecursos();
                     return Resultado;
                 }
-              
             }
             catch (Exception e)
             {
-                throw e;                
+                throw e;
+
             }
         }
 
-		 /*
-		=======================================================================================================================================================
-        Fin Operaciones sobre estructura Mantenimiento
-        =======================================================================================================================================================
-		*/
-		
-		
-       public static int EliminarRegistro(string DatoEliminar, string Tabla)
+        /*
+       =======================================================================================================================================================
+       Fin Operaciones sobre estructura Mantenimiento
+       =======================================================================================================================================================
+       */
+
+
+        public static int EliminarRegistro(string DatoEliminar, string Tabla)
         {
             try
             {
-                using ( Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
                     Cmd = new SqlCommand("spr_DRegistro", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -512,25 +541,24 @@ namespace ControlMantenimiento_NetDesktop.DAL
                     LiberarRecursos();
                     return Resultado;
                 }
-               
             }
             catch (Exception e)
             {
-                throw e;                
+                throw e;
             }
         }
 
-       public static void LiberarRecursos()
-       {            
-           Cmd.Dispose();
-           if (Cn != null)
-           {
-               Cn.Close();
-               Cn.Dispose();
-           }
-       }
+        public static void LiberarRecursos()
+        {
+            Cmd.Dispose();
+            if (Cn != null)
+            {
+                Cn.Close();
+                Cn.Dispose();
+            }
+        }
 
-     
-        
+
+
     }
 }

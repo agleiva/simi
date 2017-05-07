@@ -130,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Funciones.cs" />
-    <Compile Include="DAL\AccesoDatos.cs" />
     <Compile Include="Forms\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

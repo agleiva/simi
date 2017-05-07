@@ -35,3 +35,10 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
    * La clases `Funciones` tenían definiciones idénticas, excepto por los campos estáticos y el método `LimpiarForma()`, cuya implementación es específica para desktop y web. Se unificaron los métodos duplicados en la clase `ControlMantenimiento.Business.Funciones` y se mantuvieron las diferencias en los respectivos proyectos.
    * La clases `Controlador` tenían definiciones idénticas, excepto por el método `CargarListas()` que ahora tiene 2 sobrecargas.
    
+12. Se unificó el acceso a datos en la clase `AccesoDatos` en el proyecto `ControlMantenimiento.Data` eliminando el código duplicado que existía en los proyectos Web y Desktop.
+    * En este punto, el proyecto se encuentra correctamente separado por capas (además de no tener código duplicado), donde cada capa reside en un proyecto separado, con referencias hacia las capas "de abajo":
+        * El proyecto `ControlMantenimiento.Model` contiene el modelo de datos, y no requiere referencias a ningun otro proyecto.
+        * El proyecto `ControlMantenimiento.Data` contiene el acceso a datos, y hace uso de las entidades definidas en `ControlMantenimiento.Model`.
+        * El proyecto `ControlMantenimiento.Business` contiene la lógica de negocio y funciones comunes, y hace uso tanto de `ControlMantenimiento.Model` como de `ControlMantenimiento.Data`.
+        * El proyecto `ControlMantenimiento.Web` contiene la aplicación Web, y hace uso de la capa de negocio, el model y la capa de datos.
+        * El proyecto `ControlMantenimiento-NetDesktop` contiene la aplicación desktop, y hace uso de la capa de negocio, el model y la capa de datos.
