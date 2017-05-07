@@ -55,10 +55,6 @@
     <Compile Include="BLL\Funciones.cs" />
     <Compile Include="BLL\IControlador.cs" />
     <Compile Include="BLL\Mensajes.cs" />
-    <Compile Include="BO\Equipo.cs" />
-    <Compile Include="BO\ListaValores.cs" />
-    <Compile Include="BO\Mantenimiento.cs" />
-    <Compile Include="BO\Operario.cs" />
     <Compile Include="DAL\AccesoDatos.cs" />
     <Compile Include="Forms\frmAcceso.cs">
       <SubType>Form</SubType>
@@ -163,6 +159,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ControlMantenimiento.Model\ControlMantenimiento.Model.csproj">
+      <Project>{bf4f6d55-d3b6-4aa8-aed8-771a94aebb67}</Project>
+      <Name>ControlMantenimiento.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
