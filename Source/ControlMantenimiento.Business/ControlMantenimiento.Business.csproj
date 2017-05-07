@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36D7AC5D-243E-4550-89D1-17BC398CE6D1}</ProjectGuid>
+    <ProjectGuid>{DF20615D-4AC6-4D25-86B2-B7F1625C7FC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ControlMantenimiento.Data.Oracle</RootNamespace>
-    <AssemblyName>ControlMantenimiento.Data.Oracle</AssemblyName>
+    <RootNamespace>ControlMantenimiento.Business</RootNamespace>
+    <AssemblyName>ControlMantenimiento.Business</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesoDatos.cs" />
+    <Compile Include="IControlador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlMantenimiento.Data\ControlMantenimiento.Data.csproj">
+      <Project>{427ccd41-d5ea-4dfd-81d9-1eb42bb7ff7c}</Project>
+      <Name>ControlMantenimiento.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlMantenimiento.Model\ControlMantenimiento.Model.csproj">
       <Project>{bf4f6d55-d3b6-4aa8-aed8-771a94aebb67}</Project>
       <Name>ControlMantenimiento.Model</Name>

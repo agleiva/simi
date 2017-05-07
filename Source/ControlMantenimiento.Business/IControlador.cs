@@ -9,7 +9,7 @@ namespace ControlMantenimiento_NetDesktop.BLL
 {
     public interface IControlador
     {
-        // Validar Tablas Vacias
+        // Validar existencia de registros en tabla implicada
         int ValidarTablaVacia(string Tabla);
 
         // Carga de Listas
@@ -19,12 +19,13 @@ namespace ControlMantenimiento_NetDesktop.BLL
         ArrayList ObtenerListaLineas();
         ArrayList ObtenerListaMarcas();
         ArrayList CargarListas(string Tabla);
+        ArrayList CargarListas(string Tabla, string Condicion);
         ArrayList ObtenerListaOperarios();
           
         // Obtener Registro
         Operario ObtenerAcceso(string DatoBuscar, string Clave);
         Object ObtenerRegistro(string DatoBuscar, string Tabla);
-               
+
         // Grabar en BD
         int Guardar(object o, string Accion);
         int Guardar(object o);
@@ -32,6 +33,5 @@ namespace ControlMantenimiento_NetDesktop.BLL
        
         //Eliminar Registro
         int EliminarRegistro(string DatoEliminar, string Tabla);
-       
     }
 }

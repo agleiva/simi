@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="BLL\Controlador.cs" />
     <Compile Include="BLL\Funciones.cs" />
-    <Compile Include="BLL\IControlador.cs" />
     <Compile Include="BLL\Mensajes.cs" />
     <Compile Include="Forms\frmAcceso.cs">
       <SubType>Form</SubType>
@@ -158,6 +157,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ControlMantenimiento.Business\ControlMantenimiento.Business.csproj">
+      <Project>{df20615d-4ac6-4d25-86b2-b7f1625c7fc2}</Project>
+      <Name>ControlMantenimiento.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ControlMantenimiento.Data\ControlMantenimiento.Data.csproj">
       <Project>{427ccd41-d5ea-4dfd-81d9-1eb42bb7ff7c}</Project>
       <Name>ControlMantenimiento.Data</Name>

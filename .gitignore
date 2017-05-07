@@ -16,3 +16,5 @@ Source/ControlMantenimiento.Data.MySql/obj/
 Source/ControlMantenimiento.Data.MySql/bin/
 Source/ControlMantenimiento.Data.Oracle/obj/
 Source/ControlMantenimiento.Data.Oracle/bin/
+Source/ControlMantenimiento.Business/obj/
+Source/ControlMantenimiento.Business/bin/
