@@ -136,10 +136,6 @@
     <Compile Include="BLL\Funciones.cs" />
     <Compile Include="BLL\IControlador.cs" />
     <Compile Include="BLL\Mensajes.cs" />
-    <Compile Include="BO\Equipo.cs" />
-    <Compile Include="BO\ListaValores.cs" />
-    <Compile Include="BO\Mantenimiento.cs" />
-    <Compile Include="BO\Operario.cs" />
     <Compile Include="Conexion MySql\AccesoDatos.cs" />
     <Compile Include="Conexion Oracle\AccesoDatos.cs" />
     <Compile Include="DAL\AccesoDatos.cs" />

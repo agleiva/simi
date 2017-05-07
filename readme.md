@@ -24,3 +24,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
    * Debido a este error, el proyecto no compila en este punto del tiempo.
 
 8. Se agregó el proyecto web a la solución bajo el nombre `ControlMantenimiento.Web`.
+
+9. Se eliminaron las clases duplicadas de `BO` del proyecto `ControlMantenimiento.Web`.
+
