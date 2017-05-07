@@ -22,3 +22,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 7. Se movió el acceso a datos (anteriormente ubicado dentro de una carpeta `DAL` en el proyecto desktop) a un proyecto aparte: `ControlMantenimiento.Data`.
    * Esto dejó al descubierto una violación en la separación de capas: la clase `ControlMantenimiento_NetDesktop.DAL.AccesoDatos` hace referencia al campo estático `ControlMantenimiento_NetDesktop.BLL.Funciones.UsuarioConectado`. 
    * Debido a este error, el proyecto no compila en este punto del tiempo.
+
+8. Se agregó el proyecto web a la solución bajo el nombre `ControlMantenimiento.Web`.

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Model"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Data", "ControlMantenimiento.Data\ControlMantenimiento.Data.csproj", "{427CCD41-D5EA-4DFD-81D9-1EB42BB7FF7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlMantenimiento.Web", "ControlMantenimiento.Web\ControlMantenimiento.Web.csproj", "{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{427CCD41-D5EA-4DFD-81D9-1EB42BB7FF7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{427CCD41-D5EA-4DFD-81D9-1EB42BB7FF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{427CCD41-D5EA-4DFD-81D9-1EB42BB7FF7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,264 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{20412CDC-A2F4-4CAB-BEB7-6A3960EFD804}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControlMantenimiento.Web</RootNamespace>
+    <AssemblyName>ControlMantenimiento.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="assets\css\.DS_Store" />
+    <Content Include="assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\Resources\.htaccess" />
+    <Content Include="assets\Resources\form.formoid" />
+    <Content Include="assets\Resources\formoid.eot" />
+    <Content Include="assets\Resources\formoid.ttf" />
+    <Content Include="assets\Resources\formoid.woff" />
+    <Content Include="assets\Resources\icons.eot" />
+    <Content Include="assets\Resources\icons.ttf" />
+    <Content Include="assets\Resources\icons.woff" />
+    <Content Include="Conexion MySql\Web.config" />
+    <Content Include="Conexion Oracle\Web.config" />
+    <Content Include="Forms\MasterPage.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\Estilos.css" />
+    <Content Include="assets\css\material-dashboard.css" />
+    <Content Include="assets\css\Styles.css" />
+    <Content Include="assets\font-awesome\css\font-awesome.min.css" />
+    <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\Resources\form.php" />
+    <Content Include="assets\Resources\formoid-solid-green.css" />
+    <Content Include="assets\Resources\formoid-solid-green.js" />
+    <Content Include="assets\Resources\formoid.svg" />
+    <Content Include="assets\Resources\handler.php" />
+    <Content Include="assets\Resources\helpers.php" />
+    <Content Include="assets\Resources\icons.svg" />
+    <Content Include="assets\Resources\jquery.min.js" />
+    <Content Include="assets\Resources\JSON.php" />
+    <Content Include="assets\Resources\recaptchalib.php" />
+    <Content Include="Forms\wfrmAcceso.aspx" />
+    <Content Include="Forms\wfrmBusquedas.aspx" />
+    <Content Include="Forms\wfrmCambioClave.aspx" />
+    <Content Include="Forms\wfrmEquipos.aspx" />
+    <Content Include="Forms\wfrmError.aspx" />
+    <Content Include="Forms\wfrmListaValores.aspx" />
+    <Content Include="Forms\wfrmMantenimiento.aspx" />
+    <Content Include="Forms\wfrmMenu.aspx" />
+    <Content Include="Forms\wfrmOperarios.aspx" />
+    <Content Include="Forms\wfrmRespuesta.aspx" />
+    <Content Include="Imagenes\Advertencia.png" />
+    <Content Include="Imagenes\Ayuda-Logo.jpg" />
+    <Content Include="Imagenes\Error.png" />
+    <Content Include="Imagenes\HELP.BMP" />
+    <Content Include="Imagenes\Home.png" />
+    <Content Include="Imagenes\Informacion.png" />
+    <Content Include="Imagenes\simi-inicio.jpg" />
+    <Content Include="Imagenes\SIMI-LOGO.jpg" />
+    <Content Include="Imagenes\simi.jpg" />
+    <Content Include="JavaScript\FuncionesTeclado.js" />
+    <Content Include="JavaScript\ValidacionesPaginas.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\CargaCombosListas.cs" />
+    <Compile Include="BLL\Controlador.cs" />
+    <Compile Include="BLL\Funciones.cs" />
+    <Compile Include="BLL\IControlador.cs" />
+    <Compile Include="BLL\Mensajes.cs" />
+    <Compile Include="BO\Equipo.cs" />
+    <Compile Include="BO\ListaValores.cs" />
+    <Compile Include="BO\Mantenimiento.cs" />
+    <Compile Include="BO\Operario.cs" />
+    <Compile Include="Conexion MySql\AccesoDatos.cs" />
+    <Compile Include="Conexion Oracle\AccesoDatos.cs" />
+    <Compile Include="DAL\AccesoDatos.cs" />
+    <Compile Include="Forms\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmAcceso.aspx.cs">
+      <DependentUpon>wfrmAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmAcceso.aspx.designer.cs">
+      <DependentUpon>wfrmAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmBusquedas.aspx.cs">
+      <DependentUpon>wfrmBusquedas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmBusquedas.aspx.designer.cs">
+      <DependentUpon>wfrmBusquedas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmCambioClave.aspx.cs">
+      <DependentUpon>wfrmCambioClave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmCambioClave.aspx.designer.cs">
+      <DependentUpon>wfrmCambioClave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmEquipos.aspx.cs">
+      <DependentUpon>wfrmEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmEquipos.aspx.designer.cs">
+      <DependentUpon>wfrmEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmError.aspx.cs">
+      <DependentUpon>wfrmError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmError.aspx.designer.cs">
+      <DependentUpon>wfrmError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmListaValores.aspx.cs">
+      <DependentUpon>wfrmListaValores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmListaValores.aspx.designer.cs">
+      <DependentUpon>wfrmListaValores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmMantenimiento.aspx.cs">
+      <DependentUpon>wfrmMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmMantenimiento.aspx.designer.cs">
+      <DependentUpon>wfrmMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmMenu.aspx.cs">
+      <DependentUpon>wfrmMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmMenu.aspx.designer.cs">
+      <DependentUpon>wfrmMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmOperarios.aspx.cs">
+      <DependentUpon>wfrmOperarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmOperarios.aspx.designer.cs">
+      <DependentUpon>wfrmOperarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\wfrmRespuesta.aspx.cs">
+      <DependentUpon>wfrmRespuesta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrmRespuesta.aspx.designer.cs">
+      <DependentUpon>wfrmRespuesta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58647</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58647/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
