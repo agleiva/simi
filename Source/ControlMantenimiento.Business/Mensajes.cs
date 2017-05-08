@@ -2,7 +2,7 @@
 
 namespace ControlMantenimiento_NetDesktop.BLL
 {
-    class Mensajes // Coleccion de mensajes lanzados por el sistema
+    public class Mensajes // Coleccion de mensajes lanzados por el sistema
     {
         public static string MensajeAplicacion = "SIMI - SISTEMA DE MANTENIMIENTO INDUSTRIAL";
         public static string MensajeGraba = "El registro ha sido grabado satisfactoriamente";

@@ -53,3 +53,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 16. Se introdujo el parámetro `double usuarioConectado` en el constructor de la clase `Controlador` para guardarlo en un campo de instancia y pasarlo a `AccesoDatos` cuando sea necesario.
 
 17. Se creó un método estático (factory) en la clase `Funciones` del proyecto Desktop para unificar la creación del `Controlador` pasándo la instancia de `AccesoDatos` con el *Connection String* apropiado.
+
+18. Se convirtió la clase `Mensajes` del proyecto `ControlMantenimiento.Business` en `public` para que pueda ser accedida desde los demás proyectos.
