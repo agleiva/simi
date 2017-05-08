@@ -1,25 +1,10 @@
-﻿using System;
-
-
-
-namespace ControlMantenimiento.Model
+﻿namespace ControlMantenimiento.Model
 {
     public class CargaCombosListas
     {
-       private string Codigo;       
-       private string Detalle;
+        public string codigo { get; set; }
 
-       public string codigo
-       {
-           get { return Codigo; }
-           set { Codigo = value; }
-       }
-
-       public string detalle
-       {
-            get { return Detalle; }
-            set { Detalle = value; }
-       }
+        public string detalle { get; set; }
 
         // Default Constructor
        public CargaCombosListas()
@@ -28,8 +13,8 @@ namespace ControlMantenimiento.Model
 
        public CargaCombosListas(string codigo, string detalle)
        {
-           Codigo  = codigo;
-           Detalle = detalle;
+           this.codigo  = codigo;
+           this.detalle = detalle;
        }
     }  
 }

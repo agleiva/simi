@@ -1,45 +1,19 @@
-﻿using System;
-
-
-
-namespace ControlMantenimiento.Model
+﻿namespace ControlMantenimiento.Model
 {
     public class ListaValores
     {
-       private int    Codigo;
-       private string Nombre;
-       private string Descripcion;
-       private string Tipo;
-
-       // Default Constructor
+        // Default Constructor
        public ListaValores()
        {
        }
 
-       public int codigo
-       {
-           get { return Codigo; }
-           set { Codigo = value; }
-       }
+       public int codigo { get; set; }
 
-        public string  nombre
-        {
-            get { return Nombre; }
-            set { Nombre = value; }
-        }
+        public string  nombre { get; set; }
 
-        public string descripcion
-        {
-            get { return Descripcion; }
-            set { Descripcion = value; }
-        }
+        public string descripcion { get; set; }
 
-        public string tipo
-        {
-            get { return Tipo; }
-            set { Tipo = value; }
-        }
-
+        public string tipo { get; set; }
     }
 
     }

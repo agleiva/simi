@@ -1,58 +1,20 @@
-﻿using System;
-
-
-
-namespace ControlMantenimiento.Model
+﻿namespace ControlMantenimiento.Model
 {
     public class Equipo
     {
-
-        private int     CodigoEquipo;
-        private string  NombreEquipo;
-        private int     CodigoMarca;
-        private string  Serie;
-        private int     CodigoLinea;
-        private int     Lubricacion;
-
-
         // Default Constructor
         public Equipo() { }
 
-        public int codigoequipo
-        {
-            get { return CodigoEquipo; }
-            set { CodigoEquipo = value; }
-        }
+        public int codigoequipo { get; set; }
 
-        public string nombreequipo
-        {
-            get { return NombreEquipo; }
-            set { NombreEquipo = value; }
-        }
+        public string nombreequipo { get; set; }
 
-        public int codigomarca
-       {
-           get { return CodigoMarca; }
-           set { CodigoMarca = value; }
-       }
+        public int codigomarca { get; set; }
 
-       public string serie
-       {
-           get { return Serie; }
-           set { Serie = value; }
-       }
+        public string serie { get; set; }
 
-       public int codigolinea
-       {
-           get { return CodigoLinea; }
-           set { CodigoLinea = value; }
-       }
+        public int codigolinea { get; set; }
 
-       public int lubricacion
-       {
-           get { return Lubricacion; }
-           set { Lubricacion = value; }
-       }
-        
+        public int lubricacion { get; set; }
     }
 }

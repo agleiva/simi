@@ -120,3 +120,7 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 41. Se aplicó el uso de `AccesoDatosFactory` en los métodos `CrearControlador()` tanto en el proyecto Desktop como Web.
 
 ### En este punto ámbas aplicaciones (Web y Desktop) funcionan correctamente, y ámbas implementan una abstracción que automáticamente selecciona la implementación adecuada de *Acceso a Datos* dependiendo simplemente del parámetro `providerName` del *Connection String* en su respectivo archivo de configuración.
+
+42. A partir de este punto se realiza una limpieza de código antes de seguir haciendo mejoras en la estructura / arquitectura del proyecto.
+    * Se cambian todas las propiedades de las clases de `ControlMantenimiento.Model` a auto-properties.
+
