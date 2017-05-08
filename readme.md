@@ -114,3 +114,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 39. Se cambió la referencia de la clase `Controlador` a la implementación concreta `AccesoDatos` por la abstracción `IAccesoDatos`.
     * Esto reveló que la clase `Controlador` accedía a los *campos públicos* `ArlListEquipo`, `ArlListLinea`, `ArlListMarca`, y `ArlListOperarios` de la clase `AccesoDatos`, lo cual no es correcto ya que no se puede abstraer, y además viola el SRP dándole a la capa de acceso a datos la responsabilidad de persistir estado en memoria, cosa que no debería.
     * Se convierten estos campos públicos en properties momentáneamente en las 3 clases de acceso a datos. Luego será refactorizado ésto para evitar tener estado en la capa de acceso a datos.
+
+40. Se creó la clase estática `ControlMantenimiento.Business.AccesoDatosFactory` en el proyecto `ControlMantenimiento.Business`, que permite obtener la implementación adecuada de acceso a datos a partir de los parámetros del connection string (más precisamente el `providerName`).

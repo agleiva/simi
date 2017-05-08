@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoDatosFactory.cs" />
     <Compile Include="Controlador.cs" />
     <Compile Include="Funciones.cs" />
     <Compile Include="IControlador.cs" />
@@ -47,6 +48,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlMantenimiento.Data.MySql\ControlMantenimiento.Data.MySql.csproj">
+      <Project>{33b993f5-b243-4661-af4d-2e57cc0f0276}</Project>
+      <Name>ControlMantenimiento.Data.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlMantenimiento.Data.Oracle\ControlMantenimiento.Data.Oracle.csproj">
+      <Project>{36d7ac5d-243e-4550-89d1-17bc398ce6d1}</Project>
+      <Name>ControlMantenimiento.Data.Oracle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlMantenimiento.Data\ControlMantenimiento.Data.csproj">
       <Project>{427ccd41-d5ea-4dfd-81d9-1eb42bb7ff7c}</Project>
       <Name>ControlMantenimiento.Data</Name>
