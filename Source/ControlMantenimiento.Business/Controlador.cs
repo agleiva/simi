@@ -43,22 +43,22 @@ namespace ControlMantenimiento_NetDesktop.BLL
 
         public ArrayList ObtenerListaEquipos()
         {
-            return _accesoDatos.arlListEquipo;
+            return _accesoDatos.ArlListEquipo;
         }
 
         public ArrayList ObtenerListaLineas()
         {
-            return _accesoDatos.arlListLinea;
+            return _accesoDatos.ArlListLinea;
         }
 
         public ArrayList ObtenerListaMarcas()
         {
-            return _accesoDatos.arlListMarca;
+            return _accesoDatos.ArlListMarca;
         }
 
         public ArrayList ObtenerListaOperarios()
         {
-            return _accesoDatos.arlListOperarios;
+            return _accesoDatos.ArlListOperarios;
         }
 
         public int ValidarTablaVacia(string Tabla)

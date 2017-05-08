@@ -99,3 +99,4 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se renombró el namespace `ControlMantenimiento_NetDesktop.DAL` a `ControlMantenimiento.Data`
     * Se cambió el nombre de la clase `ControlMantenimiento_NetWeb.DAL.AccesoDatos` en el proyecto `ControlMantenimiento.Data.MySql` a `ControlMantenimiento.Data.MySql.MySqlAccesoDatos`
     * Se cambió el nombre de la clase `ControlMantenimiento_NetWeb.DAL.AccesoDatos en el proyecto `ControlMantenimiento.Data.Oracle` a `ControlMantenimiento.Data.Oracle.OracleAccesoDatos`
+    * Se renombraron todos los parámetros de todos los métodos de la clase `AccesoDatos` para usar el estilo *camelCase* que es el estándar en C# para este tipo de identificadores.
