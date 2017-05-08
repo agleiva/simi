@@ -65,3 +65,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 22. Se corrigieron las referencias a la clase `Mensajes` en el proyecto Web.
 
 23. Se corrigieron las referencias a las funciones comunes de la clase `Funciones` en el proyecto Web. El proyecto Web ahora compila correctamente.
+
+24. En este punto se creó la base de datos SQL Server, se ejecutaron los scripts de creación de los objetos de la base ubicados en `/DB/Scripts-ControlMantenimientoDB-SQLServer.txt`, se agregó el correcto *Connection String* en el `app.config` de la apliación Desktop y se procedió a ejecutar la misma para comprobar su correcto funcionamiento.
