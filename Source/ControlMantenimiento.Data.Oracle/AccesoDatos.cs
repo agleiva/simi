@@ -108,9 +108,9 @@ namespace ControlMantenimiento_NetWeb.DAL
             try
             {
                 ArrayList arlListado = new ArrayList();
-                using ( Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new OracleConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
                 {
-                    Cmd = new SqlCommand("spr_CCargarListado", Cn);
+                    Cmd = new OracleCommand("spr_CCargarListado", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
                     Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
@@ -140,7 +140,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                 arlListMarca = new ArrayList();
                 using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
                 {
-                    Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
+                    Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", "CONTROLEQUIPOS");
                     Cn.Open();
@@ -178,7 +178,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                 arlListOperarios = new ArrayList();
                 using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
                 {
-                    Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
+                    Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
                     Cn.Open();

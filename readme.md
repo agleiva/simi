@@ -86,3 +86,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 30. Se agregó una referencia a la assembly `System.Data.OracleClient` del .NET Framework al proyecto `ControlMantenimiento.Data.Oracle`
 
 31. Se realizó el paso 28, pero sobre `ControlMantenimiento.Data.Oracle`.
+
+32. Se removieron referencias a incorrectas `System.Data.SqlClient` y se reemplazaron por las respectivas de Oracle.
