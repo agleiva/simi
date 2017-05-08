@@ -43,13 +43,13 @@ namespace ControlMantenimiento_NetWeb.Forms
             Mantenimiento mantenimiento =(Mantenimiento) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"M");
             if (mantenimiento != null)
             {
-                dplEquipos.SelectedValue = mantenimiento.codigoequipo.ToString();
+                dplEquipos.SelectedValue = mantenimiento.CodigoEquipo.ToString();
                 dplEquipos.Enabled = false;
-                dplOperarios.SelectedValue = mantenimiento.documento.ToString();
-                cdrFecha.SelectedDate = mantenimiento.fecha;
-                cdrFecha.VisibleDate = mantenimiento.fecha;
-                cdrFecha.Caption = mantenimiento.fecha.ToShortDateString();                
-                txtObservaciones.Text = mantenimiento.observaciones;
+                dplOperarios.SelectedValue = mantenimiento.Documento.ToString();
+                cdrFecha.SelectedDate = mantenimiento.Fecha;
+                cdrFecha.VisibleDate = mantenimiento.Fecha;
+                cdrFecha.Caption = mantenimiento.Fecha.ToShortDateString();                
+                txtObservaciones.Text = mantenimiento.Observaciones;
             }
             
             dplOperarios.Focus();
@@ -88,10 +88,10 @@ namespace ControlMantenimiento_NetWeb.Forms
             int Resultado;
             string Accion = "U";
             Mantenimiento mantenimiento = new Mantenimiento();
-            mantenimiento.codigoequipo = Convert.ToInt32(dplEquipos.SelectedValue.ToString()); 
-            mantenimiento.documento = Convert.ToDouble(dplOperarios.SelectedValue.ToString()); 
-            mantenimiento.fecha = Convert.ToDateTime(cdrFecha.SelectedDate);
-            mantenimiento.observaciones = txtObservaciones.Text;
+            mantenimiento.CodigoEquipo = Convert.ToInt32(dplEquipos.SelectedValue.ToString()); 
+            mantenimiento.Documento = Convert.ToDouble(dplOperarios.SelectedValue.ToString()); 
+            mantenimiento.Fecha = Convert.ToDateTime(cdrFecha.SelectedDate);
+            mantenimiento.Observaciones = txtObservaciones.Text;
             if (dplEquipos.Enabled)
             {
               Accion = "I";

@@ -2,14 +2,14 @@
 {
     public class CargaCombosListas
     {
-        public string codigo { get; set; }
+        public string Codigo { get; set; }
 
-        public string detalle { get; set; }
+        public string Detalle { get; set; }
 
         public CargaCombosListas(string codigo, string detalle)
         {
-            this.codigo = codigo;
-            this.detalle = detalle;
+            this.Codigo = codigo;
+            this.Detalle = detalle;
         }
     }
 }

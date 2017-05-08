@@ -2,16 +2,16 @@
 {
     public class Equipo
     {
-        public int codigoequipo { get; set; }
+        public int CodigoEquipo { get; set; }
 
-        public string nombreequipo { get; set; }
+        public string NombreEquipo { get; set; }
 
-        public int codigomarca { get; set; }
+        public int CodigoMarca { get; set; }
 
-        public string serie { get; set; }
+        public string Serie { get; set; }
 
-        public int codigolinea { get; set; }
+        public int CodigoLinea { get; set; }
 
-        public int lubricacion { get; set; }
+        public int Lubricacion { get; set; }
     }
 }

@@ -93,9 +93,9 @@ namespace ControlMantenimiento_NetDesktop
                   if (operario != null)
                   {
                       Ingresar = true;
-                      BLL.Funciones.UsuarioConectado = operario.documento;
-                      BLL.Funciones.PerfilAcceso = operario.perfil;
-                      BLL.Funciones.NombreUsuario = operario.nombres + " " + operario.apellidos;
+                      BLL.Funciones.UsuarioConectado = operario.Documento;
+                      BLL.Funciones.PerfilAcceso = operario.Perfil;
+                      BLL.Funciones.NombreUsuario = operario.Nombres + " " + operario.Apellidos;
                       ControlMantenimiento_NetDesktop.frmMenu Form_Menu = new ControlMantenimiento_NetDesktop.frmMenu();
                       this.Close();
                       this.Dispose();

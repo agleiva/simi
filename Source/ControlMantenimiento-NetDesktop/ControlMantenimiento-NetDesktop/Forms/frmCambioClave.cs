@@ -38,7 +38,7 @@ namespace ControlMantenimiento_NetDesktop
                     txtClave.Focus();
                     errorPro.SetError(txtClave, BLL.Mensajes.MensajeCampoRequerido);
                 }
-                else if (txtClave.Text != operario.clave) // Clave debe ser igual a la hallada en BD
+                else if (txtClave.Text != operario.Clave) // Clave debe ser igual a la hallada en BD
                 {
                     Grabar = false;
                     MessageBox.Show(BLL.Mensajes.Mensaje3, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);

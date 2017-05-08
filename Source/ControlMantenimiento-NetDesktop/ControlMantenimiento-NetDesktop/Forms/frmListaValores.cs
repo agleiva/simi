@@ -83,10 +83,10 @@ namespace ControlMantenimiento_NetDesktop
         {
             int Resultado;
             ListaValores listavalores = new ListaValores();
-            listavalores.codigo = ElCodigo;
-            listavalores.nombre = txtNombre.Text;
-            listavalores.descripcion = txtDescripcion.Text;
-            listavalores.tipo = BLL.Funciones.ValorTipo;
+            listavalores.Codigo = ElCodigo;
+            listavalores.Nombre = txtNombre.Text;
+            listavalores.Descripcion = txtDescripcion.Text;
+            listavalores.Tipo = BLL.Funciones.ValorTipo;
             
             Resultado = icontrolador.Guardar(listavalores);
             if (Resultado == 0)
@@ -128,8 +128,8 @@ namespace ControlMantenimiento_NetDesktop
             if (listavalores != null)
             {
                 btnEliminar.Enabled = true;
-                txtNombre.Text = listavalores.nombre;
-                txtDescripcion.Text = listavalores.descripcion;
+                txtNombre.Text = listavalores.Nombre;
+                txtDescripcion.Text = listavalores.Descripcion;
                 txtNombre.Focus();
             }
         }

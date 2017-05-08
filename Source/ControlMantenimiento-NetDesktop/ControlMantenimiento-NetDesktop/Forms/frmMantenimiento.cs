@@ -110,10 +110,10 @@ namespace ControlMantenimiento_NetDesktop
         {
             int Resultado;
             Mantenimiento mantenimiento = new Mantenimiento();
-            mantenimiento.codigoequipo = Convert.ToInt32(cboEquipos.SelectedValue.ToString()); 
-            mantenimiento.documento = Convert.ToDouble(cboOperarios.SelectedValue.ToString()); 
-            mantenimiento.fecha = Convert.ToDateTime(dtpFecha.Value);
-            mantenimiento.observaciones = txtObservaciones.Text;
+            mantenimiento.CodigoEquipo = Convert.ToInt32(cboEquipos.SelectedValue.ToString()); 
+            mantenimiento.Documento = Convert.ToDouble(cboOperarios.SelectedValue.ToString()); 
+            mantenimiento.Fecha = Convert.ToDateTime(dtpFecha.Value);
+            mantenimiento.Observaciones = txtObservaciones.Text;
             
             Resultado = icontrolador.Guardar(mantenimiento, Accion);
             if (Resultado == 0)
@@ -170,10 +170,10 @@ namespace ControlMantenimiento_NetDesktop
           {
               btnEliminar.Enabled = true;
               cboEquipos.Enabled = false;
-              cboOperarios.SelectedValue = mantenimiento.documento.ToString();
+              cboOperarios.SelectedValue = mantenimiento.Documento.ToString();
               btnEliminar.Enabled = true;
-              dtpFecha.Value = mantenimiento.fecha;
-              txtObservaciones.Text = mantenimiento.observaciones;
+              dtpFecha.Value = mantenimiento.Fecha;
+              txtObservaciones.Text = mantenimiento.Observaciones;
               btnGrabar.Enabled = true;
               cboOperarios.Focus();
           }

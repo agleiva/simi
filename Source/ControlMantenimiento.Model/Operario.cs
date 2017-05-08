@@ -2,20 +2,20 @@
 {
     public class Operario
     {
-        public double documento { get; set; }
+        public double Documento { get; set; }
 
-        public string nombres { get; set; }
+        public string Nombres { get; set; }
 
-        public string apellidos { get; set; }
+        public string Apellidos { get; set; }
 
-        public string correo { get; set; }
+        public string Correo { get; set; }
 
-        public double telefono { get; set; }
+        public double Telefono { get; set; }
 
-        public string clave { get; set; }
+        public string Clave { get; set; }
 
-        public int perfil { get; set; }
+        public int Perfil { get; set; }
 
-        public string foto { get; set; }
+        public string Foto { get; set; }
     }
 }

@@ -67,10 +67,10 @@ namespace ControlMantenimiento_NetWeb.Forms
                 }
                 else
                 {
-                    Session["TIPO_USUARIO"] = operario.perfil;
-                    BLL.Funciones.UsuarioConectado = operario.documento;
-                    BLL.Funciones.NombreUsuario = operario.nombres + " " + operario.apellidos;
-                    BLL.Funciones.PerfilAcceso = operario.perfil;
+                    Session["TIPO_USUARIO"] = operario.Perfil;
+                    BLL.Funciones.UsuarioConectado = operario.Documento;
+                    BLL.Funciones.NombreUsuario = operario.Nombres + " " + operario.Apellidos;
+                    BLL.Funciones.PerfilAcceso = operario.Perfil;
                     Response.Redirect("~/Forms/wfrmMenu.aspx");
                 }
             }

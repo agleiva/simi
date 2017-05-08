@@ -2,13 +2,13 @@
 {
     public class ListaValores
     {
-        public int codigo { get; set; }
+        public int Codigo { get; set; }
 
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
-        public string descripcion { get; set; }
+        public string Descripcion { get; set; }
 
-        public string tipo { get; set; }
+        public string Tipo { get; set; }
     }
 
 }

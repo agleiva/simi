@@ -30,9 +30,9 @@ namespace ControlMantenimiento_NetWeb.Forms
             ListaValores listavalores = (ListaValores) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"L");
             if (listavalores != null)
             {
-                lblCodigo.Text = listavalores.codigo.ToString();
-                txtNombre.Text = listavalores.nombre;
-                txtDescripcion.Text = listavalores.descripcion;
+                lblCodigo.Text = listavalores.Codigo.ToString();
+                txtNombre.Text = listavalores.Nombre;
+                txtDescripcion.Text = listavalores.Descripcion;
             }            
             txtNombre.Focus();
         }
@@ -61,10 +61,10 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             int Resultado;
             ListaValores listavalores = new ListaValores();
-            listavalores.codigo = ElCodigo;
-            listavalores.nombre = txtNombre.Text;
-            listavalores.descripcion = txtDescripcion.Text;
-            listavalores.tipo = Funciones.Pagina;
+            listavalores.Codigo = ElCodigo;
+            listavalores.Nombre = txtNombre.Text;
+            listavalores.Descripcion = txtDescripcion.Text;
+            listavalores.Tipo = Funciones.Pagina;
             IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(listavalores);
             if (Resultado == 0)

@@ -295,12 +295,12 @@ namespace ControlMantenimiento_NetDesktop
         private void Guardar(string Accion, string Mensaje)
         {
             Operario operario = new Operario();
-            operario.documento = Convert.ToInt64(txtDocumento.Text);
-            operario.nombres = txtNombres.Text;
-            operario.apellidos = txtApellidos.Text;
-            operario.telefono = Convert.ToInt64(txtTelefono.Text);
-            operario.correo = txtCorreo.Text;
-            operario.clave = txtClave.Text;
+            operario.Documento = Convert.ToInt64(txtDocumento.Text);
+            operario.Nombres = txtNombres.Text;
+            operario.Apellidos = txtApellidos.Text;
+            operario.Telefono = Convert.ToInt64(txtTelefono.Text);
+            operario.Correo = txtCorreo.Text;
+            operario.Clave = txtClave.Text;
             if (TipoPerfil != 1) //Proteger Perfil de Administrador
             {
                 if (cboPerfil.Text == "Solo Consulta")
@@ -312,8 +312,8 @@ namespace ControlMantenimiento_NetDesktop
                     TipoPerfil = 2;
                 }
             }
-            operario.perfil = TipoPerfil;
-            operario.foto = RutaFoto;
+            operario.Perfil = TipoPerfil;
+            operario.Foto = RutaFoto;
 
             if (icontrolador.Guardar(operario, Accion) == 0)
             {
@@ -371,12 +371,12 @@ namespace ControlMantenimiento_NetDesktop
             {
                 txtDocumento.Enabled = false;
                 btnEliminar.Enabled = true;
-                txtNombres.Text = operario.nombres;
-                txtApellidos.Text = operario.apellidos;
-                txtCorreo.Text = operario.correo;
-                txtTelefono.Text = operario.telefono.ToString();
-                txtClave.Text = operario.clave;
-                TipoPerfil = operario.perfil;
+                txtNombres.Text = operario.Nombres;
+                txtApellidos.Text = operario.Apellidos;
+                txtCorreo.Text = operario.Correo;
+                txtTelefono.Text = operario.Telefono.ToString();
+                txtClave.Text = operario.Clave;
+                TipoPerfil = operario.Perfil;
                 if (TipoPerfil == 3)
                 {
                     cboPerfil.SelectedIndex = 0;
@@ -385,11 +385,11 @@ namespace ControlMantenimiento_NetDesktop
                 {
                     cboPerfil.SelectedIndex = 1;
                 }
-                if (operario.foto != null && operario.foto != "")
+                if (operario.Foto != null && operario.Foto != "")
                 {
                     try
                     {
-                        RutaFoto = operario.foto;
+                        RutaFoto = operario.Foto;
                         ptbFotoUsuario.Image = Image.FromFile(RutaFoto);
                     }
                     catch

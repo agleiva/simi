@@ -42,12 +42,12 @@ namespace ControlMantenimiento_NetWeb.Forms
             Equipo equipo = (Equipo)icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"E");
             if (equipo != null)
             {
-                lblCodigo.Text = equipo.codigoequipo.ToString();                
-                dplMarcas.SelectedValue = equipo.codigomarca.ToString();
-                txtNombre.Text = equipo.nombreequipo;
-                txtSerie.Text = equipo.serie;
-                dplLineas.SelectedValue = equipo.codigolinea.ToString();
-                if (equipo.lubricacion == 1)
+                lblCodigo.Text = equipo.CodigoEquipo.ToString();                
+                dplMarcas.SelectedValue = equipo.CodigoMarca.ToString();
+                txtNombre.Text = equipo.NombreEquipo;
+                txtSerie.Text = equipo.Serie;
+                dplLineas.SelectedValue = equipo.CodigoLinea.ToString();
+                if (equipo.Lubricacion == 1)
                 {
                     chkLubricacion.Checked = true;
                 }
@@ -72,18 +72,18 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             int Resultado;
             Equipo equipo = new Equipo();
-            equipo.codigoequipo = ElCodigo;
-            equipo.nombreequipo = txtNombre.Text;            
-            equipo.codigomarca = Convert.ToInt32(dplMarcas.SelectedValue);
-            equipo.codigolinea = Convert.ToInt32(dplLineas.SelectedValue);
-            equipo.serie = txtSerie.Text;
+            equipo.CodigoEquipo = ElCodigo;
+            equipo.NombreEquipo = txtNombre.Text;            
+            equipo.CodigoMarca = Convert.ToInt32(dplMarcas.SelectedValue);
+            equipo.CodigoLinea = Convert.ToInt32(dplLineas.SelectedValue);
+            equipo.Serie = txtSerie.Text;
             if (chkLubricacion.Checked)
             {
-                equipo.lubricacion = 1;
+                equipo.Lubricacion = 1;
             }
             else
             {
-                equipo.lubricacion = 0;
+                equipo.Lubricacion = 0;
             }
             IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(equipo);

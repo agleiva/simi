@@ -60,7 +60,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtClave.Focus();
                 return false;
             }
-            if (txtClave.Text != operario.clave)
+            if (txtClave.Text != operario.Clave)
             {
                 txtMensajeError.Text = Mensajes.Mensaje3;
                 txtClave.Focus();

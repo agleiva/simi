@@ -222,14 +222,14 @@ namespace ControlMantenimiento.Data.Oracle
                 _dataReader = (BuscarRegistro("OPERARIOS", datoBuscar, clave));
                 if (_dataReader.Read())
                 {
-                    operario.documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
-                    operario.nombres = _dataReader["NOMBRES"].ToString();
-                    operario.apellidos = _dataReader["APELLIDOS"].ToString();
-                    operario.correo = _dataReader["CORREO"].ToString();
-                    operario.telefono = Convert.ToDouble(_dataReader["TELEFONO"].ToString());
-                    operario.clave = _dataReader["CLAVE"].ToString();
-                    operario.perfil = Convert.ToInt32(_dataReader["PERFIL"].ToString());
-                    operario.foto = _dataReader["FOTO"].ToString();
+                    operario.Documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
+                    operario.Nombres = _dataReader["NOMBRES"].ToString();
+                    operario.Apellidos = _dataReader["APELLIDOS"].ToString();
+                    operario.Correo = _dataReader["CORREO"].ToString();
+                    operario.Telefono = Convert.ToDouble(_dataReader["TELEFONO"].ToString());
+                    operario.Clave = _dataReader["CLAVE"].ToString();
+                    operario.Perfil = Convert.ToInt32(_dataReader["PERFIL"].ToString());
+                    operario.Foto = _dataReader["FOTO"].ToString();
                     LiberarRecursos();
                     return operario;
                 }
@@ -254,14 +254,14 @@ namespace ControlMantenimiento.Data.Oracle
                     _cmd = new OracleCommand("spr_IUOperarios", _connection);
                     _cmd.CommandType = CommandType.StoredProcedure;
                     _cmd.Parameters.AddWithValue("p_ACCION", accion);
-                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", operario.documento);
-                    _cmd.Parameters.AddWithValue("p_NOMBRES", operario.nombres);
-                    _cmd.Parameters.AddWithValue("p_APELLIDOS", operario.apellidos);
-                    _cmd.Parameters.AddWithValue("p_CORREO", operario.correo);
-                    _cmd.Parameters.AddWithValue("p_TELEFONO", operario.telefono);
-                    _cmd.Parameters.AddWithValue("p_CLAVE", operario.clave);
-                    _cmd.Parameters.AddWithValue("p_PERFIL", operario.perfil);
-                    _cmd.Parameters.AddWithValue("p_FOTO", operario.foto);
+                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", operario.Documento);
+                    _cmd.Parameters.AddWithValue("p_NOMBRES", operario.Nombres);
+                    _cmd.Parameters.AddWithValue("p_APELLIDOS", operario.Apellidos);
+                    _cmd.Parameters.AddWithValue("p_CORREO", operario.Correo);
+                    _cmd.Parameters.AddWithValue("p_TELEFONO", operario.Telefono);
+                    _cmd.Parameters.AddWithValue("p_CLAVE", operario.Clave);
+                    _cmd.Parameters.AddWithValue("p_PERFIL", operario.Perfil);
+                    _cmd.Parameters.AddWithValue("p_FOTO", operario.Foto);
                     _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     _connection.Open();
@@ -323,9 +323,9 @@ namespace ControlMantenimiento.Data.Oracle
                 _dataReader = (BuscarRegistro("LISTAVALORES", datoBuscar, "CODIGO"));
                 if (_dataReader.Read())
                 {
-                    listavalores.codigo = Convert.ToInt32(_dataReader["CODIGO"].ToString());
-                    listavalores.nombre = _dataReader["NOMBRE"].ToString();
-                    listavalores.descripcion = _dataReader["DESCRIPCION"].ToString();
+                    listavalores.Codigo = Convert.ToInt32(_dataReader["CODIGO"].ToString());
+                    listavalores.Nombre = _dataReader["NOMBRE"].ToString();
+                    listavalores.Descripcion = _dataReader["DESCRIPCION"].ToString();
                     LiberarRecursos();
                     return listavalores;
                 }
@@ -350,10 +350,10 @@ namespace ControlMantenimiento.Data.Oracle
                 {
                     _cmd = new OracleCommand("spr_IUListaValores", _connection);
                     _cmd.CommandType = CommandType.StoredProcedure;
-                    _cmd.Parameters.AddWithValue("p_CODIGO", listavalores.codigo);
-                    _cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
-                    _cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
-                    _cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
+                    _cmd.Parameters.AddWithValue("p_CODIGO", listavalores.Codigo);
+                    _cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.Nombre);
+                    _cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.Descripcion);
+                    _cmd.Parameters.AddWithValue("p_TIPO", listavalores.Tipo);
                     _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     _connection.Open();
@@ -388,12 +388,12 @@ namespace ControlMantenimiento.Data.Oracle
                 _dataReader = (BuscarRegistro("EQUIPOS", datoBuscar, "Codigo"));
                 if (_dataReader.Read())
                 {
-                    equipo.codigoequipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
-                    equipo.nombreequipo = _dataReader["NOMBREEQUIPO"].ToString();
-                    equipo.codigomarca = Convert.ToInt32(_dataReader["CODIGOMARCA"].ToString());
-                    equipo.serie = _dataReader["SERIE"].ToString();
-                    equipo.codigolinea = Convert.ToInt32(_dataReader["CODIGOLINEA"].ToString());
-                    equipo.lubricacion = Convert.ToInt32(_dataReader["LUBRICACION"].ToString());
+                    equipo.CodigoEquipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
+                    equipo.NombreEquipo = _dataReader["NOMBREEQUIPO"].ToString();
+                    equipo.CodigoMarca = Convert.ToInt32(_dataReader["CODIGOMARCA"].ToString());
+                    equipo.Serie = _dataReader["SERIE"].ToString();
+                    equipo.CodigoLinea = Convert.ToInt32(_dataReader["CODIGOLINEA"].ToString());
+                    equipo.Lubricacion = Convert.ToInt32(_dataReader["LUBRICACION"].ToString());
                     LiberarRecursos();
                     return equipo;
                 }
@@ -417,12 +417,12 @@ namespace ControlMantenimiento.Data.Oracle
                 {
                     _cmd = new OracleCommand("spr_IUEquipos", _connection);
                     _cmd.CommandType = CommandType.StoredProcedure;
-                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.codigoequipo);
-                    _cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.nombreequipo);
-                    _cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.codigomarca);
-                    _cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
-                    _cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
-                    _cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
+                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.CodigoEquipo);
+                    _cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.NombreEquipo);
+                    _cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.CodigoMarca);
+                    _cmd.Parameters.AddWithValue("p_SERIE", equipo.Serie);
+                    _cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.CodigoLinea);
+                    _cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.Lubricacion);
                     _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     _connection.Open();
@@ -456,10 +456,10 @@ namespace ControlMantenimiento.Data.Oracle
                 _dataReader = (BuscarRegistro("MANTENIMIENTO", datoBuscar, ""));
                 if (_dataReader.Read())
                 {
-                    mantenimiento.codigoequipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
-                    mantenimiento.documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
-                    mantenimiento.fecha = Convert.ToDateTime(_dataReader["FECHA"].ToString());
-                    mantenimiento.observaciones = _dataReader["OBSERVACIONES"].ToString();
+                    mantenimiento.CodigoEquipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
+                    mantenimiento.Documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
+                    mantenimiento.Fecha = Convert.ToDateTime(_dataReader["FECHA"].ToString());
+                    mantenimiento.Observaciones = _dataReader["OBSERVACIONES"].ToString();
                     LiberarRecursos();
                     return mantenimiento;
                 }
@@ -484,10 +484,10 @@ namespace ControlMantenimiento.Data.Oracle
                     _cmd = new OracleCommand("spr_IUMantenimiento", _connection);
                     _cmd.CommandType = CommandType.StoredProcedure;
                     _cmd.Parameters.AddWithValue("p_ACCION", accion);
-                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", mantenimiento.codigoequipo);
-                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
-                    _cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
-                    _cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
+                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", mantenimiento.CodigoEquipo);
+                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.Documento);
+                    _cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.Fecha);
+                    _cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.Observaciones);
                     _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     _connection.Open();

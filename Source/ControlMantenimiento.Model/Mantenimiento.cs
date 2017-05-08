@@ -4,12 +4,12 @@ namespace ControlMantenimiento.Model
 {
     public class Mantenimiento
     {
-        public int codigoequipo { get; set; }
+        public int CodigoEquipo { get; set; }
 
-        public double documento { get; set; }
+        public double Documento { get; set; }
 
-        public DateTime fecha { get; set; }
+        public DateTime Fecha { get; set; }
 
-        public string observaciones { get; set; }
+        public string Observaciones { get; set; }
     }
 }

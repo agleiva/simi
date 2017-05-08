@@ -115,18 +115,18 @@ namespace ControlMantenimiento_NetDesktop
         {
             int Resultado;
             Equipo equipo = new Equipo();
-            equipo.codigoequipo = ElCodigo;
-            equipo.nombreequipo = txtNombreEquipo.Text;
-            equipo.codigomarca = Convert.ToInt32(cboMarcas.SelectedValue.ToString());
-            equipo.serie = txtSerie.Text;
-            equipo.codigolinea = Convert.ToInt32(cboLineas.SelectedValue.ToString());
+            equipo.CodigoEquipo = ElCodigo;
+            equipo.NombreEquipo = txtNombreEquipo.Text;
+            equipo.CodigoMarca = Convert.ToInt32(cboMarcas.SelectedValue.ToString());
+            equipo.Serie = txtSerie.Text;
+            equipo.CodigoLinea = Convert.ToInt32(cboLineas.SelectedValue.ToString());
             if (chkLubricacion.Checked)
             {
-                equipo.lubricacion = 1;
+                equipo.Lubricacion = 1;
             }
             else
             {
-                equipo.lubricacion = 0;
+                equipo.Lubricacion = 0;
             }
 
             Resultado = icontrolador.Guardar(equipo);
@@ -170,11 +170,11 @@ namespace ControlMantenimiento_NetDesktop
             if (equipo != null)
             {
                 btnEliminar.Enabled = true;
-                txtNombreEquipo.Text = equipo.nombreequipo;
-                cboMarcas.SelectedValue = equipo.codigomarca.ToString();
-                txtSerie.Text = equipo.serie;
-                cboLineas.SelectedValue = equipo.codigolinea.ToString();
-                if (equipo.lubricacion == 1)
+                txtNombreEquipo.Text = equipo.NombreEquipo;
+                cboMarcas.SelectedValue = equipo.CodigoMarca.ToString();
+                txtSerie.Text = equipo.Serie;
+                cboLineas.SelectedValue = equipo.CodigoLinea.ToString();
+                if (equipo.Lubricacion == 1)
                 {
                     chkLubricacion.Checked = true;
                 }

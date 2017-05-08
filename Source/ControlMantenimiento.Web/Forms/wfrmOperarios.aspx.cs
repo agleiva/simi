@@ -138,12 +138,12 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             int Resultado;
             Operario operario = new Operario();
-            operario.documento = Convert.ToInt64(txtDocumento.Text);
-            operario.nombres = txtNombres.Text;
-            operario.apellidos = txtApellidos.Text;
-            operario.telefono = Convert.ToInt64(txtTelefono.Text);
-            operario.correo = txtCorreo.Text;
-            operario.clave = txtClave.Text ;
+            operario.Documento = Convert.ToInt64(txtDocumento.Text);
+            operario.Nombres = txtNombres.Text;
+            operario.Apellidos = txtApellidos.Text;
+            operario.Telefono = Convert.ToInt64(txtTelefono.Text);
+            operario.Correo = txtCorreo.Text;
+            operario.Clave = txtClave.Text ;
             if (TipoPerfil != 1) // Proteger Perfil de Administrador
             {
                 if (dplPerfil.Text == "3")
@@ -155,8 +155,8 @@ namespace ControlMantenimiento_NetWeb.Forms
                     TipoPerfil = 2;
                 }
             }
-            operario.perfil = TipoPerfil;
-            operario.foto = LaFoto;
+            operario.Perfil = TipoPerfil;
+            operario.Foto = LaFoto;
             IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(operario, Accion);
             if (Resultado == 0)
@@ -189,13 +189,13 @@ namespace ControlMantenimiento_NetWeb.Forms
             if (operario != null)
             {
                 txtDocumento.Enabled = false;   
-                txtDocumento.Text = operario.documento.ToString();                
-                txtNombres.Text = operario.nombres;
-                txtApellidos.Text = operario.apellidos;
-                txtCorreo.Text = operario.correo;
-                txtTelefono.Text = operario.telefono.ToString();
-                txtClave.Text = operario.clave;
-                TipoPerfil = operario.perfil;
+                txtDocumento.Text = operario.Documento.ToString();                
+                txtNombres.Text = operario.Nombres;
+                txtApellidos.Text = operario.Apellidos;
+                txtCorreo.Text = operario.Correo;
+                txtTelefono.Text = operario.Telefono.ToString();
+                txtClave.Text = operario.Clave;
+                TipoPerfil = operario.Perfil;
                 if (TipoPerfil == 3)
                 {
                     dplPerfil.SelectedIndex = 0;
@@ -204,9 +204,9 @@ namespace ControlMantenimiento_NetWeb.Forms
                 {
                     dplPerfil.SelectedIndex = 1;
                 }
-                if (operario.foto != null)
+                if (operario.Foto != null)
                 {
-                    imgFoto.ImageUrl = operario.foto;
+                    imgFoto.ImageUrl = operario.Foto;
                     
                 }
             }
