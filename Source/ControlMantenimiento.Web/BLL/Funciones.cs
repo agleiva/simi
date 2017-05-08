@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
+using ControlMantenimiento.Business;
 using ControlMantenimiento_NetDesktop.BLL;
 using ControlMantenimiento.Data;
 
@@ -20,8 +21,9 @@ namespace ControlMantenimiento_NetWeb.BLL
 
         public static Controlador CrearControlador()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["Conexion"].ToString();
-            return new Controlador(new AccesoDatos(connectionString), UsuarioConectado);
+            var connectionStringSettings = ConfigurationManager.ConnectionStrings["Conexion"];
+            var accesoDatos = AccesoDatosFactory.GetAccesoDatos(connectionStringSettings.ConnectionString, connectionStringSettings.ProviderName);
+            return new Controlador(accesoDatos, UsuarioConectado);
         }
 
 

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
+using ControlMantenimiento.Business;
 using ControlMantenimiento.Data;
 
 namespace ControlMantenimiento_NetDesktop.BLL
@@ -28,8 +29,9 @@ namespace ControlMantenimiento_NetDesktop.BLL
 
         public static Controlador CrearControlador()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["Conexion"].ToString();
-            return new Controlador(new AccesoDatos(connectionString), UsuarioConectado);
+            var connectionStringSettings = ConfigurationManager.ConnectionStrings["Conexion"];
+            var accesoDatos = AccesoDatosFactory.GetAccesoDatos(connectionStringSettings.ConnectionString, connectionStringSettings.ProviderName);
+            return new Controlador(accesoDatos, UsuarioConectado);
         }
 
         // Default Constructor

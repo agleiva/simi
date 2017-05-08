@@ -116,3 +116,7 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se convierten estos campos públicos en properties momentáneamente en las 3 clases de acceso a datos. Luego será refactorizado ésto para evitar tener estado en la capa de acceso a datos.
 
 40. Se creó la clase estática `ControlMantenimiento.Business.AccesoDatosFactory` en el proyecto `ControlMantenimiento.Business`, que permite obtener la implementación adecuada de acceso a datos a partir de los parámetros del connection string (más precisamente el `providerName`).
+
+41. Se aplicó el uso de `AccesoDatosFactory` en los métodos `CrearControlador()` tanto en el proyecto Desktop como Web.
+
+### En este punto ámbas aplicaciones (Web y Desktop) funcionan correctamente, y ámbas implementan una abstracción que automáticamente selecciona la implementación adecuada de *Acceso a Datos* dependiendo simplemente del parámetro `providerName` del *Connection String* en su respectivo archivo de configuración.
