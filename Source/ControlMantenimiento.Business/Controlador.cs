@@ -21,14 +21,14 @@ namespace ControlMantenimiento_NetDesktop.BLL
         #region IControlador Members
 
        
-        public ArrayList CargarListas(string Tabla)
+        public ArrayList CargarListas(string tabla)
         {
-            return _accesoDatos.CargarListas(Tabla);
+            return _accesoDatos.CargarListas(tabla);
         }
 
-        public ArrayList CargarListas(string Tabla, string Condicion)
+        public ArrayList CargarListas(string tabla, string condicion)
         {
-            return _accesoDatos.CargarListas(Tabla, Condicion);
+            return _accesoDatos.CargarListas(tabla, condicion);
         }
 
         public void ControlEquipos()
@@ -36,9 +36,9 @@ namespace ControlMantenimiento_NetDesktop.BLL
             _accesoDatos.ControlEquipos();
         }
 
-        public void ControlProgramacion(string Tabla)
+        public void ControlProgramacion(string tabla)
         {
-            _accesoDatos.ControlProgramacion(Tabla);
+            _accesoDatos.ControlProgramacion(tabla);
         }
 
         public ArrayList ObtenerListaEquipos()
@@ -61,34 +61,34 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return _accesoDatos.ArlListOperarios;
         }
 
-        public int ValidarTablaVacia(string Tabla)
+        public int ValidarTablaVacia(string tabla)
         {
-            return _accesoDatos.ValidarTablaVacia(Tabla);
+            return _accesoDatos.ValidarTablaVacia(tabla);
         }
 
-        public Operario ObtenerAcceso(string DatoBuscar, string Clave)
+        public Operario ObtenerAcceso(string datoBuscar, string clave)
         {
             Operario operario = null;
-            operario = _accesoDatos.ObtenerOperario(DatoBuscar, Clave);
+            operario = _accesoDatos.ObtenerOperario(datoBuscar, clave);
             return operario;
         }
 
-        public Object ObtenerRegistro(string DatoBuscar, string Tabla)
+        public Object ObtenerRegistro(string datoBuscar, string tabla)
         {
             Object objeto = null;
-            switch (Tabla)
+            switch (tabla)
             {
                 case "O":
-                    objeto = _accesoDatos.ObtenerOperario(DatoBuscar, "");
+                    objeto = _accesoDatos.ObtenerOperario(datoBuscar, "");
                     break;
                 case "E":
-                    objeto = _accesoDatos.ObtenerEquipo(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerEquipo(datoBuscar);
                     break;
                 case "M":
-                    objeto = _accesoDatos.ObtenerMantenimiento(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerMantenimiento(datoBuscar);
                     break;
                 case "L":
-                    objeto = _accesoDatos.ObtenerListaValores(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerListaValores(datoBuscar);
                     break;
             }
             return objeto;
@@ -96,18 +96,18 @@ namespace ControlMantenimiento_NetDesktop.BLL
 
 
         // Grabar en BD
-        public int Guardar(object o, string Accion)
+        public int Guardar(object o, string accion)
         {
             int status = 0;
             if (o is Operario)
             {
                 Operario operario = (Operario)o;
-                status = _accesoDatos.GuardarOperario(operario, Accion, _usuarioConectado);
+                status = _accesoDatos.GuardarOperario(operario, accion, _usuarioConectado);
             }
             else if (o is Mantenimiento)
             {
                 Mantenimiento mantenimiento = (Mantenimiento)o;
-                status = _accesoDatos.GuardarMantenimiento(mantenimiento, Accion, _usuarioConectado);
+                status = _accesoDatos.GuardarMantenimiento(mantenimiento, accion, _usuarioConectado);
             }
 
             return status;
@@ -129,15 +129,15 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return status;
         }
 
-        public bool GuardarCambioClave(string ClaveNueva)
+        public bool GuardarCambioClave(string claveNueva)
         {
-            return _accesoDatos.GuardarCambioClave(ClaveNueva, _usuarioConectado);
+            return _accesoDatos.GuardarCambioClave(claveNueva, _usuarioConectado);
         }
 
         // Eliminar Registro
-        public int EliminarRegistro(string DatoEliminar, string Tabla)
+        public int EliminarRegistro(string datoEliminar, string tabla)
         {
-            return _accesoDatos.EliminarRegistro(DatoEliminar, Tabla);
+            return _accesoDatos.EliminarRegistro(datoEliminar, tabla);
         }
 
 

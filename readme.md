@@ -124,5 +124,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 42. A partir de este punto se realiza una limpieza de código antes de seguir haciendo mejoras en la estructura / arquitectura del proyecto.
     * Se cambian todas las propiedades de las clases de `ControlMantenimiento.Model` a auto-properties.
     * Se eliminan constructores default innecesarios en las clases de `ControlMantenimiento.Model`.
-    * Se renombras todas las propiedades de las clases de `ControlMantenimiento.Model` para usar el estilo *ProperCase* que es estándar en C# para este tipo de identificadores.
+    * Se renombran todas las propiedades de las clases de `ControlMantenimiento.Model` para usar el estilo *ProperCase* que es estándar en C# para este tipo de identificadores.
+    * Se cambian todos los nombres de los parámetros de todos los métodos de la clase `Controlador` para usar el estilo *camelCase* que es el estándar en C# para este tipo de identificadores.
 
