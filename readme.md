@@ -98,3 +98,4 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se cambió el namespace de la clase `CargaCombosListas` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Model`
     * Se renombró el namespace `ControlMantenimiento_NetDesktop.DAL` a `ControlMantenimiento.Data`
     * Se cambió el nombre de la clase `ControlMantenimiento_NetWeb.DAL.AccesoDatos` en el proyecto `ControlMantenimiento.Data.MySql` a `ControlMantenimiento.Data.MySql.MySqlAccesoDatos`
+    * Se cambió el nombre de la clase `ControlMantenimiento_NetWeb.DAL.AccesoDatos en el proyecto `ControlMantenimiento.Data.Oracle` a `ControlMantenimiento.Data.Oracle.OracleAccesoDatos`

@@ -35,13 +35,13 @@ using System.Collections;
 using System.Data;
 using ControlMantenimiento.Model;
 
-namespace ControlMantenimiento_NetWeb.DAL
+namespace ControlMantenimiento.Data.Oracle
 {
-    public class AccesoDatos
+    public class OracleAccesoDatos
     {
         private readonly string _connectionString;
 
-        public AccesoDatos(string connectionString)
+        public OracleAccesoDatos(string connectionString)
         {
             _connectionString = connectionString;
         }
