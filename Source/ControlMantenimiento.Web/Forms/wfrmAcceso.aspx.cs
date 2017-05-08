@@ -11,7 +11,7 @@ namespace ControlMantenimiento_NetWeb.Forms
     {
         private bool Verificar()
         {
-            txtDocumento.Text = Funciones.AplicarTrim(txtDocumento.Text);
+            txtDocumento.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtDocumento.Text);
             if (string.IsNullOrEmpty(txtDocumento.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -30,7 +30,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtDocumento.Focus();
                 return false;
             }
-            if (Funciones.Validar_SoloNumeros(txtDocumento.Text))
+            if (ControlMantenimiento.Business.Funciones.Validar_SoloNumeros(txtDocumento.Text))
             {
                 /* Acá no es bueno mostrar mensaje de que están enviando caracteres
                   no numéricos en el documento, para evitar que programas

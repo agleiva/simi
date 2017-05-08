@@ -63,3 +63,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 21. Se eliminaron las referencias a namespaces inexistentes en el proyecto Web.
 
 22. Se corrigieron las referencias a la clase `Mensajes` en el proyecto Web.
+
+23. Se corrigieron las referencias a las funciones comunes de la clase `Funciones` en el proyecto Web. El proyecto Web ahora compila correctamente.

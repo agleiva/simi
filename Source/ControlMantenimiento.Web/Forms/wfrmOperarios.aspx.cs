@@ -35,14 +35,14 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private bool Verificar()
         {
-            txtDocumento.Text = Funciones.AplicarTrim(txtDocumento.Text);
+            txtDocumento.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtDocumento.Text);
             if (string.IsNullOrEmpty(txtDocumento.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
                 txtDocumento.Focus();
                 return false;
             }
-            if (Funciones.Validar_SoloNumeros(txtDocumento.Text))
+            if (ControlMantenimiento.Business.Funciones.Validar_SoloNumeros(txtDocumento.Text))
             {
                 txtMensajeError.Text = Mensajes.Mensaje25;
                 txtDocumento.Focus();
@@ -66,39 +66,39 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtNombres.Focus();
                 return false;
             }
-            txtNombres.Text = BLL.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
-            if (Funciones.Validar_SoloLetras(txtNombres.Text))
+            txtNombres.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
+            if (ControlMantenimiento.Business.Funciones.Validar_SoloLetras(txtNombres.Text))
             {
                 txtMensajeError.Text = Mensajes.Mensaje23;
                 txtNombres.Focus();
                 return false;
             }
-            txtApellidos.Text = Funciones.AplicarTrim(txtApellidos.Text);
+            txtApellidos.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtApellidos.Text);
             if (string.IsNullOrEmpty(txtApellidos.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
                 txtApellidos.Focus();
                 return false;
             }
-            txtApellidos.Text = BLL.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
-            if (Funciones.Validar_SoloLetras(txtApellidos.Text))
+            txtApellidos.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
+            if (ControlMantenimiento.Business.Funciones.Validar_SoloLetras(txtApellidos.Text))
             {
                 txtMensajeError.Text = Mensajes.Mensaje23;
                 txtApellidos.Focus();
                 return false;
             }
-            txtCorreo.Text = Funciones.AplicarTrim(txtCorreo.Text);
+            txtCorreo.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtCorreo.Text);
             if (txtCorreo.Text.Length != 0)
             {
                 txtCorreo.Text = txtCorreo.Text.ToLower();
-                if (Funciones.Validar_Correo(txtCorreo.Text))
+                if (ControlMantenimiento.Business.Funciones.Validar_Correo(txtCorreo.Text))
                 {
                     txtMensajeError.Text = Mensajes.Mensaje16;
                     txtCorreo.Focus();
                     return false;
                 }
             }
-            txtTelefono.Text = Funciones.AplicarTrim(txtTelefono.Text);
+            txtTelefono.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtTelefono.Text);
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -117,7 +117,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtTelefono.Focus();
                 return false;
             }
-            txtClave.Text = Funciones.AplicarTrim(txtClave.Text);
+            txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
             if (string.IsNullOrEmpty(txtClave.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;

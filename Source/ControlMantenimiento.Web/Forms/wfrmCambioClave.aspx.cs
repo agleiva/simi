@@ -47,7 +47,7 @@ namespace ControlMantenimiento_NetWeb.Forms
        
         private bool Verificar()
         {
-            txtClave.Text = Funciones.AplicarTrim(txtClave.Text);
+            txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
             if (string.IsNullOrEmpty(txtClave.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -66,7 +66,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtClave.Focus();
                 return false;
             }            
-            txtClaveNueva.Text = Funciones.AplicarTrim(txtClaveNueva.Text);
+            txtClaveNueva.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClaveNueva.Text);
             if (string.IsNullOrEmpty(txtClaveNueva.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -85,7 +85,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtClaveNueva.Focus();
                 return false;
             }
-            txtConfirmar.Text = Funciones.AplicarTrim(txtConfirmar.Text);
+            txtConfirmar.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtConfirmar.Text);
             if (string.IsNullOrEmpty(txtConfirmar.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
