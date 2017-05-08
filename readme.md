@@ -71,6 +71,10 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 25. Se comprobó el funcionamiento correcto de la aplicación desktop.
 
-25. Se agregó el connection string al `Web.Config` de la aplicación, web, y rápidamente se encontró un error relacionado a *Unobtrusive Validation*, que se corrigió usando [esta solución](http://stackoverflow.com/a/16705149/643085)
+26. Se agregó el connection string al `Web.Config` de la aplicación, web, y rápidamente se encontró un error relacionado a *Unobtrusive Validation*, que se corrigió usando [esta solución](http://stackoverflow.com/a/16705149/643085)
 
 ### En este punto ámbas aplicaciones (Web y Desktop) funcionan correctamente, y con una estructura mucho mejor que al inicio, sin código duplicado, sin violaciones de la separación de capas y respetando el SRP. Se procede a [taggear](https://git-scm.com/book/en/v2/Git-Basics-Tagging) el commit como **V0.1**
+
+#### los proyectos `ControlMantenimiento.Data.MySql` y `ControlMantenimiento.Data.Oracle` aún no compilan.
+
+27. Se agregó el [**Paquete Nuget**](https://docs.microsoft.com/en-us/nuget/) [`MySql.Data`](https://www.nuget.org/packages/MySql.Data/) al proyecto `ControlMantenimiento.Data.MySql`
