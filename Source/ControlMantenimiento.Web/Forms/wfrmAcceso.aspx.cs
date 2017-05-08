@@ -10,7 +10,7 @@ namespace ControlMantenimiento_NetWeb.Forms
     {
         private bool Verificar()
         {
-            txtDocumento.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtDocumento.Text);
+            txtDocumento.Text = txtDocumento.Text.Trim();
             if (string.IsNullOrEmpty(txtDocumento.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;

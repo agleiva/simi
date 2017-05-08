@@ -107,14 +107,14 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private bool Verificar()
         {
-            txtNombre.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtNombre.Text);
+            txtNombre.Text = txtNombre.Text.Trim();
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
                 txtNombre.Focus();
                 return false;
             }
-            txtSerie.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtSerie.Text);
+            txtSerie.Text = txtSerie.Text.Trim();
             if (string.IsNullOrEmpty(txtSerie.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;

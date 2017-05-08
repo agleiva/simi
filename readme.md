@@ -130,5 +130,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se eliminó la interfaz `IControlador` ya que no provee ningún valor. Existe solo una implementación de la misma y no hay razón para creer que podría existir otra. Se cambiaron las referencias a esta interfaz en toda la solución para usar directamente la clase `Controlador`.
     * Se cambió el namespace de la clase `Controlador` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
     * Se cambió el namespace de la clase `Mensajes` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
+    * Se eliminó el método `AplicarTrim()` de la clase `Funciones` ya que el mismo no aporta ningún valor. Se reemplazaron todas las referencias a éste por el uso de `string.Trim()` directamente.
 
 

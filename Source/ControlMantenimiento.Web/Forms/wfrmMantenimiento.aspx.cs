@@ -73,7 +73,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private bool Verificar()
         {
-            txtObservaciones.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtObservaciones.Text);
+            txtObservaciones.Text = txtObservaciones.Text.Trim();
             if (cdrFecha.SelectedDate < DateTime.Now.Date)
             {
                 txtMensajeError.Text = Mensajes.Mensaje27;

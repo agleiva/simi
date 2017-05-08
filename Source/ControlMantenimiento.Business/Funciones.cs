@@ -7,15 +7,8 @@ using System.Threading.Tasks;
 
 namespace ControlMantenimiento.Business
 {
-    public class Funciones
+    public static class Funciones
     {
-        // Funcion para eliminar posibles espacios en blanco
-        public static string AplicarTrim(string Cadena)
-        {
-            Cadena = Cadena.Trim();
-            return Cadena;
-        }
-
         // Funcion para validar direcciones de correo electronico
         public static bool Validar_Correo(string Cadena)
         {

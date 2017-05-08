@@ -31,7 +31,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
+                txtClave.Text = txtClave.Text.Trim();
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Grabar = false;
@@ -57,7 +57,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtClaveNueva.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClaveNueva.Text);
+                txtClaveNueva.Text = txtClaveNueva.Text.Trim();
                 if (string.IsNullOrEmpty(txtClaveNueva.Text))
                 {
                     Grabar = false;
@@ -91,7 +91,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtConfirmar.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtConfirmar.Text);
+                txtConfirmar.Text = txtConfirmar.Text.Trim();
                 if (string.IsNullOrEmpty(txtConfirmar.Text))
                 {
                     Grabar = false;

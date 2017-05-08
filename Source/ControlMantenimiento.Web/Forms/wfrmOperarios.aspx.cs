@@ -35,7 +35,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private bool Verificar()
         {
-            txtDocumento.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtDocumento.Text);
+            txtDocumento.Text = txtDocumento.Text.Trim();
             if (string.IsNullOrEmpty(txtDocumento.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -73,7 +73,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtNombres.Focus();
                 return false;
             }
-            txtApellidos.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtApellidos.Text);
+            txtApellidos.Text = txtApellidos.Text.Trim();
             if (string.IsNullOrEmpty(txtApellidos.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -87,7 +87,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtApellidos.Focus();
                 return false;
             }
-            txtCorreo.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtCorreo.Text);
+            txtCorreo.Text = txtCorreo.Text.Trim();
             if (txtCorreo.Text.Length != 0)
             {
                 txtCorreo.Text = txtCorreo.Text.ToLower();
@@ -98,7 +98,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                     return false;
                 }
             }
-            txtTelefono.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtTelefono.Text);
+            txtTelefono.Text = txtTelefono.Text.Trim();
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
@@ -117,7 +117,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtTelefono.Focus();
                 return false;
             }
-            txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
+            txtClave.Text = txtClave.Text.Trim();
             if (string.IsNullOrEmpty(txtClave.Text))
             {
                 txtMensajeError.Text = Mensajes.MensajeCampoRequerido;
