@@ -104,3 +104,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se renombraron todos los parámetros de todos los métodos de la clase `MySqlAccesoDatos` para usar el estilo *camelCase* que es el estándar en C# para este tipo de identificadores.
 
 35. Se cambiaron los métodos `IniciarBusqueda()` y `LiberarRecursos` y `BuscarRegistro()` de la clases de acceso a datos de `public` a `private` ya que no se usan fuera de éstas.
+
+36. Se creó la interfaz `ControlMantenimiento.Data.IAccesoDatos` a partir de los métodos públicos de `ControlMantenimiento.Data.AccesoDatos`.

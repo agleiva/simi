@@ -13,7 +13,7 @@ using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento.Data
 {
-    public class AccesoDatos
+    public class AccesoDatos : IAccesoDatos
     {
         private readonly string _connectionString;
         private SqlConnection _connection;
