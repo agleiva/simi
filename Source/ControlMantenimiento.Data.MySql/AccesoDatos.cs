@@ -10,7 +10,6 @@ using System.Data.SqlClient;
 using System.Collections;
 using System.Configuration;
 using System.Data;
-using ControlMantenimiento_NetDesktop.BLL;
 using ControlMantenimiento.Model;
 using MySql.Data.MySqlClient;// Requiere descargar mysql-connector-net-6.8.3
 

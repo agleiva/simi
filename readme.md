@@ -95,3 +95,4 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 34. En este punto y antes de continuar con la abstracción de la capa de acceso a datos, resulta conveniente corregir el naming en varios lugares:
     * Se renombra el namespace `ControlMantenimiento_NetDesktop.BO` a `ControlMantenimiento.Model`
+    * Se cambia el namespace de la clase `CargaCombosListas` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Model`

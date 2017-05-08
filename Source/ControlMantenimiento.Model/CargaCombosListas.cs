@@ -2,7 +2,7 @@
 
 
 
-namespace ControlMantenimiento_NetDesktop.BLL
+namespace ControlMantenimiento.Model
 {
     public class CargaCombosListas
     {
