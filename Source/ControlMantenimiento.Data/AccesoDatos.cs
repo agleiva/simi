@@ -61,7 +61,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
         {
             try
             {
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(_connectionString))
                 {
                     Cmd = new SqlCommand("spr_CValidarExistenciaDatos", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -86,7 +86,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
             try
             {
                 ArrayList arlLista = new ArrayList();
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(_connectionString))
                 {
                     Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -144,7 +144,7 @@ namespace ControlMantenimiento_NetDesktop.DAL
                 arlListEquipo = new ArrayList();
                 arlListLinea = new ArrayList();
                 arlListMarca = new ArrayList();
-                using (Cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new SqlConnection(_connectionString))
                 {
                     Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
