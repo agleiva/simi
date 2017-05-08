@@ -6,20 +6,18 @@
  =================================================================================================================*/
 
 using System;
-using System.Data.SqlClient;
 using System.Collections;
-using System.Configuration;
 using System.Data;
 using ControlMantenimiento.Model;
-using MySql.Data.MySqlClient;// Requiere descargar mysql-connector-net-6.8.3
+using MySql.Data.MySqlClient;
 
-namespace ControlMantenimiento_NetWeb.DAL
+namespace ControlMantenimiento.Data.MySql
 {
-    public class AccesoDatos
+    public class MySqlAccesoDatos
     {
         private readonly string _connectionString;
 
-        public AccesoDatos(string connectionString)
+        public MySqlAccesoDatos(string connectionString)
         {
             _connectionString = connectionString;
         }

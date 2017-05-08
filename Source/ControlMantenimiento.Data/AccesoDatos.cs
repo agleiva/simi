@@ -11,7 +11,7 @@ using System.Data;
 using System.Collections;
 using ControlMantenimiento.Model;
 
-namespace ControlMantenimiento_NetDesktop.DAL
+namespace ControlMantenimiento.Data
 {
     public class AccesoDatos
     {

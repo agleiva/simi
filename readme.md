@@ -94,5 +94,7 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 #### en este punto toda la solución compila correctamente, pero el IDE muestra 24 warnings acerca de que `System.Data.OracleClient` está deprecado.
 
 34. En este punto y antes de continuar con la abstracción de la capa de acceso a datos, resulta conveniente corregir el naming en varios lugares:
-    * Se renombra el namespace `ControlMantenimiento_NetDesktop.BO` a `ControlMantenimiento.Model`
-    * Se cambia el namespace de la clase `CargaCombosListas` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Model`
+    * Se renombró el namespace `ControlMantenimiento_NetDesktop.BO` a `ControlMantenimiento.Model`
+    * Se cambió el namespace de la clase `CargaCombosListas` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Model`
+    * Se renombró el namespace `ControlMantenimiento_NetDesktop.DAL` a `ControlMantenimiento.Data`
+    * Se cambió el nombre de la clase `ControlMantenimiento_NetWeb.DAL.AccesoDatos` en el proyecto `ControlMantenimiento.Data.MySql` a `ControlMantenimiento.Data.MySql.MySqlAccesoDatos`

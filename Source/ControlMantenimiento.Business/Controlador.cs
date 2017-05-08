@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ControlMantenimiento_NetDesktop.DAL;
+using ControlMantenimiento.Data;
 using System.Collections;
 using ControlMantenimiento.Model;
 

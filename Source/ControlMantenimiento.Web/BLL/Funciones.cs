@@ -4,7 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using ControlMantenimiento_NetDesktop.BLL;
-using ControlMantenimiento_NetDesktop.DAL;
+using ControlMantenimiento.Data;
 
 namespace ControlMantenimiento_NetWeb.BLL
 {
