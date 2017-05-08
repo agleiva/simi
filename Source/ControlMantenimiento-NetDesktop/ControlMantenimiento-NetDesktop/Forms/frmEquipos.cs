@@ -17,7 +17,7 @@ namespace ControlMantenimiento_NetDesktop
             this.cboLineas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboLineas_KeyPress);
         }
 
-        private IControlador icontrolador = new Controlador();
+        private IControlador icontrolador = Funciones.CrearControlador();
         private bool Grabar;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
 

@@ -29,7 +29,7 @@ namespace ControlMantenimiento_NetDesktop
             
         }
 
-        private IControlador icontrolador = new Controlador();
+        private IControlador icontrolador = Funciones.CrearControlador();
         private bool   Grabar;
         private int    TipoPerfil;
         private string RutaFoto = "";

@@ -16,7 +16,7 @@ namespace ControlMantenimiento_NetDesktop
             this.lstListaValores.Click += new System.EventHandler(this.lstListaValores_Click);
         }
 
-        private IControlador icontrolador = new Controlador(); 
+        private IControlador icontrolador = Funciones.CrearControlador();
         private bool Grabar;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
        

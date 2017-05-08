@@ -1,7 +1,8 @@
 ﻿using System;
-
+using System.Configuration;
+using System.Linq;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
+using ControlMantenimiento_NetDesktop.DAL;
 
 namespace ControlMantenimiento_NetDesktop.BLL
 {
@@ -12,14 +13,6 @@ namespace ControlMantenimiento_NetDesktop.BLL
         public static string ValorTipo;        // Variable para controlar Tipo en Lista de Valores (Lineas o Marcas)
         public static string NombreUsuario;
         public static string Fuente;
-
-      
-
-        
-
-        
-
-        
 
         // Funcion para limpiar los controles en un formulario (Solo TextBox)
         public static void LimpiarForma(Panel pnl)
@@ -33,8 +26,12 @@ namespace ControlMantenimiento_NetDesktop.BLL
             }
         }
 
-        
-        
+        public static Controlador CrearControlador()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["Conexion"].ToString();
+            return new Controlador(new AccesoDatos(connectionString), UsuarioConectado);
+        }
+
         // Default Constructor
         public Funciones()
         { }

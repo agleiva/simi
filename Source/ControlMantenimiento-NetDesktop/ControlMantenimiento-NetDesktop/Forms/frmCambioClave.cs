@@ -16,7 +16,7 @@ namespace ControlMantenimiento_NetDesktop
             this.txtConfirmar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConfirmar_KeyPress);
         }
 
-        private IControlador icontrolador = new Controlador(); 
+        private IControlador icontrolador = Funciones.CrearControlador();
         private bool Grabar;
         private Operario operario;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter

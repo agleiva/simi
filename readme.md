@@ -46,8 +46,10 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 13. Se cambiaron todos los métodos estáticos de la clase `AccesoDatos` por métodos de instancia, y se quitó las referencias directas a `ConfigurationManager` en favor de obtener el Connection String mediante un parámetro en el constructor de la clase. Esto quita las dependencias de la capa de datos a la configuración de la aplicación, que es una violación de SRP.
 
-13. Se quitaron todas las referencias desde `AccesoDatos` hacia la capa de arriba (`Business`), para mantener una separación de capas correcta y eliminar el problema detectado en el punto 7.
+14. Se quitaron todas las referencias desde `AccesoDatos` hacia la capa de arriba (`Business`), para mantener una separación de capas correcta y eliminar el problema detectado en el punto 7.
 
-14. Se modificó la clase `Controlador` para que reciba por parámetro en el constructor una instancia de `AccesoDatos` y use esta instancia en lugar de invocar los métodos de forma estática.
+15. Se modificó la clase `Controlador` para que reciba por parámetro en el constructor una instancia de `AccesoDatos` y use esta instancia en lugar de invocar los métodos de forma estática.
 
-15. Se introdujo el parámetro `double usuarioConectado` en el constructor de la clase `Controlador` para guardarlo en un campo de instancia y pasarlo a `AccesoDatos` cuando sea necesario.
+16. Se introdujo el parámetro `double usuarioConectado` en el constructor de la clase `Controlador` para guardarlo en un campo de instancia y pasarlo a `AccesoDatos` cuando sea necesario.
+
+17. Se creó un método estático (factory) en la clase `Funciones` del proyecto Desktop para unificar la creación del `Controlador` pasándo la instancia de `AccesoDatos` con el *Connection String* apropiado.

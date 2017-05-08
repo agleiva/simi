@@ -88,7 +88,7 @@ namespace ControlMantenimiento_NetDesktop
               txtClave_KeyPress(btnIngresar, Tecla);
               if (Ingresar)
               {
-                  IControlador icontrolador = new Controlador();
+                  IControlador icontrolador = Funciones.CrearControlador();
                   Operario operario = icontrolador.ObtenerAcceso(txtDocumento.Text, txtClave.Text);
                   if (operario != null)
                   {

@@ -70,7 +70,7 @@ namespace ControlMantenimiento_NetDesktop
         private void SeleccionarOpcion(int Opcion)
         {
             int Resultado;
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             switch (Opcion)
             {
                 case 0:
