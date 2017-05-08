@@ -20,5 +20,10 @@ namespace ControlMantenimiento.Data
         Mantenimiento ObtenerMantenimiento(string datoBuscar);
         int GuardarMantenimiento(Mantenimiento mantenimiento, string accion, double usuarioConectado);
         int EliminarRegistro(string datoEliminar, string tabla);
+
+        ArrayList ArlListEquipo { get; }
+        ArrayList ArlListOperarios { get; }
+        ArrayList ArlListLinea { get; }
+        ArrayList ArlListMarca { get; }
     }
 }

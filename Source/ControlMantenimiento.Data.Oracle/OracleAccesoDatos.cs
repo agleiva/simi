@@ -49,10 +49,10 @@ namespace ControlMantenimiento.Data.Oracle
             _connectionString = connectionString;
         }
         
-        public ArrayList ArlListEquipo = new ArrayList();
-        public ArrayList ArlListLinea = new ArrayList();
-        public ArrayList ArlListMarca = new ArrayList();
-        public ArrayList ArlListOperarios = new ArrayList();
+        public ArrayList ArlListEquipo { get; private set; } = new ArrayList();
+        public ArrayList ArlListLinea { get; private set; } = new ArrayList();
+        public ArrayList ArlListMarca { get; private set; } = new ArrayList();
+        public ArrayList ArlListOperarios { get; private set; } = new ArrayList();
 
         public int ValidarTablaVacia(string tabla)
         {
