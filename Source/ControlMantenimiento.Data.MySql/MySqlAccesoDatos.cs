@@ -13,7 +13,7 @@ using MySql.Data.MySqlClient;
 
 namespace ControlMantenimiento.Data.MySql
 {
-    public class MySqlAccesoDatos
+    public class MySqlAccesoDatos: IAccesoDatos
     {
         private MySqlConnection _connection;
         private MySqlDataReader _dataReader;  // Cursor - Recordset de solo lectura
@@ -52,7 +52,35 @@ namespace ControlMantenimiento.Data.MySql
                 throw ex;            
             }
         }
-        
+
+        public ArrayList CargarListas(string tabla)
+        {
+            try
+            {
+                ArrayList arlLista = new ArrayList();
+                using (_connection = new MySqlConnection(_connectionString))
+                {
+                    _cmd = new MySqlCommand("spr_CCargarCombosListas", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                    _connection.Open();
+                    using (_dataReader = _cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        while (_dataReader.Read())
+                        {
+                            arlLista.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
+                        }
+                    _dataReader.Close();
+                    LiberarRecursos();
+                }
+                return arlLista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public ArrayList CargarListas(string tabla, string condicion)
         {
             try

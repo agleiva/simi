@@ -106,3 +106,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 35. Se cambiaron los métodos `IniciarBusqueda()` y `LiberarRecursos` y `BuscarRegistro()` de la clases de acceso a datos de `public` a `private` ya que no se usan fuera de éstas.
 
 36. Se creó la interfaz `ControlMantenimiento.Data.IAccesoDatos` a partir de los métodos públicos de `ControlMantenimiento.Data.AccesoDatos`.
+
+37. Al tratar de implementar la interfaz `IAccesoDatos` en la clase `MySqlAccesoDatos` se descubrió que faltaba el método `public ArrayList CargarListas(string tabla)`. Se agregó éste a partir de la definición del mismo en la clase `AccesoDatos`, reemplazando las APIs de SQL Server (`SqlConnection` y `SqlCommand`) por las de MySQL (`MySqlConnection` y `MySqlCommand`)
