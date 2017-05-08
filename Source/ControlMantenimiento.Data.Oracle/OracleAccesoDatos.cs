@@ -39,34 +39,34 @@ namespace ControlMantenimiento.Data.Oracle
 {
     public class OracleAccesoDatos
     {
+        private OracleConnection _connection;  
+        private OracleDataReader _dataReader;  // Cursor - Recordset de solo lectura
+        private OracleCommand _cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
         private readonly string _connectionString;
 
         public OracleAccesoDatos(string connectionString)
         {
             _connectionString = connectionString;
         }
-
-        public OracleConnection Cn;   // Conexion 
-        public OracleDataReader sdr;  // Cursor - Recordset de solo lectura
-        public OracleCommand Cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
-        public ArrayList arlListEquipo = new ArrayList();
-        public ArrayList arlListLinea = new ArrayList();
-        public ArrayList arlListMarca = new ArrayList();
-        public ArrayList arlListOperarios = new ArrayList();
+        
+        public ArrayList ArlListEquipo = new ArrayList();
+        public ArrayList ArlListLinea = new ArrayList();
+        public ArrayList ArlListMarca = new ArrayList();
+        public ArrayList ArlListOperarios = new ArrayList();
 
        
-        public void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
+        public void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
         {
             try
             {
-                Cn = new OracleConnection(_connectionString);
-                Cmd = new OracleCommand("spr_CBuscarRegistro", Cn);
-                Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                Cmd.Parameters.AddWithValue("p_DATOBUSCAR", DatoBuscar);
-                Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
-                Cmd.Parameters.Add("Out_Data", OracleType.Cursor).Direction = ParameterDirection.Output;                  
-                Cn.Open();
+                _connection = new OracleConnection(_connectionString);
+                _cmd = new OracleCommand("spr_CBuscarRegistro", _connection);
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
+                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
+                _cmd.Parameters.Add("Out_Data", OracleType.Cursor).Direction = ParameterDirection.Output;                  
+                _connection.Open();
             }
             catch (Exception ex)
             {
@@ -74,28 +74,28 @@ namespace ControlMantenimiento.Data.Oracle
             }
         }
 
-        public OracleDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
+        public OracleDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
         {
-            IniciarBusqueda(Tabla, DatoBuscar, Condicion);
-            sdr = Cmd.ExecuteReader();
-            return sdr; 
+            IniciarBusqueda(tabla, datoBuscar, condicion);
+            _dataReader = _cmd.ExecuteReader();
+            return _dataReader; 
         }
      
-        public int ValidarTablaVacia(string Tabla)
+        public int ValidarTablaVacia(string tabla)
         {
             try
             {
-                using (Cn = new OracleConnection(_connectionString))
+                using (_connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_CValidarExistenciaDatos", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));                   
+                    _cmd = new OracleCommand("spr_CValidarExistenciaDatos", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));                   
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }
             }
             catch (Exception ex)
@@ -105,24 +105,24 @@ namespace ControlMantenimiento.Data.Oracle
         }      
 
         
-        public ArrayList CargarListas(string Tabla, string Condicion)
+        public ArrayList CargarListas(string tabla, string condicion)
         {
             try
             {
                 ArrayList arlListado = new ArrayList();
-                using ( Cn = new OracleConnection(_connectionString))
+                using ( _connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_CCargarListado", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                    Cmd.Parameters.AddWithValue("p_CONDICION", Condicion);
-                    Cn.Open();
-                    using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))
-                    while (sdr.Read())
+                    _cmd = new OracleCommand("spr_CCargarListado", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                    _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
+                    _connection.Open();
+                    using (_dataReader = _cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                    while (_dataReader.Read())
                     {
-                        arlListado.Add(new CargaCombosListas(sdr.GetValue(0).ToString(),  sdr.GetValue(1).ToString()));
+                        arlListado.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(),  _dataReader.GetValue(1).ToString()));
                     }
-                    sdr.Close();
+                    _dataReader.Close();
                     LiberarRecursos();
                 }
                 return arlListado;
@@ -137,32 +137,32 @@ namespace ControlMantenimiento.Data.Oracle
         {
             try
             {
-                arlListEquipo = new ArrayList();
-                arlListLinea = new ArrayList();
-                arlListMarca = new ArrayList();
-                using (Cn = new OracleConnection(_connectionString))
+                ArlListEquipo = new ArrayList();
+                ArlListLinea = new ArrayList();
+                ArlListMarca = new ArrayList();
+                using (_connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_TABLA", "CONTROLEQUIPOS");
-                    Cn.Open();
-                    using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))
-                        while (sdr.Read())
+                    _cmd = new OracleCommand("spr_CCargarCombosListas", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", "CONTROLEQUIPOS");
+                    _connection.Open();
+                    using (_dataReader = _cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        while (_dataReader.Read())
                         {
-                            if (sdr.GetValue(2).ToString().Equals("EQUIPOS"))
+                            if (_dataReader.GetValue(2).ToString().Equals("EQUIPOS"))
                             {
-                                arlListEquipo.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                                ArlListEquipo.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
                             }
-                            else if (sdr.GetValue(2).ToString().Equals("LINEAS"))
+                            else if (_dataReader.GetValue(2).ToString().Equals("LINEAS"))
                             {
-                                arlListLinea.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                                ArlListLinea.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
                             }
                             else
                             {
-                                arlListMarca.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                                ArlListMarca.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
                             }
                         }
-                    sdr.Close();
+                    _dataReader.Close();
                     LiberarRecursos();
                 }
             }
@@ -172,31 +172,31 @@ namespace ControlMantenimiento.Data.Oracle
             }
         }
 
-        public void ControlProgramacion(string Tabla)
+        public void ControlProgramacion(string tabla)
         {
             try
             {
-                arlListEquipo = new ArrayList();
-                arlListOperarios = new ArrayList();
-                using (Cn = new OracleConnection(_connectionString))
+                ArlListEquipo = new ArrayList();
+                ArlListOperarios = new ArrayList();
+                using (_connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                    Cn.Open();
-                    using (sdr = Cmd.ExecuteReader(CommandBehavior.CloseConnection))
-                        while (sdr.Read())
+                    _cmd = new OracleCommand("spr_CCargarCombosListas", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                    _connection.Open();
+                    using (_dataReader = _cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        while (_dataReader.Read())
                         {
-                            if (sdr.GetValue(2).ToString().Equals("EQUIPOS"))
+                            if (_dataReader.GetValue(2).ToString().Equals("EQUIPOS"))
                             {
-                                arlListEquipo.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                                ArlListEquipo.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
                             }
-                            else if (sdr.GetValue(2).ToString().Equals("OPERARIOS"))
+                            else if (_dataReader.GetValue(2).ToString().Equals("OPERARIOS"))
                             {
-                                arlListOperarios.Add(new CargaCombosListas(sdr.GetValue(0).ToString(), sdr.GetValue(0).ToString() + " " + sdr.GetValue(1).ToString()));
+                                ArlListOperarios.Add(new CargaCombosListas(_dataReader.GetValue(0).ToString(), _dataReader.GetValue(0).ToString() + " " + _dataReader.GetValue(1).ToString()));
                             }
                         }
-                    sdr.Close();
+                    _dataReader.Close();
                     LiberarRecursos();
                 }
             }
@@ -213,23 +213,23 @@ namespace ControlMantenimiento.Data.Oracle
          =======================================================================================================================================================
          */
 
-        public Operario ObtenerOperario(string DatoBuscar, string Clave)
+        public Operario ObtenerOperario(string datoBuscar, string clave)
         {
             Operario operario = new Operario();
             try
             {
 
-                sdr = (BuscarRegistro("OPERARIOS", DatoBuscar, Clave));
-                if (sdr.Read())
+                _dataReader = (BuscarRegistro("OPERARIOS", datoBuscar, clave));
+                if (_dataReader.Read())
                 {
-                    operario.documento = Convert.ToDouble(sdr["DOCUMENTO"].ToString());
-                    operario.nombres = sdr["NOMBRES"].ToString();
-                    operario.apellidos = sdr["APELLIDOS"].ToString();
-                    operario.correo = sdr["CORREO"].ToString();
-                    operario.telefono = Convert.ToDouble(sdr["TELEFONO"].ToString());
-                    operario.clave = sdr["CLAVE"].ToString();
-                    operario.perfil = Convert.ToInt32(sdr["PERFIL"].ToString());
-                    operario.foto = sdr["FOTO"].ToString();
+                    operario.documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
+                    operario.nombres = _dataReader["NOMBRES"].ToString();
+                    operario.apellidos = _dataReader["APELLIDOS"].ToString();
+                    operario.correo = _dataReader["CORREO"].ToString();
+                    operario.telefono = Convert.ToDouble(_dataReader["TELEFONO"].ToString());
+                    operario.clave = _dataReader["CLAVE"].ToString();
+                    operario.perfil = Convert.ToInt32(_dataReader["PERFIL"].ToString());
+                    operario.foto = _dataReader["FOTO"].ToString();
                     LiberarRecursos();
                     return operario;
                 }
@@ -245,30 +245,30 @@ namespace ControlMantenimiento.Data.Oracle
             }
         }
 
-        public int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
+        public int GuardarOperario(Operario operario, string accion, double usuarioConectado)
         {
             try
             {
-                using ( Cn = new OracleConnection(_connectionString))
+                using ( _connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_IUOperarios", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_ACCION", Accion);
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", Operario.documento);
-                    Cmd.Parameters.AddWithValue("p_NOMBRES", Operario.nombres);
-                    Cmd.Parameters.AddWithValue("p_APELLIDOS", Operario.apellidos);
-                    Cmd.Parameters.AddWithValue("p_CORREO", Operario.correo);
-                    Cmd.Parameters.AddWithValue("p_TELEFONO", Operario.telefono);
-                    Cmd.Parameters.AddWithValue("p_CLAVE", Operario.clave);
-                    Cmd.Parameters.AddWithValue("p_PERFIL", Operario.perfil);
-                    Cmd.Parameters.AddWithValue("p_FOTO", Operario.foto);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));                    
+                    _cmd = new OracleCommand("spr_IUOperarios", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_ACCION", accion);
+                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", operario.documento);
+                    _cmd.Parameters.AddWithValue("p_NOMBRES", operario.nombres);
+                    _cmd.Parameters.AddWithValue("p_APELLIDOS", operario.apellidos);
+                    _cmd.Parameters.AddWithValue("p_CORREO", operario.correo);
+                    _cmd.Parameters.AddWithValue("p_TELEFONO", operario.telefono);
+                    _cmd.Parameters.AddWithValue("p_CLAVE", operario.clave);
+                    _cmd.Parameters.AddWithValue("p_PERFIL", operario.perfil);
+                    _cmd.Parameters.AddWithValue("p_FOTO", operario.foto);
+                    _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));                    
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }                
             }
             catch (Exception e)
@@ -278,21 +278,21 @@ namespace ControlMantenimiento.Data.Oracle
 
         }
 
-        public bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
+        public bool GuardarCambioClave(string nuevaClave, double usuarioConectado)
         {
             bool status = false;
             try
             {
-                using (Cn = new OracleConnection(_connectionString))
+                using (_connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_UCambioClave", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", usuarioConectado);
-                    Cmd.Parameters.AddWithValue("p_CLAVE", NuevaClave);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    if (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value) == 0)
+                    _cmd = new OracleCommand("spr_UCambioClave", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", usuarioConectado);
+                    _cmd.Parameters.AddWithValue("p_CLAVE", nuevaClave);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    if (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value) == 0)
                     {
                         status = true;
                     }
@@ -314,18 +314,18 @@ namespace ControlMantenimiento.Data.Oracle
         Inicio Operaciones sobre estructura ListaValores
        =======================================================================================================================================================
        */
-        public ListaValores ObtenerListaValores(string DatoBuscar)
+        public ListaValores ObtenerListaValores(string datoBuscar)
         {
             ListaValores listavalores = new ListaValores();
             try
             {
 
-                sdr = (BuscarRegistro("LISTAVALORES", DatoBuscar, "CODIGO"));
-                if (sdr.Read())
+                _dataReader = (BuscarRegistro("LISTAVALORES", datoBuscar, "CODIGO"));
+                if (_dataReader.Read())
                 {
-                    listavalores.codigo = Convert.ToInt32(sdr["CODIGO"].ToString());
-                    listavalores.nombre = sdr["NOMBRE"].ToString();
-                    listavalores.descripcion = sdr["DESCRIPCION"].ToString();
+                    listavalores.codigo = Convert.ToInt32(_dataReader["CODIGO"].ToString());
+                    listavalores.nombre = _dataReader["NOMBRE"].ToString();
+                    listavalores.descripcion = _dataReader["DESCRIPCION"].ToString();
                     LiberarRecursos();
                     return listavalores;
                 }
@@ -345,22 +345,22 @@ namespace ControlMantenimiento.Data.Oracle
         {
             try
             {
-                using ( Cn = new OracleConnection(_connectionString))
+                using ( _connection = new OracleConnection(_connectionString))
                
                 {
-                    Cmd = new OracleCommand("spr_IUListaValores", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_CODIGO", listavalores.codigo);
-                    Cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
-                    Cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
-                    Cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));                    
+                    _cmd = new OracleCommand("spr_IUListaValores", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_CODIGO", listavalores.codigo);
+                    _cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
+                    _cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
+                    _cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
+                    _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));                    
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }
                 
             }
@@ -379,21 +379,21 @@ namespace ControlMantenimiento.Data.Oracle
         Inicio Operaciones sobre estructura Equipos
         =======================================================================================================================================================
         */
-        public Equipo ObtenerEquipo(string DatoBuscar)
+        public Equipo ObtenerEquipo(string datoBuscar)
         {
             Equipo equipo = new Equipo();
             try
             {
 
-                sdr = (BuscarRegistro("EQUIPOS", DatoBuscar, "Codigo"));
-                if (sdr.Read())
+                _dataReader = (BuscarRegistro("EQUIPOS", datoBuscar, "Codigo"));
+                if (_dataReader.Read())
                 {
-                    equipo.codigoequipo = Convert.ToInt32(sdr["CODIGOEQUIPO"].ToString());
-                    equipo.nombreequipo = sdr["NOMBREEQUIPO"].ToString();
-                    equipo.codigomarca = Convert.ToInt32(sdr["CODIGOMARCA"].ToString());
-                    equipo.serie = sdr["SERIE"].ToString();
-                    equipo.codigolinea = Convert.ToInt32(sdr["CODIGOLINEA"].ToString());
-                    equipo.lubricacion = Convert.ToInt32(sdr["LUBRICACION"].ToString());
+                    equipo.codigoequipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
+                    equipo.nombreequipo = _dataReader["NOMBREEQUIPO"].ToString();
+                    equipo.codigomarca = Convert.ToInt32(_dataReader["CODIGOMARCA"].ToString());
+                    equipo.serie = _dataReader["SERIE"].ToString();
+                    equipo.codigolinea = Convert.ToInt32(_dataReader["CODIGOLINEA"].ToString());
+                    equipo.lubricacion = Convert.ToInt32(_dataReader["LUBRICACION"].ToString());
                     LiberarRecursos();
                     return equipo;
                 }
@@ -413,23 +413,23 @@ namespace ControlMantenimiento.Data.Oracle
         {
             try
             {
-                using (Cn = new OracleConnection(_connectionString))
+                using (_connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_IUEquipos", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.codigoequipo);
-                    Cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.nombreequipo);
-                    Cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.codigomarca);
-                    Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
-                    Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
-                    Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));                    
+                    _cmd = new OracleCommand("spr_IUEquipos", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", equipo.codigoequipo);
+                    _cmd.Parameters.AddWithValue("p_NOMBREEQUIPO", equipo.nombreequipo);
+                    _cmd.Parameters.AddWithValue("p_CODIGOMARCA", equipo.codigomarca);
+                    _cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
+                    _cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
+                    _cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
+                    _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));                    
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }                
             }
             catch (Exception e)
@@ -447,19 +447,19 @@ namespace ControlMantenimiento.Data.Oracle
        Inicio Operaciones sobre estructura Mantenimiento
        =======================================================================================================================================================
        */
-        public Mantenimiento ObtenerMantenimiento(string DatoBuscar)
+        public Mantenimiento ObtenerMantenimiento(string datoBuscar)
         {
             Mantenimiento mantenimiento = new Mantenimiento();
             try
             {
 
-                sdr = (BuscarRegistro("MANTENIMIENTO", DatoBuscar, ""));
-                if (sdr.Read())
+                _dataReader = (BuscarRegistro("MANTENIMIENTO", datoBuscar, ""));
+                if (_dataReader.Read())
                 {
-                    mantenimiento.codigoequipo = Convert.ToInt32(sdr["CODIGOEQUIPO"].ToString());
-                    mantenimiento.documento = Convert.ToDouble(sdr["DOCUMENTO"].ToString());
-                    mantenimiento.fecha = Convert.ToDateTime(sdr["FECHA"].ToString());
-                    mantenimiento.observaciones = sdr["OBSERVACIONES"].ToString();
+                    mantenimiento.codigoequipo = Convert.ToInt32(_dataReader["CODIGOEQUIPO"].ToString());
+                    mantenimiento.documento = Convert.ToDouble(_dataReader["DOCUMENTO"].ToString());
+                    mantenimiento.fecha = Convert.ToDateTime(_dataReader["FECHA"].ToString());
+                    mantenimiento.observaciones = _dataReader["OBSERVACIONES"].ToString();
                     LiberarRecursos();
                     return mantenimiento;
                 }
@@ -475,26 +475,26 @@ namespace ControlMantenimiento.Data.Oracle
             }
         }
 
-        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
+        public int GuardarMantenimiento(Mantenimiento mantenimiento, string accion, double usuarioConectado)
         {
             try
             {
-                using ( Cn = new OracleConnection(_connectionString))
+                using ( _connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_IUMantenimiento", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_ACCION", Accion);
-                    Cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", mantenimiento.codigoequipo);
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
-                    Cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
-                    Cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));
+                    _cmd = new OracleCommand("spr_IUMantenimiento", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_ACCION", accion);
+                    _cmd.Parameters.AddWithValue("p_CODIGOEQUIPO", mantenimiento.codigoequipo);
+                    _cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
+                    _cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
+                    _cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
+                    _cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }                
             }
             catch (Exception e)
@@ -509,23 +509,23 @@ namespace ControlMantenimiento.Data.Oracle
        =======================================================================================================================================================
        */
         
-        public int EliminarRegistro(string DatoEliminar, string Tabla)
+        public int EliminarRegistro(string datoEliminar, string tabla)
         {
             bool status = false;
             try
             {
-                using ( Cn = new OracleConnection(_connectionString))
+                using ( _connection = new OracleConnection(_connectionString))
                 {
-                    Cmd = new OracleCommand("spr_DRegistro", Cn);
-                    Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
-                    Cmd.Parameters.AddWithValue("p_CONDICION", DatoEliminar);
-                    Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
-                    Cn.Open();
-                    Cmd.ExecuteNonQuery();
-                    int Resultado = (Convert.ToInt32(Cmd.Parameters["p_RESULTADO"].Value));
+                    _cmd = new OracleCommand("spr_DRegistro", _connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+                    _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                    _cmd.Parameters.AddWithValue("p_CONDICION", datoEliminar);
+                    _cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
+                    _connection.Open();
+                    _cmd.ExecuteNonQuery();
+                    int resultado = (Convert.ToInt32(_cmd.Parameters["p_RESULTADO"].Value));
                     LiberarRecursos();
-                    return Resultado;
+                    return resultado;
                 }
             }
             catch (Exception e)
@@ -536,12 +536,12 @@ namespace ControlMantenimiento.Data.Oracle
 
         public void LiberarRecursos()
         {
-            if (!sdr.IsClosed) sdr.Close();
-            Cmd.Dispose();
-            if (Cn != null)
+            if (!_dataReader.IsClosed) _dataReader.Close();
+            _cmd.Dispose();
+            if (_connection != null)
             {
-                Cn.Close();
-                Cn.Dispose();
+                _connection.Close();
+                _connection.Dispose();
             }
         }
 
