@@ -10,10 +10,12 @@ namespace ControlMantenimiento_NetDesktop.BLL
     public class Controlador: IControlador
     {
         private readonly AccesoDatos _accesoDatos;
+        private readonly double _usuarioConectado;
 
-        public Controlador(AccesoDatos accesoDatos)
+        public Controlador(AccesoDatos accesoDatos, double usuarioConectado)
         {
             _accesoDatos = accesoDatos;
+            _usuarioConectado = usuarioConectado;
         }
 
         #region IControlador Members
@@ -100,12 +102,12 @@ namespace ControlMantenimiento_NetDesktop.BLL
             if (o is Operario)
             {
                 Operario operario = (Operario)o;
-                status = _accesoDatos.GuardarOperario(operario, Accion);
+                status = _accesoDatos.GuardarOperario(operario, Accion, _usuarioConectado);
             }
             else if (o is Mantenimiento)
             {
                 Mantenimiento mantenimiento = (Mantenimiento)o;
-                status = _accesoDatos.GuardarMantenimiento(mantenimiento, Accion);
+                status = _accesoDatos.GuardarMantenimiento(mantenimiento, Accion, _usuarioConectado);
             }
 
             return status;
@@ -117,19 +119,19 @@ namespace ControlMantenimiento_NetDesktop.BLL
             if (o is Equipo)
             {
                 Equipo equipo = (Equipo)o;
-                status = _accesoDatos.GuardarEquipo(equipo);
+                status = _accesoDatos.GuardarEquipo(equipo, _usuarioConectado);
             }
             else if (o is ListaValores)
             {
                 ListaValores listavalores = (ListaValores)o;
-                status = _accesoDatos.GuardarListaValores(listavalores);
+                status = _accesoDatos.GuardarListaValores(listavalores, _usuarioConectado);
             }
             return status;
         }
 
         public bool GuardarCambioClave(string ClaveNueva)
         {
-            return _accesoDatos.GuardarCambioClave(ClaveNueva);
+            return _accesoDatos.GuardarCambioClave(ClaveNueva, _usuarioConectado);
         }
 
         // Eliminar Registro
