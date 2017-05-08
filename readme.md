@@ -68,3 +68,7 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 24. En este punto se creó la base de datos SQL Server, se ejecutaron los scripts de creación de los objetos de la base ubicados en `/DB/Scripts-ControlMantenimientoDB-SQLServer.txt`, se agregó el correcto *Connection String* en el `app.config` de la apliación Desktop y se procedió a ejecutar la misma para comprobar su correcto funcionamiento. 
     * Rápidamente se observó que aún había referencias a `System.Configuration` en la clase `AccesoDatos` que estaban causando errores ya que estaban buscando el *Connection String* en los `AppSettings` del `App.config` en lugar de hacerlo en la sección `connectionStrings` que es lo correcto. De todas formas como no es responsabilidad de la capa de acceso a datos obtener el connection string se cambió esto para usar el connection string provisto por el constructor de la clase.
+
+25. Se comprobó el funcionamiento correcto de la aplicación desktop.
+
+25. Se agregó el connection string al `Web.Config` de la aplicación, web, y rápidamente se encontró un error relacionado a *Unobtrusive Validation*, que se corrigió usando [esta solución](http://stackoverflow.com/a/16705149/643085)
