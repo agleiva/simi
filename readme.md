@@ -78,3 +78,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 #### los proyectos `ControlMantenimiento.Data.MySql` y `ControlMantenimiento.Data.Oracle` aún no compilan.
 
 27. Se agregó el [**Paquete Nuget**](https://docs.microsoft.com/en-us/nuget/) [`MySql.Data`](https://www.nuget.org/packages/MySql.Data/) al proyecto `ControlMantenimiento.Data.MySql`
+
+28. Se realizaron los mismos cambios que en el punto `13`, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.MySql`.

@@ -18,23 +18,27 @@ namespace ControlMantenimiento_NetWeb.DAL
 {
     public class AccesoDatos
     {
-        // Default Constructor
-        public AccesoDatos() { }
+        private readonly string _connectionString;
 
-        public static MySqlConnection Cn;   // Conexion 
-        public static MySqlDataReader sdr;  // Cursor - Recordset de solo lectura
-        public static MySqlCommand Cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
-        public static ArrayList arlListEquipo = new ArrayList();
-        public static ArrayList arlListLinea = new ArrayList();
-        public static ArrayList arlListMarca = new ArrayList();
-        public static ArrayList arlListOperarios = new ArrayList();
+        public AccesoDatos(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public MySqlConnection Cn;   // Conexion 
+        public MySqlDataReader sdr;  // Cursor - Recordset de solo lectura
+        public MySqlCommand Cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
+        public ArrayList arlListEquipo = new ArrayList();
+        public ArrayList arlListLinea = new ArrayList();
+        public ArrayList arlListMarca = new ArrayList();
+        public ArrayList arlListOperarios = new ArrayList();
 
 
-        public static void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
+        public void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
         {
             try
             {
-                Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString());                
+                Cn = new MySqlConnection(_connectionString);                
                 Cmd = new MySqlCommand("spr_CBuscarRegistro", Cn);
                 Cmd.CommandType = CommandType.StoredProcedure;
                 Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
@@ -48,20 +52,20 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static MySqlDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
+        public MySqlDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
         {
             IniciarBusqueda(Tabla, DatoBuscar, Condicion);
             sdr = Cmd.ExecuteReader();
             return sdr;
         }
 
-         public static int ValidarTablaVacia(string Tabla)
+         public int ValidarTablaVacia(string Tabla)
         {
             try
             {
-                using (Cn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using (Cn = new MySqlConnection(_connectionString))
                 {
-                    Cmd = new SqlCommand("spr_CValidarExistenciaDatos", Cn);
+                    Cmd = new MySqlCommand("spr_CValidarExistenciaDatos", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -78,12 +82,12 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
         
-        public static ArrayList CargarListas(string Tabla, string Condicion)
+        public ArrayList CargarListas(string Tabla, string Condicion)
         {
             try
             {
                 ArrayList arlLista = new ArrayList();
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_CCargarListado", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -106,16 +110,16 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void ControlEquipos()
+        public void ControlEquipos()
         {
             try
             {
                 arlListEquipo = new ArrayList();
                 arlListLinea = new ArrayList();
                 arlListMarca = new ArrayList();
-                using (Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using (Cn = new MySqlConnection(_connectionString))
                 {
-                    Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
+                    Cmd = new MySqlCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", "CONTROLEQUIPOS");
                     Cn.Open();
@@ -145,15 +149,15 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void ControlProgramacion(string Tabla)
+        public void ControlProgramacion(string Tabla)
         {
             try
             {
                 arlListEquipo = new ArrayList();
                 arlListOperarios = new ArrayList();
-                using (Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using (Cn = new MySqlConnection(_connectionString))
                 {
-                    Cmd = new SqlCommand("spr_CCargarCombosListas", Cn);
+                    Cmd = new MySqlCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
                     Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
                     Cn.Open();
@@ -187,7 +191,7 @@ namespace ControlMantenimiento_NetWeb.DAL
          =======================================================================================================================================================
          */
 
-        public static Operario ObtenerOperario(string DatoBuscar, string Clave)
+        public Operario ObtenerOperario(string DatoBuscar, string Clave)
         {
             Operario operario = new Operario();
             try
@@ -220,11 +224,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarOperario(Operario Operario, string Accion)
+        public int GuardarOperario(Operario Operario, string Accion)
         {
             try
             {
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_IUOperarios", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -254,11 +258,11 @@ namespace ControlMantenimiento_NetWeb.DAL
 
         }
 
-        public static bool GuardarCambioClave(string NuevaClave)
+        public bool GuardarCambioClave(string NuevaClave)
         {
             try
             {
-                using (Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using (Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -293,7 +297,7 @@ namespace ControlMantenimiento_NetWeb.DAL
         Inicio Operaciones sobre estructura ListaValores
         =======================================================================================================================================================
         */
-        public static ListaValores ObtenerListaValores(string DatoBuscar)
+        public ListaValores ObtenerListaValores(string DatoBuscar)
         {
             ListaValores listavalores = new ListaValores();
             try
@@ -322,11 +326,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarListaValores(ListaValores listavalores)
+        public int GuardarListaValores(ListaValores listavalores)
         {
             try
             {
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_IUListaValores", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -362,7 +366,7 @@ namespace ControlMantenimiento_NetWeb.DAL
         Inicio Operaciones sobre estructura Equipos
         =======================================================================================================================================================
         */
-        public static Equipo ObtenerEquipo(string DatoBuscar)
+        public Equipo ObtenerEquipo(string DatoBuscar)
         {
             Equipo equipo = new Equipo();
             try
@@ -393,11 +397,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarEquipo(Equipo equipo)
+        public int GuardarEquipo(Equipo equipo)
         {
             try
             {
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_IUEquipos", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -434,7 +438,7 @@ namespace ControlMantenimiento_NetWeb.DAL
        Inicio Operaciones sobre estructura Mantenimiento
        =======================================================================================================================================================
        */
-        public static Mantenimiento ObtenerMantenimiento(string DatoBuscar)
+        public Mantenimiento ObtenerMantenimiento(string DatoBuscar)
         {
             Mantenimiento mantenimiento = new Mantenimiento();
             try
@@ -463,11 +467,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion)
+        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion)
         {
             try
             {
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_IUMantenimiento", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -499,11 +503,11 @@ namespace ControlMantenimiento_NetWeb.DAL
        */
 
       
-        public static int EliminarRegistro(string DatoEliminar, string Tabla)
+        public int EliminarRegistro(string DatoEliminar, string Tabla)
         {
             try
             {
-                using ( Cn = new MySqlConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new MySqlConnection(_connectionString))
                 {
                     Cmd = new MySqlCommand("spr_DRegistro", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -523,7 +527,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void LiberarRecursos()
+        public void LiberarRecursos()
         {
             Cmd.Dispose();
             if (Cn != null)
