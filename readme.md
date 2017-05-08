@@ -80,3 +80,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 27. Se agregó el [**Paquete Nuget**](https://docs.microsoft.com/en-us/nuget/) [`MySql.Data`](https://www.nuget.org/packages/MySql.Data/) al proyecto `ControlMantenimiento.Data.MySql`
 
 28. Se realizaron los mismos cambios que en el punto `13`, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.MySql`.
+
+29. Se corrigieron las referencias a los namespaces del model y se quitaron las referencias hacia la capa de arriba de la misma forma que en el punto 14, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.MySql`.

@@ -10,8 +10,8 @@ using System.Data.SqlClient;
 using System.Collections;
 using System.Configuration;
 using System.Data;
-using ControlMantenimiento_NetWeb.BO;
-using ControlMantenimiento_NetWeb.BLL;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using MySql.Data.MySqlClient;// Requiere descargar mysql-connector-net-6.8.3
 
 namespace ControlMantenimiento_NetWeb.DAL
@@ -224,7 +224,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public int GuardarOperario(Operario Operario, string Accion)
+        public int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
         {
             try
             {
@@ -241,7 +241,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_CLAVE", Operario.clave);
                     Cmd.Parameters.AddWithValue("p_PERFIL", Operario.perfil);
                     Cmd.Parameters.AddWithValue("p_FOTO", Operario.foto);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -258,7 +258,7 @@ namespace ControlMantenimiento_NetWeb.DAL
 
         }
 
-        public bool GuardarCambioClave(string NuevaClave)
+        public bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                 {
                     Cmd = new MySqlCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_CLAVE", NuevaClave);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
@@ -326,7 +326,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public int GuardarListaValores(ListaValores listavalores)
+        public int GuardarListaValores(ListaValores listavalores, double usuarioConectado)
         {
             try
             {
@@ -338,7 +338,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
                     Cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
                     Cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -397,7 +397,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public int GuardarEquipo(Equipo equipo)
+        public int GuardarEquipo(Equipo equipo, double usuarioConectado)
         {
             try
             {
@@ -411,7 +411,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
                     Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
                     Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -467,7 +467,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion)
+        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
         {
             try
             {
@@ -480,7 +480,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
                     Cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
                     Cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
