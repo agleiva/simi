@@ -10,23 +10,23 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            IControlador icontrolador = Funciones.CrearControlador();
+            var controlador = Funciones.CrearControlador();
             if (Funciones.ParametroBuscar != null)
             {
-                icontrolador.ControlProgramacion("CONTROLPROGRAMACION");            
+                controlador.ControlProgramacion("CONTROLPROGRAMACION");            
             }
             else
             {
-                icontrolador.ControlProgramacion("CONTROLPROGRAMAREQUIPOS");            
+                controlador.ControlProgramacion("CONTROLPROGRAMAREQUIPOS");            
             }
             dplEquipos.Items.Clear();
-            dplEquipos.DataSource = icontrolador.ObtenerListaEquipos();
+            dplEquipos.DataSource = controlador.ObtenerListaEquipos();
             dplEquipos.DataValueField = "CODIGO";     // Codigo o Documento a relacionar en BD
             dplEquipos.DataTextField = "DETALLE";     // Visualizar Nombre o Detalle           
             dplEquipos.DataBind();
 
             dplOperarios.Items.Clear();
-            dplOperarios.DataSource = icontrolador.ObtenerListaOperarios();
+            dplOperarios.DataSource = controlador.ObtenerListaOperarios();
             dplOperarios.DataValueField = "CODIGO";     
             dplOperarios.DataTextField = "DETALLE";                
             dplOperarios.DataBind();
@@ -39,8 +39,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            Mantenimiento mantenimiento =(Mantenimiento) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"M");
+            var controlador = Funciones.CrearControlador();
+            Mantenimiento mantenimiento =(Mantenimiento) controlador.ObtenerRegistro(Funciones.ParametroBuscar,"M");
             if (mantenimiento != null)
             {
                 dplEquipos.SelectedValue = mantenimiento.CodigoEquipo.ToString();
@@ -96,8 +96,8 @@ namespace ControlMantenimiento_NetWeb.Forms
             {
               Accion = "I";
             }
-            IControlador icontrolador = Funciones.CrearControlador();
-            Resultado = icontrolador.Guardar(mantenimiento, Accion);
+            var controlador = Funciones.CrearControlador();
+            Resultado = controlador.Guardar(mantenimiento, Accion);
             if (Resultado == 0)
             {
                 mantenimiento = null;

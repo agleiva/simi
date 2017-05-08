@@ -28,8 +28,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void BindRepeater()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            Repeater1.DataSource = icontrolador.CargarListas(Funciones.Pagina, "");
+            var controlador = Funciones.CrearControlador();
+            Repeater1.DataSource = controlador.CargarListas(Funciones.Pagina, "");
             Repeater1.DataBind();
         }
 
@@ -52,8 +52,8 @@ namespace ControlMantenimiento_NetWeb.Forms
             }
             else
             {
-                IControlador icontrolador = Funciones.CrearControlador();
-                Repeater1.DataSource = icontrolador.CargarListas(Funciones.Pagina, txtBuscar.Text);
+                var controlador = Funciones.CrearControlador();
+                Repeater1.DataSource = controlador.CargarListas(Funciones.Pagina, txtBuscar.Text);
                 Repeater1.DataBind();
             }
 
@@ -92,14 +92,14 @@ namespace ControlMantenimiento_NetWeb.Forms
             else if (e.CommandName == "Eliminar")
             {                                
                     int Resultado;
-                IControlador icontrolador = Funciones.CrearControlador();
+                var controlador = Funciones.CrearControlador();
                     if (Funciones.Pagina.Equals("MARCAS") || Funciones.Pagina.Equals("LINEAS"))
                     {
-                        Resultado = icontrolador.EliminarRegistro(((Button)e.CommandSource).CommandArgument, "LISTAVALORES"); 
+                        Resultado = controlador.EliminarRegistro(((Button)e.CommandSource).CommandArgument, "LISTAVALORES"); 
                     }
                     else
                     {
-                        Resultado = icontrolador.EliminarRegistro(((Button)e.CommandSource).CommandArgument, Funciones.Pagina);
+                        Resultado = controlador.EliminarRegistro(((Button)e.CommandSource).CommandArgument, Funciones.Pagina);
  
                     }
                     if (Resultado == 0)
@@ -133,14 +133,14 @@ namespace ControlMantenimiento_NetWeb.Forms
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             int Resultado;
-            IControlador icontrolador = Funciones.CrearControlador();
+            var controlador = Funciones.CrearControlador();
             switch (Funciones.Pagina)
             {
                 case "OPERARIOS":
                     Response.Redirect("~/Forms/wfrmOperarios.aspx");
                     break;
                 case "EQUIPOS":
-                    Resultado = icontrolador.ValidarTablaVacia("CMARCAS");
+                    Resultado = controlador.ValidarTablaVacia("CMARCAS");
                     if (Resultado == -1)
                     {
                         Funciones.MensajeError = Mensajes.Mensaje11;
@@ -164,7 +164,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                     Response.Redirect("~/Forms/wfrmListavalores.aspx");
                     break;
                 case "MANTENIMIENTO":
-                    Resultado = icontrolador.ValidarTablaVacia("CPROGRAMAREQUIPOS");
+                    Resultado = controlador.ValidarTablaVacia("CPROGRAMAREQUIPOS");
                     if (Resultado == -1) 
                     {
                       Funciones.MensajeError = Mensajes.Mensaje14;

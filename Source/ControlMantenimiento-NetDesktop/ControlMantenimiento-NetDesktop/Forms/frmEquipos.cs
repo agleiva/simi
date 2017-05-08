@@ -17,31 +17,31 @@ namespace ControlMantenimiento_NetDesktop
             this.cboLineas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboLineas_KeyPress);
         }
 
-        private IControlador icontrolador = Funciones.CrearControlador();
+        private Controlador _controlador = Funciones.CrearControlador();
         private bool Grabar;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
 
         private void frmEquipos_Load(object sender, EventArgs e)
         {            
-            icontrolador.ControlEquipos();
+            _controlador.ControlEquipos();
             lstEquipos.ValueMember = "CODIGO";
             lstEquipos.DisplayMember = "DETALLE";
-            lstEquipos.DataSource = icontrolador.ObtenerListaEquipos();
+            lstEquipos.DataSource = _controlador.ObtenerListaEquipos();
 
             cboLineas.ValueMember = "CODIGO";
             cboLineas.DisplayMember = "DETALLE";
-            cboLineas.DataSource = icontrolador.ObtenerListaLineas();
+            cboLineas.DataSource = _controlador.ObtenerListaLineas();
 
             cboMarcas.ValueMember = "CODIGO";
             cboMarcas.DisplayMember = "DETALLE";
-            cboMarcas.DataSource = icontrolador.ObtenerListaMarcas();
+            cboMarcas.DataSource = _controlador.ObtenerListaMarcas();
         }
 
         private void CargarListaSeleccion()
         {
             lstEquipos.ValueMember = "CODIGO";
             lstEquipos.DisplayMember = "DETALLE";
-            lstEquipos.DataSource = icontrolador.CargarListas("EQUIPOS");
+            lstEquipos.DataSource = _controlador.CargarListas("EQUIPOS");
         }
 
         private void txtNombreEquipo_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -129,7 +129,7 @@ namespace ControlMantenimiento_NetDesktop
                 equipo.Lubricacion = 0;
             }
 
-            Resultado = icontrolador.Guardar(equipo);
+            Resultado = _controlador.Guardar(equipo);
             if (Resultado == 0)
             {
                 MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -166,7 +166,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void LlenarCampos()
         {
-            Equipo equipo = (Equipo)icontrolador.ObtenerRegistro(lblCodigo.Text, "E");
+            Equipo equipo = (Equipo)_controlador.ObtenerRegistro(lblCodigo.Text, "E");
             if (equipo != null)
             {
                 btnEliminar.Enabled = true;
@@ -203,7 +203,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            icontrolador = null;
+            _controlador = null;
             this.Close();
             this.Dispose();
         }
@@ -212,7 +212,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if (icontrolador.EliminarRegistro(lblCodigo.Text, "EQUIPOS") == 0)
+                if (_controlador.EliminarRegistro(lblCodigo.Text, "EQUIPOS") == 0)
                 {
                     MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CargarListaSeleccion();

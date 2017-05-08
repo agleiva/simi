@@ -23,7 +23,7 @@ namespace ControlMantenimiento_NetDesktop
             this.txtObservaciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtObservaciones_KeyPress);
         }
 
-        private IControlador icontrolador = Funciones.CrearControlador();
+        private Controlador _controlador = Funciones.CrearControlador();
         private bool     Grabar;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
 
@@ -34,26 +34,26 @@ namespace ControlMantenimiento_NetDesktop
                 btnBuscar.Visible = true;
                 lbMensaje.Visible = true;
                 btnGrabar.Enabled = false;
-                icontrolador.ControlProgramacion("CONTROLPROGRAMACION");
+                _controlador.ControlProgramacion("CONTROLPROGRAMACION");
             }
             else 
             {
-                icontrolador.ControlProgramacion("CONTROLPROGRAMAREQUIPOS");               
+                _controlador.ControlProgramacion("CONTROLPROGRAMAREQUIPOS");               
             }
             cboEquipos.ValueMember = "CODIGO";
             cboEquipos.DisplayMember = "DETALLE";
-            cboEquipos.DataSource = icontrolador.ObtenerListaEquipos();
+            cboEquipos.DataSource = _controlador.ObtenerListaEquipos();
 
             cboOperarios.ValueMember = "CODIGO";
             cboOperarios.DisplayMember = "DETALLE";
-            cboOperarios.DataSource = icontrolador.ObtenerListaOperarios();
+            cboOperarios.DataSource = _controlador.ObtenerListaOperarios();
         }
 
         private void CargarEquipos()
         {   
            cboEquipos.ValueMember = "CODIGO";
            cboEquipos.DisplayMember = "DETALLE";
-           cboEquipos.DataSource = icontrolador.CargarListas(Funciones.Fuente);
+           cboEquipos.DataSource = _controlador.CargarListas(Funciones.Fuente);
         }
 
         private void cboEquipos_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -115,7 +115,7 @@ namespace ControlMantenimiento_NetDesktop
             mantenimiento.Fecha = Convert.ToDateTime(dtpFecha.Value);
             mantenimiento.Observaciones = txtObservaciones.Text;
             
-            Resultado = icontrolador.Guardar(mantenimiento, Accion);
+            Resultado = _controlador.Guardar(mantenimiento, Accion);
             if (Resultado == 0)
             {
                 MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -165,7 +165,7 @@ namespace ControlMantenimiento_NetDesktop
         
         private void LlenarCampos()
         {
-          Mantenimiento mantenimiento = (Mantenimiento)icontrolador.ObtenerRegistro(cboEquipos.SelectedValue.ToString(),"M");
+          Mantenimiento mantenimiento = (Mantenimiento)_controlador.ObtenerRegistro(cboEquipos.SelectedValue.ToString(),"M");
           if (mantenimiento != null)
           {
               btnEliminar.Enabled = true;
@@ -181,7 +181,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            icontrolador = null;
+            _controlador = null;
             this.Close();
             this.Dispose();
         }
@@ -191,7 +191,7 @@ namespace ControlMantenimiento_NetDesktop
             if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 
-                if (icontrolador.EliminarRegistro(cboEquipos.SelectedValue.ToString(), "MANTENIMIENTO")==0)
+                if (_controlador.EliminarRegistro(cboEquipos.SelectedValue.ToString(), "MANTENIMIENTO")==0)
                 {
                     MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

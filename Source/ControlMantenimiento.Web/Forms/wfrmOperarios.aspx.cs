@@ -157,8 +157,8 @@ namespace ControlMantenimiento_NetWeb.Forms
             }
             operario.Perfil = TipoPerfil;
             operario.Foto = LaFoto;
-            IControlador icontrolador = Funciones.CrearControlador();
-            Resultado = icontrolador.Guardar(operario, Accion);
+            var controlador = Funciones.CrearControlador();
+            Resultado = controlador.Guardar(operario, Accion);
             if (Resultado == 0)
             {
                operario = null;
@@ -184,8 +184,8 @@ namespace ControlMantenimiento_NetWeb.Forms
         
         private void LlenarCampos()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            Operario operario = (Operario) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"O");
+            var controlador = Funciones.CrearControlador();
+            Operario operario = (Operario) controlador.ObtenerRegistro(Funciones.ParametroBuscar,"O");
             if (operario != null)
             {
                 txtDocumento.Enabled = false;   

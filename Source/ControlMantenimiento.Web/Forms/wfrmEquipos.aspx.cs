@@ -10,16 +10,16 @@ namespace ControlMantenimiento_NetWeb.Forms
         
         protected void Page_Init(object sender, EventArgs e)
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            icontrolador.ControlEquipos();
+            var controlador = Funciones.CrearControlador();
+            controlador.ControlEquipos();
             dplMarcas.DataValueField = "CODIGO";
             dplMarcas.DataTextField = "DETALLE";
-            dplMarcas.DataSource = icontrolador.ObtenerListaMarcas();
+            dplMarcas.DataSource = controlador.ObtenerListaMarcas();
             dplMarcas.DataBind();
 
             dplLineas.DataValueField = "CODIGO";
             dplLineas.DataTextField = "DETALLE";
-            dplLineas.DataSource = icontrolador.ObtenerListaLineas();
+            dplLineas.DataSource = controlador.ObtenerListaLineas();
             dplLineas.DataBind();
 
             if (Funciones.ParametroBuscar != null)
@@ -38,8 +38,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            Equipo equipo = (Equipo)icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"E");
+            var controlador = Funciones.CrearControlador();
+            Equipo equipo = (Equipo)controlador.ObtenerRegistro(Funciones.ParametroBuscar,"E");
             if (equipo != null)
             {
                 lblCodigo.Text = equipo.CodigoEquipo.ToString();                
@@ -85,8 +85,8 @@ namespace ControlMantenimiento_NetWeb.Forms
             {
                 equipo.Lubricacion = 0;
             }
-            IControlador icontrolador = Funciones.CrearControlador();
-            Resultado = icontrolador.Guardar(equipo);
+            var controlador = Funciones.CrearControlador();
+            Resultado = controlador.Guardar(equipo);
             if (Resultado == 0)
             {
                 equipo = null;

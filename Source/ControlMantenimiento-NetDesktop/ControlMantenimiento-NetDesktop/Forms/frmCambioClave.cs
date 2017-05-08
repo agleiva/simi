@@ -16,14 +16,14 @@ namespace ControlMantenimiento_NetDesktop
             this.txtConfirmar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConfirmar_KeyPress);
         }
 
-        private IControlador icontrolador = Funciones.CrearControlador();
+        private Controlador _controlador = Funciones.CrearControlador();
         private bool Grabar;
         private Operario operario;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
 
         private void frmCambioClave_Load(object sender, EventArgs e)
         {           
-            operario = (Operario)icontrolador.ObtenerRegistro(BLL.Funciones.UsuarioConectado.ToString(),"O");                  
+            operario = (Operario)_controlador.ObtenerRegistro(BLL.Funciones.UsuarioConectado.ToString(),"O");                  
         }
 
         private void txtClave_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -133,7 +133,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void Guardar()
         {
-            if (icontrolador.GuardarCambioClave(txtClaveNueva.Text))
+            if (_controlador.GuardarCambioClave(txtClaveNueva.Text))
             {
                 MessageBox.Show(BLL.Mensajes.MensajeActualiza, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -158,7 +158,7 @@ namespace ControlMantenimiento_NetDesktop
               
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            icontrolador = null;
+            _controlador = null;
             this.Close();
             this.Dispose();
         }

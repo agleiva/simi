@@ -26,8 +26,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            ListaValores listavalores = (ListaValores) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"L");
+            var controlador = Funciones.CrearControlador();
+            ListaValores listavalores = (ListaValores) controlador.ObtenerRegistro(Funciones.ParametroBuscar,"L");
             if (listavalores != null)
             {
                 lblCodigo.Text = listavalores.Codigo.ToString();
@@ -65,8 +65,8 @@ namespace ControlMantenimiento_NetWeb.Forms
             listavalores.Nombre = txtNombre.Text;
             listavalores.Descripcion = txtDescripcion.Text;
             listavalores.Tipo = Funciones.Pagina;
-            IControlador icontrolador = Funciones.CrearControlador();
-            Resultado = icontrolador.Guardar(listavalores);
+            var controlador = Funciones.CrearControlador();
+            Resultado = controlador.Guardar(listavalores);
             if (Resultado == 0)
             {
                 listavalores = null;

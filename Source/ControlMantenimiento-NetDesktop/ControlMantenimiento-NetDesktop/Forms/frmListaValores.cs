@@ -16,7 +16,7 @@ namespace ControlMantenimiento_NetDesktop
             this.lstListaValores.Click += new System.EventHandler(this.lstListaValores_Click);
         }
 
-        private IControlador icontrolador = Funciones.CrearControlador();
+        private Controlador _controlador = Funciones.CrearControlador();
         private bool Grabar;
         private KeyPressEventArgs Tecla = new KeyPressEventArgs('\r'); // Send Enter
        
@@ -34,11 +34,11 @@ namespace ControlMantenimiento_NetDesktop
             
             if (BLL.Funciones.ValorTipo == "LINEAS")
             {
-                lstListaValores.DataSource = icontrolador.CargarListas("CLineas");
+                lstListaValores.DataSource = _controlador.CargarListas("CLineas");
             }
             else
             {
-                lstListaValores.DataSource = icontrolador.CargarListas("CMarcas");
+                lstListaValores.DataSource = _controlador.CargarListas("CMarcas");
             }
         }
 
@@ -88,7 +88,7 @@ namespace ControlMantenimiento_NetDesktop
             listavalores.Descripcion = txtDescripcion.Text;
             listavalores.Tipo = BLL.Funciones.ValorTipo;
             
-            Resultado = icontrolador.Guardar(listavalores);
+            Resultado = _controlador.Guardar(listavalores);
             if (Resultado == 0)
             {
                 MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -124,7 +124,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void LlenarCampos()
         {
-            ListaValores listavalores = (ListaValores) icontrolador.ObtenerRegistro(lblCodigo.Text,"L");
+            ListaValores listavalores = (ListaValores) _controlador.ObtenerRegistro(lblCodigo.Text,"L");
             if (listavalores != null)
             {
                 btnEliminar.Enabled = true;
@@ -151,7 +151,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            icontrolador = null;
+            _controlador = null;
             this.Close();
             this.Dispose();
         }
@@ -161,7 +161,7 @@ namespace ControlMantenimiento_NetDesktop
             int Resultado;
             if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                Resultado = icontrolador.EliminarRegistro(lblCodigo.Text, "LISTAVALORES");
+                Resultado = _controlador.EliminarRegistro(lblCodigo.Text, "LISTAVALORES");
                 if (Resultado == 0)
                 {
                     MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);

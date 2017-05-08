@@ -70,7 +70,7 @@ namespace ControlMantenimiento_NetDesktop
         private void SeleccionarOpcion(int Opcion)
         {
             int Resultado;
-            IControlador icontrolador = Funciones.CrearControlador();
+            var controlador = Funciones.CrearControlador();
             switch (Opcion)
             {
                 case 0:
@@ -78,7 +78,7 @@ namespace ControlMantenimiento_NetDesktop
                        Form_Operarios.ShowDialog(this);
                        break;
                 case 1:
-                       Resultado = icontrolador.ValidarTablaVacia("CMARCAS");
+                       Resultado = controlador.ValidarTablaVacia("CMARCAS");
                        if (Resultado == -1)
                        {
                            MessageBox.Show(BLL.Mensajes.Mensaje11, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -94,7 +94,7 @@ namespace ControlMantenimiento_NetDesktop
                        }                       
                        break;                
                 case 2:
-                       Resultado = icontrolador.ValidarTablaVacia("CPROGRAMAREQUIPOS");
+                       Resultado = controlador.ValidarTablaVacia("CPROGRAMAREQUIPOS");
                        if (Resultado == -1)
                        {
                            MessageBox.Show(BLL.Mensajes.Mensaje14, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -111,7 +111,7 @@ namespace ControlMantenimiento_NetDesktop
                        }                        
                        break;
                 case 3:
-                       Resultado = icontrolador.ValidarTablaVacia("CPROGRAMACION");
+                       Resultado = controlador.ValidarTablaVacia("CPROGRAMACION");
                        if (Resultado > 0)                      
                        {
                             ControlMantenimiento_NetDesktop.frmMantenimiento Form_Mantenimiento = new ControlMantenimiento_NetDesktop.frmMantenimiento();

@@ -29,7 +29,7 @@ namespace ControlMantenimiento_NetDesktop
             
         }
 
-        private IControlador icontrolador = Funciones.CrearControlador();
+        private Controlador _controlador = Funciones.CrearControlador();
         private bool   Grabar;
         private int    TipoPerfil;
         private string RutaFoto = "";
@@ -46,7 +46,7 @@ namespace ControlMantenimiento_NetDesktop
             lstOperarios.ValueMember = "CODIGO";        // Documento de Operario a relacionar en BD
             lstOperarios.DisplayMember = "DETALLE";     // Visualizar Nombres y Apellidos de Operario
             
-            lstOperarios.DataSource = icontrolador.CargarListas("OPERARIOS");            
+            lstOperarios.DataSource = _controlador.CargarListas("OPERARIOS");            
         }
 
         private void txtDocumento_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -315,7 +315,7 @@ namespace ControlMantenimiento_NetDesktop
             operario.Perfil = TipoPerfil;
             operario.Foto = RutaFoto;
 
-            if (icontrolador.Guardar(operario, Accion) == 0)
+            if (_controlador.Guardar(operario, Accion) == 0)
             {
                 MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarListaSeleccion();
@@ -366,7 +366,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void LlenarCampos()// Volcar datos de estrucura de Base da Datos sobre el Formulario actual
         {  
-            Operario operario = (Operario) icontrolador.ObtenerRegistro(txtDocumento.Text, "O"); 
+            Operario operario = (Operario) _controlador.ObtenerRegistro(txtDocumento.Text, "O"); 
             if (operario != null)
             {
                 txtDocumento.Enabled = false;
@@ -403,7 +403,7 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            icontrolador = null;
+            _controlador = null;
             this.Close();
             this.Dispose();
         }
@@ -413,7 +413,7 @@ namespace ControlMantenimiento_NetDesktop
             int Resultado;
             if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                Resultado = icontrolador.EliminarRegistro(txtDocumento.Text, "OPERARIOS");
+                Resultado = _controlador.EliminarRegistro(txtDocumento.Text, "OPERARIOS");
                 if (Resultado == 0)
                {
                    MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);

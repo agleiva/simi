@@ -12,8 +12,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-           operario = (Operario)icontrolador.ObtenerRegistro(BLL.Funciones.UsuarioConectado.ToString(),"O");
+            var controlador = Funciones.CrearControlador();
+           operario = (Operario)controlador.ObtenerRegistro(BLL.Funciones.UsuarioConectado.ToString(),"O");
         }
         
         protected void Page_Load(object sender, EventArgs e)
@@ -34,8 +34,8 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void Guardar()
         {
-            IControlador icontrolador = Funciones.CrearControlador();
-            if (icontrolador.GuardarCambioClave(txtClaveNueva.Text))
+            var controlador = Funciones.CrearControlador();
+            if (controlador.GuardarCambioClave(txtClaveNueva.Text))
             { 
                 Response.Redirect("~/Forms/wfrmRespuesta.aspx");
             }

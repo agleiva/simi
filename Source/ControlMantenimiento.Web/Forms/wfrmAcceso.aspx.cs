@@ -58,8 +58,8 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             if (Verificar())
             {
-                IControlador icontrolador = Funciones.CrearControlador();
-                Operario operario = icontrolador.ObtenerAcceso(txtDocumento.Text, txtClave.Text);
+                var controlador = Funciones.CrearControlador();
+                Operario operario = controlador.ObtenerAcceso(txtDocumento.Text, txtClave.Text);
                 if (operario == null)
                 {
                     txtMensajeError.Text = Mensajes.Mensaje2;

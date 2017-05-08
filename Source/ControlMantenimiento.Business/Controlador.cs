@@ -7,7 +7,7 @@ using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento_NetDesktop.BLL
 {
-    public class Controlador: IControlador
+    public class Controlador
     {
         private readonly IAccesoDatos _accesoDatos;
         private readonly double _usuarioConectado;
