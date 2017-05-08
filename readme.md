@@ -84,3 +84,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 29. Se corrigieron las referencias a los namespaces del model y se quitaron las referencias hacia la capa de arriba de la misma forma que en el punto 14, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.MySql`.
 
 30. Se agregó una referencia a la assembly `System.Data.OracleClient` del .NET Framework al proyecto `ControlMantenimiento.Data.Oracle`
+
+31. Se realizó el paso 28, pero sobre `ControlMantenimiento.Data.Oracle`.

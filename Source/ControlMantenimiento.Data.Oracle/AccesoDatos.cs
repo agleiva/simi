@@ -34,8 +34,8 @@ using System.Data.OracleClient;
 using System.Collections;
 using System.Configuration;
 using System.Data;
-using ControlMantenimiento_NetWeb.BO;
-using ControlMantenimiento_NetWeb.BLL;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 
 namespace ControlMantenimiento_NetWeb.DAL
 {
@@ -243,7 +243,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarOperario(Operario Operario, string Accion)
+        public static int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
         {
             try
             {
@@ -260,7 +260,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_CLAVE", Operario.clave);
                     Cmd.Parameters.AddWithValue("p_PERFIL", Operario.perfil);
                     Cmd.Parameters.AddWithValue("p_FOTO", Operario.foto);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -276,7 +276,7 @@ namespace ControlMantenimiento_NetWeb.DAL
 
         }
 
-        public static bool GuardarCambioClave(string NuevaClave)
+        public static bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
         {
             bool status = false;
             try
@@ -285,7 +285,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                 {
                     Cmd = new OracleCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
-                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_DOCUMENTO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_CLAVE", NuevaClave);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     Cn.Open();
@@ -339,7 +339,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarListaValores(ListaValores listavalores)
+        public static int GuardarListaValores(ListaValores listavalores, double usuarioConectado)
         {
             try
             {
@@ -352,7 +352,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_NOMBRE", listavalores.nombre);
                     Cmd.Parameters.AddWithValue("p_DESCRIPCION", listavalores.descripcion);
                     Cmd.Parameters.AddWithValue("p_TIPO", listavalores.tipo);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -407,7 +407,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarEquipo(Equipo equipo)
+        public static int GuardarEquipo(Equipo equipo, double usuarioConectado)
         {
             try
             {
@@ -421,7 +421,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_SERIE", equipo.serie);
                     Cmd.Parameters.AddWithValue("p_CODIGOLINEA", equipo.codigolinea);
                     Cmd.Parameters.AddWithValue("p_LUBRICACION", equipo.lubricacion);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
@@ -473,7 +473,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion)
+        public static int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
         {
             try
             {
@@ -486,7 +486,7 @@ namespace ControlMantenimiento_NetWeb.DAL
                     Cmd.Parameters.AddWithValue("p_DOCUMENTO", mantenimiento.documento);
                     Cmd.Parameters.AddWithValue("p_FECHA", mantenimiento.fecha);
                     Cmd.Parameters.AddWithValue("p_OBSERVACIONES", mantenimiento.observaciones);
-                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", BLL.Funciones.UsuarioConectado);
+                    Cmd.Parameters.AddWithValue("p_USUARIOCONECTADO", usuarioConectado);
                     Cmd.Parameters.AddWithValue("p_RESULTADO", OracleType.Int32).Direction = ParameterDirection.Output;
                     Cn.Open();
                     Cmd.ExecuteNonQuery();
