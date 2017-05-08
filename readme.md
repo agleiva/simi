@@ -90,3 +90,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 32. Se removieron referencias a incorrectas `System.Data.SqlClient` y se reemplazaron por las respectivas de Oracle.
 
 33. Se realizaron los mismos cambios que en el punto `13`, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.Oracle`
+
+#### en este punto toda la solución compila correctamente, pero el IDE muestra 24 warnings acerca de que `System.Data.OracleClient` está deprecado.
