@@ -218,7 +218,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             if (Verificar())
             {
-                Guardar((txtDocumento.Enabled) ? "I" : "U", (txtDocumento.Enabled) ? BLL.Mensajes.MensajeGraba : BLL.Mensajes.MensajeActualiza);
+                Guardar((txtDocumento.Enabled) ? "I" : "U", (txtDocumento.Enabled) ? Mensajes.MensajeGraba : Mensajes.MensajeActualiza);
             }  
         }
 

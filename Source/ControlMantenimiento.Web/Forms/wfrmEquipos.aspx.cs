@@ -64,7 +64,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             if (Verificar())
             {
-                Guardar(Convert.ToInt32(lblCodigo.Text), (lblCodigo.Text == "0") ? BLL.Mensajes.MensajeGraba : BLL.Mensajes.MensajeActualiza);
+                Guardar(Convert.ToInt32(lblCodigo.Text), (lblCodigo.Text == "0") ? Mensajes.MensajeGraba : Mensajes.MensajeActualiza);
             }
         }
 
