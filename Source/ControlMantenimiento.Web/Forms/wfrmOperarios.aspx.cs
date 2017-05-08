@@ -42,7 +42,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtDocumento.Focus();
                 return false;
             }
-            if (ControlMantenimiento.Business.Funciones.Validar_SoloNumeros(txtDocumento.Text))
+            if (txtDocumento.Text.ValidarSoloNumeros())
             {
                 txtMensajeError.Text = Mensajes.Mensaje25;
                 txtDocumento.Focus();
@@ -66,8 +66,8 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtNombres.Focus();
                 return false;
             }
-            txtNombres.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
-            if (ControlMantenimiento.Business.Funciones.Validar_SoloLetras(txtNombres.Text))
+            txtNombres.Text = txtNombres.Text.EliminarTabulador("1MAY");
+            if (txtNombres.Text.ValidarSoloLetras())
             {
                 txtMensajeError.Text = Mensajes.Mensaje23;
                 txtNombres.Focus();
@@ -80,8 +80,8 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtApellidos.Focus();
                 return false;
             }
-            txtApellidos.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
-            if (ControlMantenimiento.Business.Funciones.Validar_SoloLetras(txtApellidos.Text))
+            txtApellidos.Text = txtApellidos.Text.EliminarTabulador("1MAY");
+            if (txtApellidos.Text.ValidarSoloLetras())
             {
                 txtMensajeError.Text = Mensajes.Mensaje23;
                 txtApellidos.Focus();
@@ -91,7 +91,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             if (txtCorreo.Text.Length != 0)
             {
                 txtCorreo.Text = txtCorreo.Text.ToLower();
-                if (ControlMantenimiento.Business.Funciones.Validar_Correo(txtCorreo.Text))
+                if (txtCorreo.Text.ValidarEmail())
                 {
                     txtMensajeError.Text = Mensajes.Mensaje16;
                     txtCorreo.Focus();

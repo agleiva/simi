@@ -131,5 +131,7 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se cambió el namespace de la clase `Controlador` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
     * Se cambió el namespace de la clase `Mensajes` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
     * Se eliminó el método `AplicarTrim()` de la clase `Funciones` ya que el mismo no aporta ningún valor. Se reemplazaron todas las referencias a éste por el uso de `string.Trim()` directamente.
+    * Se cambiaron todos los métodos de la clase `Funciones` a [Extensiones](https://docs.microsoft.com/en-us/dotnet/articles/csharp/programming-guide/classes-and-structs/extension-methods) y se cambió el nombre de la clase a `Extensions`.
+    * Se cambiaron varios métodos de la clase `Extensions` a *Expresiones*, usando **LINQ** en lugar de bucles `for`.
 
 

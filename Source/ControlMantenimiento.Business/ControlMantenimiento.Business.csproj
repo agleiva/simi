@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="AccesoDatosFactory.cs" />
     <Compile Include="Controlador.cs" />
-    <Compile Include="Funciones.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Mensajes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

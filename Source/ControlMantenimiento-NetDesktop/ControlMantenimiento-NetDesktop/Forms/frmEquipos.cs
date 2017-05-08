@@ -58,7 +58,7 @@ namespace ControlMantenimiento_NetDesktop
                 }
                 else
                 {
-                    txtNombreEquipo.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtNombreEquipo.Text, "MAY");
+                    txtNombreEquipo.Text = txtNombreEquipo.Text.EliminarTabulador("MAY");
                     cboMarcas.Focus();
                 }
             }

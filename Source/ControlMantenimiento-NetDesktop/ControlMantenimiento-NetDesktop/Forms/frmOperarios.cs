@@ -111,7 +111,7 @@ namespace ControlMantenimiento_NetDesktop
                 }               
                 else
                 {
-                    txtNombres.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
+                    txtNombres.Text = txtNombres.Text.EliminarTabulador("1MAY");
                     errorPro.Clear();
                     txtApellidos.Focus();
                 }  
@@ -139,7 +139,7 @@ namespace ControlMantenimiento_NetDesktop
                 }
                 else
                 {
-                    txtApellidos.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
+                    txtApellidos.Text = txtApellidos.Text.EliminarTabulador("1MAY");
                     errorPro.Clear();
                     txtCorreo.Focus();
                 }
@@ -161,7 +161,7 @@ namespace ControlMantenimiento_NetDesktop
                 if (txtCorreo.Text.Length != 0)
                 {
                     txtCorreo.Text = txtCorreo.Text.ToLower();
-                    if (ControlMantenimiento.Business.Funciones.Validar_Correo(txtCorreo.Text))                    
+                    if (txtCorreo.Text.ValidarEmail())                    
                     {
                         Grabar = false;
                         MessageBox.Show(Mensajes.Mensaje16, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);

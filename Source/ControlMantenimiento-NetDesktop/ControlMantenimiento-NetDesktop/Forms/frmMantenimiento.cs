@@ -85,7 +85,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-               ControlMantenimiento.Business.Funciones.EliminarTabulador(txtObservaciones.Text, "");
+               txtObservaciones.Text.EliminarTabulador("");
                btnGrabar.Focus();
             }
         }

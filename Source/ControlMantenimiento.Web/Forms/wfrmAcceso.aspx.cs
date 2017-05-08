@@ -29,7 +29,7 @@ namespace ControlMantenimiento_NetWeb.Forms
                 txtDocumento.Focus();
                 return false;
             }
-            if (ControlMantenimiento.Business.Funciones.Validar_SoloNumeros(txtDocumento.Text))
+            if (txtDocumento.Text.ValidarSoloNumeros())
             {
                 /* Acá no es bueno mostrar mensaje de que están enviando caracteres
                   no numéricos en el documento, para evitar que programas
