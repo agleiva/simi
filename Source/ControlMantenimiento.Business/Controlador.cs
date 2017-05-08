@@ -21,50 +21,23 @@ namespace ControlMantenimiento_NetDesktop.BLL
         #region IControlador Members
 
        
-        public ArrayList CargarListas(string tabla)
-        {
-            return _accesoDatos.CargarListas(tabla);
-        }
+        public ArrayList CargarListas(string tabla) => _accesoDatos.CargarListas(tabla);
 
-        public ArrayList CargarListas(string tabla, string condicion)
-        {
-            return _accesoDatos.CargarListas(tabla, condicion);
-        }
+        public ArrayList CargarListas(string tabla, string condicion) => _accesoDatos.CargarListas(tabla, condicion);
 
-        public void ControlEquipos()
-        {
-            _accesoDatos.ControlEquipos();
-        }
+        public void ControlEquipos() => _accesoDatos.ControlEquipos();
 
-        public void ControlProgramacion(string tabla)
-        {
-            _accesoDatos.ControlProgramacion(tabla);
-        }
+        public void ControlProgramacion(string tabla) => _accesoDatos.ControlProgramacion(tabla);
 
-        public ArrayList ObtenerListaEquipos()
-        {
-            return _accesoDatos.ArlListEquipo;
-        }
+        public ArrayList ObtenerListaEquipos() => _accesoDatos.ArlListEquipo;
 
-        public ArrayList ObtenerListaLineas()
-        {
-            return _accesoDatos.ArlListLinea;
-        }
+        public ArrayList ObtenerListaLineas() => _accesoDatos.ArlListLinea;
 
-        public ArrayList ObtenerListaMarcas()
-        {
-            return _accesoDatos.ArlListMarca;
-        }
+        public ArrayList ObtenerListaMarcas() => _accesoDatos.ArlListMarca;
 
-        public ArrayList ObtenerListaOperarios()
-        {
-            return _accesoDatos.ArlListOperarios;
-        }
+        public ArrayList ObtenerListaOperarios() => _accesoDatos.ArlListOperarios;
 
-        public int ValidarTablaVacia(string tabla)
-        {
-            return _accesoDatos.ValidarTablaVacia(tabla);
-        }
+        public int ValidarTablaVacia(string tabla) => _accesoDatos.ValidarTablaVacia(tabla);
 
         public Operario ObtenerAcceso(string datoBuscar, string clave)
         {
@@ -129,17 +102,10 @@ namespace ControlMantenimiento_NetDesktop.BLL
             return status;
         }
 
-        public bool GuardarCambioClave(string claveNueva)
-        {
-            return _accesoDatos.GuardarCambioClave(claveNueva, _usuarioConectado);
-        }
+        public bool GuardarCambioClave(string claveNueva) => _accesoDatos.GuardarCambioClave(claveNueva, _usuarioConectado);
 
         // Eliminar Registro
-        public int EliminarRegistro(string datoEliminar, string tabla)
-        {
-            return _accesoDatos.EliminarRegistro(datoEliminar, tabla);
-        }
-
+        public int EliminarRegistro(string datoEliminar, string tabla) => _accesoDatos.EliminarRegistro(datoEliminar, tabla);
 
         #endregion
 
