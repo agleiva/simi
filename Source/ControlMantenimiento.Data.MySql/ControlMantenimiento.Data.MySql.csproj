@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlMantenimiento.Data\ControlMantenimiento.Data.csproj">
+      <Project>{427ccd41-d5ea-4dfd-81d9-1eb42bb7ff7c}</Project>
+      <Name>ControlMantenimiento.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlMantenimiento.Model\ControlMantenimiento.Model.csproj">
       <Project>{bf4f6d55-d3b6-4aa8-aed8-771a94aebb67}</Project>
       <Name>ControlMantenimiento.Model</Name>
