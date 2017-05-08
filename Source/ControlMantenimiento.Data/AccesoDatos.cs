@@ -30,31 +30,6 @@ namespace ControlMantenimiento.Data
         public ArrayList ArlListMarca = new ArrayList();
         public ArrayList ArlListOperarios = new ArrayList();
 
-        public void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
-        {
-            try
-            {
-                _connection = new SqlConnection(_connectionString);
-                _cmd = new SqlCommand("spr_CBuscarRegistro", _connection);
-                _cmd.CommandType = CommandType.StoredProcedure;
-                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
-                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
-                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
-                _connection.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public SqlDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
-        {
-            IniciarBusqueda(tabla, datoBuscar, condicion);
-            _dataReader = _cmd.ExecuteReader();
-            return _dataReader;
-        }
-
         public int ValidarTablaVacia(string tabla)
         {
             try
@@ -549,7 +524,32 @@ namespace ControlMantenimiento.Data
             }
         }
 
-        public void LiberarRecursos()
+        private SqlDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
+        {
+            IniciarBusqueda(tabla, datoBuscar, condicion);
+            _dataReader = _cmd.ExecuteReader();
+            return _dataReader;
+        }
+
+        private void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
+        {
+            try
+            {
+                _connection = new SqlConnection(_connectionString);
+                _cmd = new SqlCommand("spr_CBuscarRegistro", _connection);
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
+                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
+                _connection.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void LiberarRecursos()
         {
             _cmd.Dispose();
             if (_connection != null)

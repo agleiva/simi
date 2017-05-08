@@ -30,32 +30,7 @@ namespace ControlMantenimiento.Data.MySql
         public ArrayList ArlListMarca = new ArrayList();
         public ArrayList ArlListOperarios = new ArrayList();
 
-        public void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
-        {
-            try
-            {
-                _connection = new MySqlConnection(_connectionString);                
-                _cmd = new MySqlCommand("spr_CBuscarRegistro", _connection);
-                _cmd.CommandType = CommandType.StoredProcedure;
-                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
-                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
-                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
-                _connection.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public MySqlDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
-        {
-            IniciarBusqueda(tabla, datoBuscar, condicion);
-            _dataReader = _cmd.ExecuteReader();
-            return _dataReader;
-        }
-
-         public int ValidarTablaVacia(string tabla)
+        public int ValidarTablaVacia(string tabla)
         {
             try
             {
@@ -523,7 +498,32 @@ namespace ControlMantenimiento.Data.MySql
             }
         }
 
-        public void LiberarRecursos()
+        private MySqlDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
+        {
+            IniciarBusqueda(tabla, datoBuscar, condicion);
+            _dataReader = _cmd.ExecuteReader();
+            return _dataReader;
+        }
+
+        private void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
+        {
+            try
+            {
+                _connection = new MySqlConnection(_connectionString);
+                _cmd = new MySqlCommand("spr_CBuscarRegistro", _connection);
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
+                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
+                _connection.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void LiberarRecursos()
         {
             _cmd.Dispose();
             if (_connection != null)

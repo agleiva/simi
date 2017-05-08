@@ -54,33 +54,6 @@ namespace ControlMantenimiento.Data.Oracle
         public ArrayList ArlListMarca = new ArrayList();
         public ArrayList ArlListOperarios = new ArrayList();
 
-       
-        public void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
-        {
-            try
-            {
-                _connection = new OracleConnection(_connectionString);
-                _cmd = new OracleCommand("spr_CBuscarRegistro", _connection);
-                _cmd.CommandType = CommandType.StoredProcedure;
-                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
-                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
-                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
-                _cmd.Parameters.Add("Out_Data", OracleType.Cursor).Direction = ParameterDirection.Output;                  
-                _connection.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public OracleDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
-        {
-            IniciarBusqueda(tabla, datoBuscar, condicion);
-            _dataReader = _cmd.ExecuteReader();
-            return _dataReader; 
-        }
-     
         public int ValidarTablaVacia(string tabla)
         {
             try
@@ -534,7 +507,33 @@ namespace ControlMantenimiento.Data.Oracle
             }
         }
 
-        public void LiberarRecursos()
+        private OracleDataReader BuscarRegistro(string tabla, string datoBuscar, string condicion)
+        {
+            IniciarBusqueda(tabla, datoBuscar, condicion);
+            _dataReader = _cmd.ExecuteReader();
+            return _dataReader;
+        }
+
+        private void IniciarBusqueda(string tabla, string datoBuscar, string condicion)
+        {
+            try
+            {
+                _connection = new OracleConnection(_connectionString);
+                _cmd = new OracleCommand("spr_CBuscarRegistro", _connection);
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.Parameters.AddWithValue("p_TABLA", tabla);
+                _cmd.Parameters.AddWithValue("p_DATOBUSCAR", datoBuscar);
+                _cmd.Parameters.AddWithValue("p_CONDICION", condicion);
+                _cmd.Parameters.Add("Out_Data", OracleType.Cursor).Direction = ParameterDirection.Output;
+                _connection.Open();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void LiberarRecursos()
         {
             if (!_dataReader.IsClosed) _dataReader.Close();
             _cmd.Dispose();
