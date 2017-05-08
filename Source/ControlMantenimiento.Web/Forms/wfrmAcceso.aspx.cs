@@ -1,8 +1,7 @@
 ﻿using System;
-using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento.Business;
 using ControlMantenimiento.Model;
-using ControlMantenimiento_NetWeb.BLL;
-
+using Funciones = ControlMantenimiento_NetWeb.BLL.Funciones;
 
 
 namespace ControlMantenimiento_NetWeb.Forms

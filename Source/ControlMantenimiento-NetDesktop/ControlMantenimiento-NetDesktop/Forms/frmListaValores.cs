@@ -50,9 +50,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtNombre.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtNombre.Focus();
-                    errorPro.SetError(txtNombre, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtNombre, Mensajes.MensajeCampoRequerido);
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace ControlMantenimiento_NetDesktop
             txtNombre_KeyPress(btnGrabar, Tecla);
             if (Grabar)
             {  
-               Guardar(Convert.ToInt32(lblCodigo.Text),  (lblCodigo.Text == "0") ? BLL.Mensajes.MensajeGraba : BLL.Mensajes.MensajeActualiza);               
+               Guardar(Convert.ToInt32(lblCodigo.Text),  (lblCodigo.Text == "0") ? Mensajes.MensajeGraba : Mensajes.MensajeActualiza);               
             }
         }
 
@@ -92,19 +92,19 @@ namespace ControlMantenimiento_NetDesktop
             Resultado = _controlador.Guardar(listavalores);
             if (Resultado == 0)
             {
-                MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Mensaje, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarListaSeleccion();
                 Limpiar();
             }
             else if (Resultado == 1)
             {
-              MessageBox.Show(BLL.Mensajes.Mensaje8, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+              MessageBox.Show(Mensajes.Mensaje8, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
               txtNombre.Focus();
-              errorPro.SetError(txtNombre, BLL.Mensajes.Mensaje8);
+              errorPro.SetError(txtNombre, Mensajes.Mensaje8);
             }
             else
             {
-                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
         }
 
@@ -160,22 +160,22 @@ namespace ControlMantenimiento_NetDesktop
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             int Resultado;
-            if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (MessageBox.Show(Mensajes.MensajeConfirmarBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 Resultado = _controlador.EliminarRegistro(lblCodigo.Text, "LISTAVALORES");
                 if (Resultado == 0)
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Mensajes.MensajeBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CargarListaSeleccion();
                     Limpiar();
                 }
                 else if (Resultado == 1)
                 {
-                    MessageBox.Show(BLL.Mensajes.Mensaje9, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje9, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }

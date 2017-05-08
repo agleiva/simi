@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento.Business;
+using Funciones = ControlMantenimiento_NetDesktop.BLL.Funciones;
 
 namespace ControlMantenimiento_NetDesktop
 {
@@ -81,11 +82,11 @@ namespace ControlMantenimiento_NetDesktop
                        Resultado = controlador.ValidarTablaVacia("CMARCAS");
                        if (Resultado == -1)
                        {
-                           MessageBox.Show(BLL.Mensajes.Mensaje11, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           MessageBox.Show(Mensajes.Mensaje11, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                        }
                        else if (Resultado == -2)
                        {
-                           MessageBox.Show(BLL.Mensajes.Mensaje12, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           MessageBox.Show(Mensajes.Mensaje12, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                        }
                        else
                        {
@@ -97,11 +98,11 @@ namespace ControlMantenimiento_NetDesktop
                        Resultado = controlador.ValidarTablaVacia("CPROGRAMAREQUIPOS");
                        if (Resultado == -1)
                        {
-                           MessageBox.Show(BLL.Mensajes.Mensaje14, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           MessageBox.Show(Mensajes.Mensaje14, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                        }
                        else if (Resultado == -2)
                        {
-                           MessageBox.Show(BLL.Mensajes.Mensaje13, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           MessageBox.Show(Mensajes.Mensaje13, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                        }
                        else
                        {
@@ -120,7 +121,7 @@ namespace ControlMantenimiento_NetDesktop
                        }    
                        else
                        {
-                            MessageBox.Show(BLL.Mensajes.Mensaje14, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Mensajes.Mensaje14, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                        }
                        break;
                 case 4:

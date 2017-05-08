@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using ControlMantenimiento.Business;
 using ControlMantenimiento.Model;
-using ControlMantenimiento_NetDesktop.BLL;
+using Funciones = ControlMantenimiento_NetDesktop.BLL.Funciones;
 
 
 namespace ControlMantenimiento_NetDesktop
@@ -29,9 +30,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtDocumento.Text))
                 {
                     Ingresar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtDocumento.Focus();
-                    errorPro.SetError(txtDocumento, ControlMantenimiento_NetDesktop.BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtDocumento, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtDocumento.Text.Length < 6)
                 {
@@ -60,9 +61,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Ingresar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClave.Focus();
-                    errorPro.SetError(txtClave, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtClave, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtDocumento.Text.Length < 6)
                 {
@@ -103,9 +104,9 @@ namespace ControlMantenimiento_NetDesktop
                   }
                   else
                   {                      
-                      MessageBox.Show(BLL.Mensajes.Mensaje2, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      MessageBox.Show(Mensajes.Mensaje2, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                       txtClave.Focus();
-                      errorPro.SetError(txtClave, BLL.Mensajes.Mensaje2);                      
+                      errorPro.SetError(txtClave, Mensajes.Mensaje2);                      
                   }
               }
           }

@@ -98,11 +98,11 @@ namespace ControlMantenimiento_NetDesktop
             {
                 if (Funciones.Fuente == "CPROGRAMAREQUIPOS")
                 {
-                    Guardar("I", BLL.Mensajes.MensajeGraba);
+                    Guardar("I", Mensajes.MensajeGraba);
                 }
                 else
                 {
-                    Guardar("U", BLL.Mensajes.MensajeActualiza);
+                    Guardar("U", Mensajes.MensajeActualiza);
                 }
             }            
         }
@@ -119,19 +119,19 @@ namespace ControlMantenimiento_NetDesktop
             Resultado = _controlador.Guardar(mantenimiento, Accion);
             if (Resultado == 0)
             {
-                MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Mensaje, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarEquipos();
                 Limpiar();
             }
             else if (Resultado == 1)
             {
-                MessageBox.Show(BLL.Mensajes.Mensaje10, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.Mensaje10, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboOperarios.Focus();
-                errorPro.SetError(cboOperarios, BLL.Mensajes.Mensaje10);
+                errorPro.SetError(cboOperarios, Mensajes.Mensaje10);
             }
             else
             {
-                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
             if (cboEquipos.Items.Count <= 0)
@@ -189,16 +189,16 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (MessageBox.Show(Mensajes.MensajeConfirmarBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 
                 if (_controlador.EliminarRegistro(cboEquipos.SelectedValue.ToString(), "MANTENIMIENTO")==0)
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Mensajes.MensajeBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Limpiar();
                 CargarEquipos();
@@ -215,9 +215,9 @@ namespace ControlMantenimiento_NetDesktop
             if (dtpFecha.Value < DateTime.Now.Date)
             {
                 Grabar = false;
-                MessageBox.Show(BLL.Mensajes.Mensaje27, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.Mensaje27, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtpFecha.Focus();
-                errorPro.SetError(dtpFecha, BLL.Mensajes.Mensaje27);
+                errorPro.SetError(dtpFecha, Mensajes.Mensaje27);
             }
             else
             {

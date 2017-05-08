@@ -35,16 +35,16 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClave.Focus();
-                    errorPro.SetError(txtClave, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtClave, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtClave.Text != operario.Clave) // Clave debe ser igual a la hallada en BD
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje3, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje3, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClave.Focus();
-                    errorPro.SetError(txtClave, BLL.Mensajes.Mensaje3);
+                    errorPro.SetError(txtClave, Mensajes.Mensaje3);
                 }
                 else
                 {
@@ -61,23 +61,23 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtClaveNueva.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClaveNueva.Focus();
-                    errorPro.SetError(txtClaveNueva, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtClaveNueva, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtClaveNueva.Text == txtClave.Text) // Clave Nueva debe ser diferente de la actual
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje4, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje4, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClaveNueva.Focus();
-                    errorPro.SetError(txtClaveNueva, BLL.Mensajes.Mensaje4);
+                    errorPro.SetError(txtClaveNueva, Mensajes.Mensaje4);
                 }
                 else if (txtClaveNueva.Text.Length < 6)
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje21, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje21, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClaveNueva.Focus();
-                    errorPro.SetError(txtClaveNueva, BLL.Mensajes.Mensaje21);
+                    errorPro.SetError(txtClaveNueva, Mensajes.Mensaje21);
                 }
                 else
                 {
@@ -95,16 +95,16 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtConfirmar.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtConfirmar.Focus();
-                    errorPro.SetError(txtConfirmar, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtConfirmar, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtConfirmar.Text != txtClaveNueva.Text) // Debe confirmar la clave y debe ser igual a Clave Nueva
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje5, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje5, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtConfirmar.Focus();
-                    errorPro.SetError(txtConfirmar, BLL.Mensajes.Mensaje5);
+                    errorPro.SetError(txtConfirmar, Mensajes.Mensaje5);
                 }
                 else
                 {
@@ -136,11 +136,11 @@ namespace ControlMantenimiento_NetDesktop
         {
             if (_controlador.GuardarCambioClave(txtClaveNueva.Text))
             {
-                MessageBox.Show(BLL.Mensajes.MensajeActualiza, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Mensajes.MensajeActualiza, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {                
-                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
             btnSalir.PerformClick(); 
         }

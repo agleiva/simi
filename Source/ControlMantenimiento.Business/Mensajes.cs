@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ControlMantenimiento_NetDesktop.BLL
+namespace ControlMantenimiento.Business
 {
     public class Mensajes // Coleccion de mensajes lanzados por el sistema
     {

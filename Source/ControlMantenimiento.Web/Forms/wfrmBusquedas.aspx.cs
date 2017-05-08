@@ -1,8 +1,8 @@
 ﻿using System;
-using ControlMantenimiento_NetWeb.BLL;
 using ControlMantenimiento_NetWeb.Forms;
 using System.Web.UI.WebControls;
-using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento.Business;
+using Funciones = ControlMantenimiento_NetWeb.BLL.Funciones;
 
 namespace ControlMantenimiento_NetWeb.Forms
 {

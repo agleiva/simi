@@ -52,9 +52,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtNombreEquipo.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtNombreEquipo.Focus();
-                    errorPro.SetError(txtNombreEquipo, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtNombreEquipo, Mensajes.MensajeCampoRequerido);
                 }
                 else
                 {
@@ -71,9 +71,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtSerie.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtSerie.Focus();
-                    errorPro.SetError(txtSerie, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtSerie, Mensajes.MensajeCampoRequerido);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace ControlMantenimiento_NetDesktop
                 txtSerie_KeyPress(btnGrabar, Tecla);
                 if (Grabar)
                 {
-                    Guardar(Convert.ToInt32(lblCodigo.Text), (lblCodigo.Text == "0") ? BLL.Mensajes.MensajeGraba : BLL.Mensajes.MensajeActualiza);                  
+                    Guardar(Convert.ToInt32(lblCodigo.Text), (lblCodigo.Text == "0") ? Mensajes.MensajeGraba : Mensajes.MensajeActualiza);                  
                 }
             }
         }
@@ -133,19 +133,19 @@ namespace ControlMantenimiento_NetDesktop
             Resultado = _controlador.Guardar(equipo);
             if (Resultado == 0)
             {
-                MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Mensaje, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarListaSeleccion();
                 Limpiar();
             }
             else if (Resultado == 1)
             {
-                MessageBox.Show(BLL.Mensajes.Mensaje7, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.Mensaje7, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSerie.Focus();
-                errorPro.SetError(txtSerie, BLL.Mensajes.Mensaje7);
+                errorPro.SetError(txtSerie, Mensajes.Mensaje7);
             }
             else
             {
-                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
         }
 
@@ -211,17 +211,17 @@ namespace ControlMantenimiento_NetDesktop
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (MessageBox.Show(Mensajes.MensajeConfirmarBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 if (_controlador.EliminarRegistro(lblCodigo.Text, "EQUIPOS") == 0)
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Mensajes.MensajeBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CargarListaSeleccion();
                     Limpiar();
                 }
                 else
                 {
-                    MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -57,23 +57,23 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtDocumento.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtDocumento.Focus();
-                    errorPro.SetError(txtDocumento, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtDocumento, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtDocumento.Text.Length < 6)
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje15, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje15, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtDocumento.Focus();
-                    errorPro.SetError(txtDocumento, BLL.Mensajes.Mensaje15);
+                    errorPro.SetError(txtDocumento, Mensajes.Mensaje15);
                 }
                 else if (txtDocumento.Text.Substring(0, 1) == "0")
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje6, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje6, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtDocumento.Focus();
-                    errorPro.SetError(txtDocumento, BLL.Mensajes.Mensaje6);
+                    errorPro.SetError(txtDocumento, Mensajes.Mensaje6);
                 }
                 else
                 {
@@ -105,9 +105,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtNombres.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtNombres.Focus();
-                    errorPro.SetError(txtNombres, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtNombres, Mensajes.MensajeCampoRequerido);
                 }               
                 else
                 {
@@ -133,9 +133,9 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtApellidos.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtApellidos.Focus();
-                    errorPro.SetError(txtApellidos, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtApellidos, Mensajes.MensajeCampoRequerido);
                 }
                 else
                 {
@@ -164,9 +164,9 @@ namespace ControlMantenimiento_NetDesktop
                     if (ControlMantenimiento.Business.Funciones.Validar_Correo(txtCorreo.Text))                    
                     {
                         Grabar = false;
-                        MessageBox.Show(BLL.Mensajes.Mensaje16, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Mensajes.Mensaje16, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         txtCorreo.Focus();
-                        errorPro.SetError(txtCorreo, BLL.Mensajes.Mensaje16);
+                        errorPro.SetError(txtCorreo, Mensajes.Mensaje16);
                     }
                     else
                     {
@@ -191,25 +191,25 @@ namespace ControlMantenimiento_NetDesktop
                     if (string.IsNullOrEmpty(txtTelefono.Text))
                     {
                         Grabar = false;
-                        MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         txtTelefono.Focus();
-                        errorPro.SetError(txtTelefono, BLL.Mensajes.MensajeCampoRequerido);
+                        errorPro.SetError(txtTelefono, Mensajes.MensajeCampoRequerido);
                     }
                     else
                     {
                         if ((txtTelefono.Text.Length != 7) && (txtTelefono.Text.Length != 10))
                         {
                             Grabar = false;
-                            MessageBox.Show(BLL.Mensajes.Mensaje17, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Mensajes.Mensaje17, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             txtTelefono.Focus();
-                            errorPro.SetError(txtTelefono, BLL.Mensajes.Mensaje17);
+                            errorPro.SetError(txtTelefono, Mensajes.Mensaje17);
                         }
                         else if (txtTelefono.Text.Substring(0, 1) == "0")
                         {
                             Grabar = false;
-                            MessageBox.Show(BLL.Mensajes.Mensaje6, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Mensajes.Mensaje6, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             txtTelefono.Focus();
-                            errorPro.SetError(txtTelefono, BLL.Mensajes.Mensaje6);
+                            errorPro.SetError(txtTelefono, Mensajes.Mensaje6);
                         }
                         else
                         {
@@ -236,16 +236,16 @@ namespace ControlMantenimiento_NetDesktop
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.MensajeCampoRequerido, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeCampoRequerido, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClave.Focus();
-                    errorPro.SetError(txtClave, BLL.Mensajes.MensajeCampoRequerido);
+                    errorPro.SetError(txtClave, Mensajes.MensajeCampoRequerido);
                 }
                 else if (txtClave.Text.Length < 6)
                 {
                     Grabar = false;
-                    MessageBox.Show(BLL.Mensajes.Mensaje21, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.Mensaje21, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtClave.Focus();
-                    errorPro.SetError(txtClave, BLL.Mensajes.Mensaje21);
+                    errorPro.SetError(txtClave, Mensajes.Mensaje21);
                 }
                 else
                 {
@@ -284,7 +284,7 @@ namespace ControlMantenimiento_NetDesktop
                             txtClave_KeyPress(btnGrabar, Tecla);
                             if (Grabar)
                             {
-                                Guardar((txtDocumento.Enabled) ? "I" : "U", (txtDocumento.Enabled) ? BLL.Mensajes.MensajeGraba : BLL.Mensajes.MensajeActualiza);
+                                Guardar((txtDocumento.Enabled) ? "I" : "U", (txtDocumento.Enabled) ? Mensajes.MensajeGraba : Mensajes.MensajeActualiza);
                             }
                         }
                       }
@@ -318,12 +318,12 @@ namespace ControlMantenimiento_NetDesktop
 
             if (_controlador.Guardar(operario, Accion) == 0)
             {
-                MessageBox.Show(Mensaje, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Mensaje, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarListaSeleccion();
             }
             else
             {
-                MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Limpiar();
         }
@@ -356,7 +356,7 @@ namespace ControlMantenimiento_NetDesktop
                 RutaFoto = oFD.FileName;                
                 if ((RutaFoto.Length)>50)
                 {
-                  MessageBox.Show(BLL.Mensajes.Mensaje28, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);                
+                  MessageBox.Show(Mensajes.Mensaje28, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);                
                 }
                 else
                 {
@@ -395,7 +395,7 @@ namespace ControlMantenimiento_NetDesktop
                     }
                     catch
                     {
-                        MessageBox.Show(BLL.Mensajes.Mensaje24, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Mensajes.Mensaje24, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }                
             }
@@ -412,22 +412,22 @@ namespace ControlMantenimiento_NetDesktop
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             int Resultado;
-            if (MessageBox.Show(BLL.Mensajes.MensajeConfirmarBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (MessageBox.Show(Mensajes.MensajeConfirmarBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
                 Resultado = _controlador.EliminarRegistro(txtDocumento.Text, "OPERARIOS");
                 if (Resultado == 0)
                {
-                   MessageBox.Show(BLL.Mensajes.MensajeBorrado, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   MessageBox.Show(Mensajes.MensajeBorrado, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                    CargarListaSeleccion();
                    Limpiar();
                }
                 else if (Resultado == 1)
                {
-                  MessageBox.Show(BLL.Mensajes.Mensaje20, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  MessageBox.Show(Mensajes.Mensaje20, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                }
                else
                {
-                    MessageBox.Show(BLL.Mensajes.MensajeErrorBD, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Mensajes.MensajeErrorBD, Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
                }                
                
             }

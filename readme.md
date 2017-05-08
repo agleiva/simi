@@ -129,4 +129,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
     * Se cambian varios métodos de la clase `Controlador` a [*Expresiones*](http://www.kunal-chowdhury.com/2014/12/csharp-6-expression-bodied-method.html#OdtlcoXvsRZCmwWd.97), revelando que la gran mayoría de los métodos de esta clase (excepto 4 métodos puntuales) son solo una indirección a la capa de acceso a datos.
     * Se eliminó la interfaz `IControlador` ya que no provee ningún valor. Existe solo una implementación de la misma y no hay razón para creer que podría existir otra. Se cambiaron las referencias a esta interfaz en toda la solución para usar directamente la clase `Controlador`.
     * Se cambió el namespace de la clase `Controlador` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
+    * Se cambió el namespace de la clase `Mensajes` de `ControlMantenimiento_NetDesktop.BLL` a `ControlMantenimiento.Business`.
+
 
