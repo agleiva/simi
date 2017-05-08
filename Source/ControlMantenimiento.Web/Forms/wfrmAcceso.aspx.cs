@@ -1,4 +1,6 @@
 ﻿using System;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using ControlMantenimiento_NetWeb.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
@@ -57,7 +59,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         {
             if (Verificar())
             {
-                IControlador icontrolador = new Controlador();
+                IControlador icontrolador = Funciones.CrearControlador();
                 Operario operario = icontrolador.ObtenerAcceso(txtDocumento.Text, txtClave.Text);
                 if (operario == null)
                 {

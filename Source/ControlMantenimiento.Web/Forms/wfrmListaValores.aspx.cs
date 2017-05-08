@@ -1,5 +1,6 @@
 ﻿using System;
-using ControlMantenimiento_NetWeb.BO;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
 namespace ControlMantenimiento_NetWeb.Forms
@@ -25,7 +26,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = new Controlador();           
+            IControlador icontrolador = Funciones.CrearControlador();
             ListaValores listavalores = (ListaValores) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"L");
             if (listavalores != null)
             {
@@ -64,7 +65,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             listavalores.nombre = txtNombre.Text;
             listavalores.descripcion = txtDescripcion.Text;
             listavalores.tipo = Funciones.Pagina;
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(listavalores);
             if (Resultado == 0)
             {

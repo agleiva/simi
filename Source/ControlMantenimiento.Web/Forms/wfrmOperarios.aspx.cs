@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using ControlMantenimiento_NetWeb.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
@@ -156,7 +158,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             }
             operario.perfil = TipoPerfil;
             operario.foto = LaFoto;
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(operario, Accion);
             if (Resultado == 0)
             {
@@ -183,7 +185,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         
         private void LlenarCampos()
         {
-            IControlador icontrolador = new Controlador();           
+            IControlador icontrolador = Funciones.CrearControlador();
             Operario operario = (Operario) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"O");
             if (operario != null)
             {

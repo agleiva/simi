@@ -1,4 +1,6 @@
 ﻿using System;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using ControlMantenimiento_NetWeb.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
@@ -9,7 +11,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             if (Funciones.ParametroBuscar != null)
             {
                 icontrolador.ControlProgramacion("CONTROLPROGRAMACION");            
@@ -38,7 +40,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Mantenimiento mantenimiento =(Mantenimiento) icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"M");
             if (mantenimiento != null)
             {
@@ -95,7 +97,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             {
               Accion = "I";
             }
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(mantenimiento, Accion);
             if (Resultado == 0)
             {

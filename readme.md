@@ -57,3 +57,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 18. Se convirtió la clase `Mensajes` del proyecto `ControlMantenimiento.Business` en `public` para que pueda ser accedida desde los demás proyectos.
 
 19. Se corrigieron todas las referencias a `Funciones` en el proyecto desktop. El proyecto desktop ahora compila correctamente.
+
+20. Se implementó un método estático igual al del punto 17 en el proyecto Web se usó el mismo para instanciar la clase `Controlador` en los casos necesarios.

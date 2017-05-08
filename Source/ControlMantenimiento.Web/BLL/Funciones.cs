@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.DAL;
 
 namespace ControlMantenimiento_NetWeb.BLL
 {
@@ -14,12 +17,13 @@ namespace ControlMantenimiento_NetWeb.BLL
         public static string NombreUsuario;
         public static string MensajeError;
 
-       
-        
 
-        
-        
-        
+        public static Controlador CrearControlador()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["Conexion"].ToString();
+            return new Controlador(new AccesoDatos(connectionString), UsuarioConectado);
+        }
+
 
         // Funcion para limpiar los controles en un formulario (Solo TextBox)
         public static void LimpiarForma(Control strWebForm)    

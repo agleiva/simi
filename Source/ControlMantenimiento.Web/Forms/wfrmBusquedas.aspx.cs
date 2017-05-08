@@ -2,6 +2,7 @@
 using ControlMantenimiento_NetWeb.BLL;
 using ControlMantenimiento_NetWeb.Forms;
 using System.Web.UI.WebControls;
+using ControlMantenimiento_NetDesktop.BLL;
 
 namespace ControlMantenimiento_NetWeb.Forms
 {
@@ -27,7 +28,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void BindRepeater()
         {
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Repeater1.DataSource = icontrolador.CargarListas(Funciones.Pagina, "");
             Repeater1.DataBind();
         }
@@ -51,7 +52,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             }
             else
             {
-                IControlador icontrolador = new Controlador();
+                IControlador icontrolador = Funciones.CrearControlador();
                 Repeater1.DataSource = icontrolador.CargarListas(Funciones.Pagina, txtBuscar.Text);
                 Repeater1.DataBind();
             }
@@ -91,7 +92,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             else if (e.CommandName == "Eliminar")
             {                                
                     int Resultado;
-                    IControlador icontrolador = new Controlador();
+                IControlador icontrolador = Funciones.CrearControlador();
                     if (Funciones.Pagina.Equals("MARCAS") || Funciones.Pagina.Equals("LINEAS"))
                     {
                         Resultado = icontrolador.EliminarRegistro(((Button)e.CommandSource).CommandArgument, "LISTAVALORES"); 
@@ -132,7 +133,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             int Resultado;
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             switch (Funciones.Pagina)
             {
                 case "OPERARIOS":

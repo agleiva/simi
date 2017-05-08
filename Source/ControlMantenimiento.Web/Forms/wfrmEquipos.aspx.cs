@@ -1,5 +1,6 @@
 ﻿using System;
-using ControlMantenimiento_NetWeb.BO;
+using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento_NetDesktop.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
 namespace ControlMantenimiento_NetWeb.Forms
@@ -9,7 +10,7 @@ namespace ControlMantenimiento_NetWeb.Forms
         
         protected void Page_Init(object sender, EventArgs e)
         {
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             icontrolador.ControlEquipos();
             dplMarcas.DataValueField = "CODIGO";
             dplMarcas.DataTextField = "DETALLE";
@@ -37,7 +38,7 @@ namespace ControlMantenimiento_NetWeb.Forms
 
         private void LlenarCampos()
         {
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Equipo equipo = (Equipo)icontrolador.ObtenerRegistro(Funciones.ParametroBuscar,"E");
             if (equipo != null)
             {
@@ -84,7 +85,7 @@ namespace ControlMantenimiento_NetWeb.Forms
             {
                 equipo.lubricacion = 0;
             }
-            IControlador icontrolador = new Controlador();
+            IControlador icontrolador = Funciones.CrearControlador();
             Resultado = icontrolador.Guardar(equipo);
             if (Resultado == 0)
             {
