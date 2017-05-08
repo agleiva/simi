@@ -5,7 +5,7 @@ using ControlMantenimiento.Data;
 using System.Collections;
 using ControlMantenimiento.Model;
 
-namespace ControlMantenimiento_NetDesktop.BLL
+namespace ControlMantenimiento.Business
 {
     public class Controlador
     {

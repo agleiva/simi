@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ControlMantenimiento_NetDesktop.BLL;
+using ControlMantenimiento.Business;
 using ControlMantenimiento.Model;
+using Funciones = ControlMantenimiento_NetDesktop.BLL.Funciones;
 
 namespace ControlMantenimiento_NetDesktop
 {
