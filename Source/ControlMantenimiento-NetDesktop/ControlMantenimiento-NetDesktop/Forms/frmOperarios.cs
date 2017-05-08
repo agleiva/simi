@@ -100,7 +100,7 @@ namespace ControlMantenimiento_NetDesktop
         {
         if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtNombres.Text = BLL.Funciones.AplicarTrim(txtNombres.Text);
+                txtNombres.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtNombres.Text);
                 if (string.IsNullOrEmpty(txtNombres.Text))
                 {
                     Grabar = false;
@@ -110,7 +110,7 @@ namespace ControlMantenimiento_NetDesktop
                 }               
                 else
                 {
-                    txtNombres.Text = BLL.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
+                    txtNombres.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtNombres.Text, "1MAY");
                     errorPro.Clear();
                     txtApellidos.Focus();
                 }  
@@ -128,7 +128,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtApellidos.Text = BLL.Funciones.AplicarTrim(txtApellidos.Text);
+                txtApellidos.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtApellidos.Text);
                 if (string.IsNullOrEmpty(txtApellidos.Text))
                 {
                     Grabar = false;
@@ -138,7 +138,7 @@ namespace ControlMantenimiento_NetDesktop
                 }
                 else
                 {
-                    txtApellidos.Text = BLL.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
+                    txtApellidos.Text = ControlMantenimiento.Business.Funciones.EliminarTabulador(txtApellidos.Text, "1MAY");
                     errorPro.Clear();
                     txtCorreo.Focus();
                 }
@@ -156,11 +156,11 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtCorreo.Text = BLL.Funciones.AplicarTrim(txtCorreo.Text);
+                txtCorreo.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtCorreo.Text);
                 if (txtCorreo.Text.Length != 0)
                 {
                     txtCorreo.Text = txtCorreo.Text.ToLower();
-                    if (BLL.Funciones.Validar_Correo(txtCorreo.Text))                    
+                    if (ControlMantenimiento.Business.Funciones.Validar_Correo(txtCorreo.Text))                    
                     {
                         Grabar = false;
                         MessageBox.Show(BLL.Mensajes.Mensaje16, BLL.Mensajes.MensajeAplicacion, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -231,7 +231,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtClave.Text = BLL.Funciones.AplicarTrim(txtClave.Text);
+                txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Grabar = false;

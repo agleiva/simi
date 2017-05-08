@@ -55,3 +55,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 17. Se creó un método estático (factory) en la clase `Funciones` del proyecto Desktop para unificar la creación del `Controlador` pasándo la instancia de `AccesoDatos` con el *Connection String* apropiado.
 
 18. Se convirtió la clase `Mensajes` del proyecto `ControlMantenimiento.Business` en `public` para que pueda ser accedida desde los demás proyectos.
+
+19. Se corrigieron todas las referencias a `Funciones` en el proyecto desktop. El proyecto desktop ahora compila correctamente.

@@ -56,7 +56,7 @@ namespace ControlMantenimiento_NetDesktop
         {
             if ((e.KeyChar == '\r') || (e.KeyChar == 9)) // Si presionan Enter o Tab
             {
-                txtClave.Text = ControlMantenimiento_NetDesktop.BLL.Funciones.AplicarTrim(txtClave.Text);
+                txtClave.Text = ControlMantenimiento.Business.Funciones.AplicarTrim(txtClave.Text);
                 if (string.IsNullOrEmpty(txtClave.Text))
                 {
                     Ingresar = false;
