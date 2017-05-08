@@ -32,7 +32,6 @@
 using System;
 using System.Data.OracleClient;
 using System.Collections;
-using System.Configuration;
 using System.Data;
 using ControlMantenimiento_NetDesktop.BLL;
 using ControlMantenimiento_NetDesktop.BO;
@@ -41,23 +40,27 @@ namespace ControlMantenimiento_NetWeb.DAL
 {
     public class AccesoDatos
     {
-        // Default Constructor
-        public AccesoDatos() {}
+        private readonly string _connectionString;
 
-        public static OracleConnection Cn;   // Conexion 
-        public static OracleDataReader sdr;  // Cursor - Recordset de solo lectura
-        public static OracleCommand Cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
-        public static ArrayList arlListEquipo = new ArrayList();
-        public static ArrayList arlListLinea = new ArrayList();
-        public static ArrayList arlListMarca = new ArrayList();
-        public static ArrayList arlListOperarios = new ArrayList();
+        public AccesoDatos(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public OracleConnection Cn;   // Conexion 
+        public OracleDataReader sdr;  // Cursor - Recordset de solo lectura
+        public OracleCommand Cmd;     // Objeto de tipo Command para acceder a Procedimientos Almacenados
+        public ArrayList arlListEquipo = new ArrayList();
+        public ArrayList arlListLinea = new ArrayList();
+        public ArrayList arlListMarca = new ArrayList();
+        public ArrayList arlListOperarios = new ArrayList();
 
        
-        public static void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
+        public void IniciarBusqueda(string Tabla, string DatoBuscar, string Condicion)
         {
             try
             {
-                Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]);
+                Cn = new OracleConnection(_connectionString);
                 Cmd = new OracleCommand("spr_CBuscarRegistro", Cn);
                 Cmd.CommandType = CommandType.StoredProcedure;
                 Cmd.Parameters.AddWithValue("p_TABLA", Tabla);
@@ -72,18 +75,18 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static OracleDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
+        public OracleDataReader BuscarRegistro(string Tabla, string DatoBuscar, string Condicion)
         {
             IniciarBusqueda(Tabla, DatoBuscar, Condicion);
             sdr = Cmd.ExecuteReader();
             return sdr; 
         }
      
-        public static int ValidarTablaVacia(string Tabla)
+        public int ValidarTablaVacia(string Tabla)
         {
             try
             {
-                using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_CValidarExistenciaDatos", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -103,12 +106,12 @@ namespace ControlMantenimiento_NetWeb.DAL
         }      
 
         
-        public static ArrayList CargarListas(string Tabla, string Condicion)
+        public ArrayList CargarListas(string Tabla, string Condicion)
         {
             try
             {
                 ArrayList arlListado = new ArrayList();
-                using ( Cn = new OracleConnection(ConfigurationManager.ConnectionStrings["Conexion"].ToString()))
+                using ( Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_CCargarListado", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -131,14 +134,14 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void ControlEquipos()
+        public void ControlEquipos()
         {
             try
             {
                 arlListEquipo = new ArrayList();
                 arlListLinea = new ArrayList();
                 arlListMarca = new ArrayList();
-                using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -170,13 +173,13 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void ControlProgramacion(string Tabla)
+        public void ControlProgramacion(string Tabla)
         {
             try
             {
                 arlListEquipo = new ArrayList();
                 arlListOperarios = new ArrayList();
-                using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_CCargarCombosListas", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -211,7 +214,7 @@ namespace ControlMantenimiento_NetWeb.DAL
          =======================================================================================================================================================
          */
 
-        public static Operario ObtenerOperario(string DatoBuscar, string Clave)
+        public Operario ObtenerOperario(string DatoBuscar, string Clave)
         {
             Operario operario = new Operario();
             try
@@ -243,11 +246,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
+        public int GuardarOperario(Operario Operario, string Accion, double usuarioConectado)
         {
             try
             {
-                using ( Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using ( Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_IUOperarios", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -276,12 +279,12 @@ namespace ControlMantenimiento_NetWeb.DAL
 
         }
 
-        public static bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
+        public bool GuardarCambioClave(string NuevaClave, double usuarioConectado)
         {
             bool status = false;
             try
             {
-                using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_UCambioClave", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -312,7 +315,7 @@ namespace ControlMantenimiento_NetWeb.DAL
         Inicio Operaciones sobre estructura ListaValores
        =======================================================================================================================================================
        */
-        public static ListaValores ObtenerListaValores(string DatoBuscar)
+        public ListaValores ObtenerListaValores(string DatoBuscar)
         {
             ListaValores listavalores = new ListaValores();
             try
@@ -339,11 +342,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarListaValores(ListaValores listavalores, double usuarioConectado)
+        public int GuardarListaValores(ListaValores listavalores, double usuarioConectado)
         {
             try
             {
-                using ( Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using ( Cn = new OracleConnection(_connectionString))
                
                 {
                     Cmd = new OracleCommand("spr_IUListaValores", Cn);
@@ -377,7 +380,7 @@ namespace ControlMantenimiento_NetWeb.DAL
         Inicio Operaciones sobre estructura Equipos
         =======================================================================================================================================================
         */
-        public static Equipo ObtenerEquipo(string DatoBuscar)
+        public Equipo ObtenerEquipo(string DatoBuscar)
         {
             Equipo equipo = new Equipo();
             try
@@ -407,11 +410,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarEquipo(Equipo equipo, double usuarioConectado)
+        public int GuardarEquipo(Equipo equipo, double usuarioConectado)
         {
             try
             {
-                using (Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using (Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_IUEquipos", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -445,7 +448,7 @@ namespace ControlMantenimiento_NetWeb.DAL
        Inicio Operaciones sobre estructura Mantenimiento
        =======================================================================================================================================================
        */
-        public static Mantenimiento ObtenerMantenimiento(string DatoBuscar)
+        public Mantenimiento ObtenerMantenimiento(string DatoBuscar)
         {
             Mantenimiento mantenimiento = new Mantenimiento();
             try
@@ -473,11 +476,11 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
+        public int GuardarMantenimiento(Mantenimiento mantenimiento, string Accion, double usuarioConectado)
         {
             try
             {
-                using ( Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using ( Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_IUMantenimiento", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -507,12 +510,12 @@ namespace ControlMantenimiento_NetWeb.DAL
        =======================================================================================================================================================
        */
         
-        public static int EliminarRegistro(string DatoEliminar, string Tabla)
+        public int EliminarRegistro(string DatoEliminar, string Tabla)
         {
             bool status = false;
             try
             {
-                using ( Cn = new OracleConnection(System.Configuration.ConfigurationSettings.AppSettings["Conexion"]))
+                using ( Cn = new OracleConnection(_connectionString))
                 {
                     Cmd = new OracleCommand("spr_DRegistro", Cn);
                     Cmd.CommandType = CommandType.StoredProcedure;
@@ -532,7 +535,7 @@ namespace ControlMantenimiento_NetWeb.DAL
             }
         }
 
-        public static void LiberarRecursos()
+        public void LiberarRecursos()
         {
             if (!sdr.IsClosed) sdr.Close();
             Cmd.Dispose();

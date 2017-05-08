@@ -88,3 +88,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 31. Se realizó el paso 28, pero sobre `ControlMantenimiento.Data.Oracle`.
 
 32. Se removieron referencias a incorrectas `System.Data.SqlClient` y se reemplazaron por las respectivas de Oracle.
+
+33. Se realizaron los mismos cambios que en el punto `13`, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.Oracle`
