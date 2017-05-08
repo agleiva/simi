@@ -9,60 +9,65 @@ namespace ControlMantenimiento_NetDesktop.BLL
 {
     public class Controlador: IControlador
     {
-        public Controlador() { }
+        private readonly AccesoDatos _accesoDatos;
+
+        public Controlador(AccesoDatos accesoDatos)
+        {
+            _accesoDatos = accesoDatos;
+        }
 
         #region IControlador Members
 
        
         public ArrayList CargarListas(string Tabla)
         {
-            return AccesoDatos.CargarListas(Tabla);
+            return _accesoDatos.CargarListas(Tabla);
         }
 
         public ArrayList CargarListas(string Tabla, string Condicion)
         {
-            return AccesoDatos.CargarListas(Tabla, Condicion);
+            return _accesoDatos.CargarListas(Tabla, Condicion);
         }
 
         public void ControlEquipos()
         {
-            AccesoDatos.ControlEquipos();
+            _accesoDatos.ControlEquipos();
         }
 
         public void ControlProgramacion(string Tabla)
         {
-            AccesoDatos.ControlProgramacion(Tabla);
+            _accesoDatos.ControlProgramacion(Tabla);
         }
 
         public ArrayList ObtenerListaEquipos()
         {
-            return AccesoDatos.arlListEquipo;
+            return _accesoDatos.arlListEquipo;
         }
 
         public ArrayList ObtenerListaLineas()
         {
-            return AccesoDatos.arlListLinea;
+            return _accesoDatos.arlListLinea;
         }
 
         public ArrayList ObtenerListaMarcas()
         {
-            return AccesoDatos.arlListMarca;
+            return _accesoDatos.arlListMarca;
         }
 
         public ArrayList ObtenerListaOperarios()
         {
-            return AccesoDatos.arlListOperarios;
+            return _accesoDatos.arlListOperarios;
         }
 
         public int ValidarTablaVacia(string Tabla)
         {
-            return AccesoDatos.ValidarTablaVacia(Tabla);
+            return _accesoDatos.ValidarTablaVacia(Tabla);
         }
 
         public Operario ObtenerAcceso(string DatoBuscar, string Clave)
         {
             Operario operario = null;
-            operario = AccesoDatos.ObtenerOperario(DatoBuscar, Clave);
+            operario = _accesoDatos.ObtenerOperario(DatoBuscar, Clave);
             return operario;
         }
 
@@ -72,16 +77,16 @@ namespace ControlMantenimiento_NetDesktop.BLL
             switch (Tabla)
             {
                 case "O":
-                    objeto = AccesoDatos.ObtenerOperario(DatoBuscar, "");
+                    objeto = _accesoDatos.ObtenerOperario(DatoBuscar, "");
                     break;
                 case "E":
-                    objeto = AccesoDatos.ObtenerEquipo(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerEquipo(DatoBuscar);
                     break;
                 case "M":
-                    objeto = AccesoDatos.ObtenerMantenimiento(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerMantenimiento(DatoBuscar);
                     break;
                 case "L":
-                    objeto = AccesoDatos.ObtenerListaValores(DatoBuscar);
+                    objeto = _accesoDatos.ObtenerListaValores(DatoBuscar);
                     break;
             }
             return objeto;
@@ -95,12 +100,12 @@ namespace ControlMantenimiento_NetDesktop.BLL
             if (o is Operario)
             {
                 Operario operario = (Operario)o;
-                status = AccesoDatos.GuardarOperario(operario, Accion);
+                status = _accesoDatos.GuardarOperario(operario, Accion);
             }
             else if (o is Mantenimiento)
             {
                 Mantenimiento mantenimiento = (Mantenimiento)o;
-                status = AccesoDatos.GuardarMantenimiento(mantenimiento, Accion);
+                status = _accesoDatos.GuardarMantenimiento(mantenimiento, Accion);
             }
 
             return status;
@@ -112,25 +117,25 @@ namespace ControlMantenimiento_NetDesktop.BLL
             if (o is Equipo)
             {
                 Equipo equipo = (Equipo)o;
-                status = AccesoDatos.GuardarEquipo(equipo);
+                status = _accesoDatos.GuardarEquipo(equipo);
             }
             else if (o is ListaValores)
             {
                 ListaValores listavalores = (ListaValores)o;
-                status = AccesoDatos.GuardarListaValores(listavalores);
+                status = _accesoDatos.GuardarListaValores(listavalores);
             }
             return status;
         }
 
         public bool GuardarCambioClave(string ClaveNueva)
         {
-            return AccesoDatos.GuardarCambioClave(ClaveNueva);
+            return _accesoDatos.GuardarCambioClave(ClaveNueva);
         }
 
         // Eliminar Registro
         public int EliminarRegistro(string DatoEliminar, string Tabla)
         {
-            return AccesoDatos.EliminarRegistro(DatoEliminar, Tabla);
+            return _accesoDatos.EliminarRegistro(DatoEliminar, Tabla);
         }
 
 
