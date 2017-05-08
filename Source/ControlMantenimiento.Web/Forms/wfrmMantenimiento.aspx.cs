@@ -1,7 +1,6 @@
 ﻿using System;
 using ControlMantenimiento_NetDesktop.BLL;
 using ControlMantenimiento_NetDesktop.BO;
-using ControlMantenimiento_NetWeb.BO;
 using ControlMantenimiento_NetWeb.BLL;
 
 namespace ControlMantenimiento_NetWeb.Forms

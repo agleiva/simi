@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using ControlMantenimiento_NetWeb.BO;
 using ControlMantenimiento_NetWeb.BLL;
 using ControlMantenimiento_NetWeb.Forms;
 

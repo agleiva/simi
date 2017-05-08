@@ -59,3 +59,5 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 19. Se corrigieron todas las referencias a `Funciones` en el proyecto desktop. El proyecto desktop ahora compila correctamente.
 
 20. Se implementó un método estático igual al del punto 17 en el proyecto Web se usó el mismo para instanciar la clase `Controlador` en los casos necesarios.
+
+21. Se eliminaron las referencias a namespaces inexistentes en el proyecto Web.
