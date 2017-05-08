@@ -2,11 +2,6 @@
 {
     public class Operario
     {
-        // Default Constructor
-        public Operario()
-        {
-        }
-
         public double documento { get; set; }
 
         public string nombres { get; set; }

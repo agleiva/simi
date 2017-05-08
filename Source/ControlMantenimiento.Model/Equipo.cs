@@ -2,9 +2,6 @@
 {
     public class Equipo
     {
-        // Default Constructor
-        public Equipo() { }
-
         public int codigoequipo { get; set; }
 
         public string nombreequipo { get; set; }

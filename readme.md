@@ -123,4 +123,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 
 42. A partir de este punto se realiza una limpieza de código antes de seguir haciendo mejoras en la estructura / arquitectura del proyecto.
     * Se cambian todas las propiedades de las clases de `ControlMantenimiento.Model` a auto-properties.
+    * Se eliminan constructores default innecesarios en las clases de `ControlMantenimiento.Model`.
+    
 
