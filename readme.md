@@ -110,3 +110,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 37. Al tratar de implementar la interfaz `IAccesoDatos` en la clase `MySqlAccesoDatos` se descubrió que faltaba el método `public ArrayList CargarListas(string tabla)`. Se agregó éste a partir de la definición del mismo en la clase `AccesoDatos`, reemplazando las APIs de SQL Server (`SqlConnection` y `SqlCommand`) por las de MySQL (`MySqlConnection` y `MySqlCommand`)
 
 38. Idem punto anterior, pero con `OracleAccesoDatos`.
+
+39. Se cambió la referencia de la clase `Controlador` a la implementación concreta `AccesoDatos` por la abstracción `IAccesoDatos`.
+    * Esto reveló que la clase `Controlador` accedía a los *campos públicos* `ArlListEquipo`, `ArlListLinea`, `ArlListMarca`, y `ArlListOperarios` de la clase `AccesoDatos`.

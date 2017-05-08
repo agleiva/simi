@@ -9,10 +9,10 @@ namespace ControlMantenimiento_NetDesktop.BLL
 {
     public class Controlador: IControlador
     {
-        private readonly AccesoDatos _accesoDatos;
+        private readonly IAccesoDatos _accesoDatos;
         private readonly double _usuarioConectado;
 
-        public Controlador(AccesoDatos accesoDatos, double usuarioConectado)
+        public Controlador(IAccesoDatos accesoDatos, double usuarioConectado)
         {
             _accesoDatos = accesoDatos;
             _usuarioConectado = usuarioConectado;
