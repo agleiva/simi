@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 
 
 namespace ControlMantenimiento_NetDesktop.BLL

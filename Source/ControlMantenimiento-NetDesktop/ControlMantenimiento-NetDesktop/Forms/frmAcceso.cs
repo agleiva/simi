@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 using ControlMantenimiento_NetDesktop.BLL;
 
 

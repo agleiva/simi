@@ -2,7 +2,7 @@
 
 
 
-namespace ControlMantenimiento_NetDesktop.BO
+namespace ControlMantenimiento.Model
 {
     public class Operario
     {

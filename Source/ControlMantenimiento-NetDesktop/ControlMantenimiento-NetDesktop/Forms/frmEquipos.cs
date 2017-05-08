@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using ControlMantenimiento_NetDesktop.BLL;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento_NetDesktop
 {

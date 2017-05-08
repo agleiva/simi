@@ -92,3 +92,6 @@ Describiré en este documento los pasos que fui dando para adaptar el proyecto a
 33. Se realizaron los mismos cambios que en el punto `13`, pero esta vez con la clase `AccesoDatos` del proyecto `ControlMantenimiento.Data.Oracle`
 
 #### en este punto toda la solución compila correctamente, pero el IDE muestra 24 warnings acerca de que `System.Data.OracleClient` está deprecado.
+
+34. En este punto y antes de continuar con la abstracción de la capa de acceso a datos, resulta conveniente corregir el naming en varios lugares:
+    * Se renombra el namespace `ControlMantenimiento_NetDesktop.BO` a `ControlMantenimiento.Model`

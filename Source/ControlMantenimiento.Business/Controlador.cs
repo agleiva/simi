@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ControlMantenimiento_NetDesktop.DAL;
 using System.Collections;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento_NetDesktop.BLL
 {

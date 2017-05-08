@@ -34,7 +34,7 @@ using System.Data.OracleClient;
 using System.Collections;
 using System.Data;
 using ControlMantenimiento_NetDesktop.BLL;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento_NetWeb.DAL
 {

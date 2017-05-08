@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Collections;
 using ControlMantenimiento_NetDesktop.BLL;
-using ControlMantenimiento_NetDesktop.BO;
+using ControlMantenimiento.Model;
 
 namespace ControlMantenimiento_NetDesktop.DAL
 {
